@@ -24,6 +24,7 @@ dependencies:
   print_bluetooth_thermal: ^1.0.9
   qr_flutter: ^4.1.0
   shared_preferences: ^2.2.2
+  sqflite: ^2.3.2
 
 dev_dependencies:
   build_runner: ^2.4.6
