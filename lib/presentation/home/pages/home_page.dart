@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_pos_apps/core/core.dart';
 import 'package:flutter_pos_apps/presentation/home/widgets/order_menu.dart';
 
 import '../../../core/assets/assets.gen.dart';
@@ -14,6 +15,7 @@ import '../widgets/column_button.dart';
 import '../widgets/custom_tab_bar.dart';
 import '../widgets/home_title.dart';
 import '../widgets/product_card.dart';
+import 'confirm_payment_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -437,33 +439,33 @@ class _HomePageState extends State<HomePage> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            'Orders #1',
-                            style: TextStyle(
-                              color: AppColors.primary,
-                              fontSize: 20,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                          const SpaceHeight(8.0),
-                          Row(
-                            children: [
-                              Button.filled(
-                                width: 120.0,
-                                height: 40,
-                                onPressed: () {},
-                                label: 'Dine In',
-                              ),
-                              const SpaceWidth(8.0),
-                              Button.outlined(
-                                width: 100.0,
-                                height: 40,
-                                onPressed: () {},
-                                label: 'To Go',
-                              ),
-                            ],
-                          ),
-                          const SpaceHeight(16.0),
+                          // const Text(
+                          //   'Orders #1',
+                          //   style: TextStyle(
+                          //     color: AppColors.primary,
+                          //     fontSize: 20,
+                          //     fontWeight: FontWeight.w600,
+                          //   ),
+                          // ),
+                          // const SpaceHeight(8.0),
+                          // Row(
+                          //   children: [
+                          //     Button.filled(
+                          //       width: 120.0,
+                          //       height: 40,
+                          //       onPressed: () {},
+                          //       label: 'Dine In',
+                          //     ),
+                          //     const SpaceWidth(8.0),
+                          //     Button.outlined(
+                          //       width: 100.0,
+                          //       height: 40,
+                          //       onPressed: () {},
+                          //       label: 'To Go',
+                          //     ),
+                          //   ],
+                          // ),
+                          // const SpaceHeight(16.0),
                           const Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -593,21 +595,28 @@ class _HomePageState extends State<HomePage> {
                                 'Sub total',
                                 style: TextStyle(color: AppColors.grey),
                               ),
-                              // BlocBuilder<CheckoutBloc, CheckoutState>(
-                              //   builder: (context, state) {
-                              //     final price = state.maybeWhen(
-                              //       orElse: () => 0,
-                              //       success: (products, qty, price) => price,
-                              //     );
-                              //     return Text(
-                              //       price.currencyFormatRp,
-                              //       style: const TextStyle(
-                              //         color: AppColors.primary,
-                              //         fontWeight: FontWeight.w600,
-                              //       ),
-                              //     );
-                              //   },
-                              // ),
+                              BlocBuilder<CheckoutBloc, CheckoutState>(
+                                builder: (context, state) {
+                                  int price = state.maybeWhen(
+                                      orElse: () => 0,
+                                      loaded: (products) {
+                                        if (products.isEmpty) {
+                                          return 0;
+                                        }
+                                        return products
+                                            .map((e) =>
+                                                e.product.price! * e.quantity)
+                                            .reduce((a, b) => a + b);
+                                      });
+                                  return Text(
+                                    price.currencyFormatRp,
+                                    style: const TextStyle(
+                                      color: AppColors.primary,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  );
+                                },
+                              ),
                             ],
                           ),
                           const SpaceHeight(100.0),
@@ -623,7 +632,7 @@ class _HomePageState extends State<HomePage> {
                               horizontal: 24.0, vertical: 16.0),
                           child: Button.filled(
                             onPressed: () {
-                              // context.push(const ConfirmPaymentPage());
+                              context.push(const ConfirmPaymentPage());
                             },
                             label: 'Lanjutkan Pembayaran',
                           ),

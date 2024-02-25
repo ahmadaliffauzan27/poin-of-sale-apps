@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_pos_apps/core/core.dart';
 import 'package:flutter_pos_apps/presentation/home/models/product_qty.dart';
 import '../../../core/components/spaces.dart';
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/variables.dart';
+import '../bloc/checkout/checkout_bloc.dart';
 import '../models/order_item.dart';
 
 class OrderMenu extends StatelessWidget {
@@ -32,15 +34,13 @@ class OrderMenu extends StatelessWidget {
                     fit: BoxFit.cover,
                   ),
                 ),
-                title: FittedBox(
-                  child: Text(data.product.name!,
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
-                      )),
-                ),
+                title: Text(data.product.name!,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                    )),
                 subtitle: Text(data.product.price!.currencyFormatRp),
               ),
             ),
@@ -61,14 +61,9 @@ class OrderMenu extends StatelessWidget {
               children: [
                 GestureDetector(
                   onTap: () {
-                    // if (data.quantity > 1) {
-                    // context
-                    //     .read<CheckoutBloc>()
-                    //     .add(CheckoutEvent.removeProduct(data.product));
-                    //       onDeleteTap();
-                    //   // data.quantity--;
-                    //   // setState(() {});
-                    // }
+                    context
+                        .read<CheckoutBloc>()
+                        .add(CheckoutEvent.removeItem(data.product));
                   },
                   child: Container(
                     width: 30,
@@ -89,12 +84,9 @@ class OrderMenu extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () {
-                    // context
-                    //     .read<CheckoutBloc>()
-                    //     .add(CheckoutEvent.addProduct(data.product));
-                    //     onDeleteTap();
-                    // data.quantity++;
-                    // setState(() {});
+                    context
+                        .read<CheckoutBloc>()
+                        .add(CheckoutEvent.addItem(data.product));
                   },
                   child: Container(
                     width: 30,
