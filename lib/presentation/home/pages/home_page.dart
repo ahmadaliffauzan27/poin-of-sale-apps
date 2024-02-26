@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_pos_apps/core/core.dart';
 import 'package:flutter_pos_apps/presentation/home/widgets/order_menu.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../../core/assets/assets.gen.dart';
 import '../../../core/components/buttons.dart';
@@ -509,13 +510,49 @@ class _HomePageState extends State<HomePage> {
                           BlocBuilder<CheckoutBloc, CheckoutState>(
                             builder: (context, state) {
                               return state.maybeWhen(
-                                  orElse: () => const Center(
-                                        child: Text('No Items'),
+                                  orElse: () => Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 80),
+                                        child: Center(
+                                          child: Column(
+                                            children: [
+                                              Assets.icons.noProduct.svg(),
+                                              const SizedBox(
+                                                height: 20,
+                                              ),
+                                              const Text(
+                                                'Belum ada produk yang\nditambahkan',
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                    fontWeight:
+                                                        FontWeight.w700),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
                                       ),
                                   loaded: (products) {
                                     if (products.isEmpty) {
-                                      return const Center(
-                                        child: Text('No Items'),
+                                      return Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 80),
+                                        child: Center(
+                                          child: Column(
+                                            children: [
+                                              Assets.icons.noProduct.svg(),
+                                              const SizedBox(
+                                                height: 20,
+                                              ),
+                                              const Text(
+                                                'Belum ada produk yang\nditambahkan',
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                    fontWeight:
+                                                        FontWeight.w700),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
                                       );
                                     }
                                     return ListView.separated(
@@ -623,21 +660,64 @@ class _HomePageState extends State<HomePage> {
                         ],
                       ),
                     ),
-                    Align(
-                      alignment: Alignment.bottomCenter,
-                      child: ColoredBox(
-                        color: AppColors.white,
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 24.0, vertical: 16.0),
-                          child: Button.filled(
-                            onPressed: () {
-                              context.push(const ConfirmPaymentPage());
-                            },
-                            label: 'Lanjutkan Pembayaran',
-                          ),
-                        ),
-                      ),
+                    // Align(
+                    //   alignment: Alignment.bottomCenter,
+                    //   child: ColoredBox(
+                    //     color: AppColors.white,
+                    //     child: Padding(
+                    //       padding: const EdgeInsets.symmetric(
+                    //           horizontal: 24.0, vertical: 16.0),
+                    //       child: Button.filled(
+                    //         onPressed: () {
+                    //           context.push(const ConfirmPaymentPage());
+                    //         },
+                    //         label: 'Lanjutkan Pembayaran',
+                    //       ),
+                    //     ),
+                    //   ),
+                    // ),
+                    // make disabled button if no product
+                    BlocBuilder<CheckoutBloc, CheckoutState>(
+                      builder: (context, state) {
+                        return state.maybeWhen(
+                          orElse: () => const SizedBox(),
+                          loaded: (products) {
+                            if (products.isEmpty) {
+                              return Align(
+                                alignment: Alignment.bottomCenter,
+                                child: ColoredBox(
+                                  color: AppColors.white,
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 24.0, vertical: 16.0),
+                                    child: Button.filled(
+                                      color: AppColors.disabled,
+                                      onPressed: () {},
+                                      label: 'Lanjutkan Pembayaran',
+                                    ),
+                                  ),
+                                ),
+                              );
+                            }
+                            return Align(
+                              alignment: Alignment.bottomCenter,
+                              child: ColoredBox(
+                                color: AppColors.white,
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 24.0, vertical: 16.0),
+                                  child: Button.filled(
+                                    onPressed: () {
+                                      context.push(const ConfirmPaymentPage());
+                                    },
+                                    label: 'Lanjutkan Pembayaran',
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
+                        );
+                      },
                     ),
                   ],
                 ),

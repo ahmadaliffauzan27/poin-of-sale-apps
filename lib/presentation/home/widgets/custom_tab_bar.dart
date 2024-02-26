@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../../../core/constants/colors.dart';
 
-
-
 class CustomTabBar extends StatefulWidget {
   final List<String> tabTitles;
   final int initialTabIndex;

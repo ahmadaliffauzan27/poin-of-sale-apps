@@ -71,6 +71,44 @@ class _DashboardPageState extends State<DashboardPage> {
                           isActive: _selectedIndex == 3,
                           onTap: () => _onItemTapped(3),
                         ),
+                        // BlocListener<LogoutBloc, LogoutState>(
+                        //   listener: (context, state) {
+                        //     state.maybeMap(
+                        //       orElse: () {},
+                        //       error: (e) {
+                        //         ScaffoldMessenger.of(context).showSnackBar(
+                        //           SnackBar(
+                        //             content: Text(e.message),
+                        //             backgroundColor: AppColors.red,
+                        //           ),
+                        //         );
+                        //       },
+                        //       success: (value) {
+                        //         AuthLocalRemoteDatasource().removeAuthData();
+                        //         ScaffoldMessenger.of(context).showSnackBar(
+                        //           const SnackBar(
+                        //             content: Text('Logout success'),
+                        //             backgroundColor: AppColors.primary,
+                        //           ),
+                        //         );
+                        //         Navigator.pushReplacement(context,
+                        //             MaterialPageRoute(builder: (context) {
+                        //           return const LoginPage();
+                        //         }));
+                        //       },
+                        //     );
+                        //   },
+                        //   child: NavItem(
+                        //     iconPath: Assets.icons.logout.path,
+                        //     isActive: false,
+                        //     onTap: () {
+                        //       context
+                        //           .read<LogoutBloc>()
+                        //           .add(const LogoutEvent.logout());
+                        //     },
+                        //   ),
+                        // ),
+                        // logout with popup dialog
                         BlocListener<LogoutBloc, LogoutState>(
                           listener: (context, state) {
                             state.maybeMap(
@@ -102,9 +140,32 @@ class _DashboardPageState extends State<DashboardPage> {
                             iconPath: Assets.icons.logout.path,
                             isActive: false,
                             onTap: () {
-                              context
-                                  .read<LogoutBloc>()
-                                  .add(const LogoutEvent.logout());
+                              showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return AlertDialog(
+                                    title: const Text('Logout'),
+                                    content:
+                                        const Text('Are you sure to logout?'),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                        },
+                                        child: const Text('Cancel'),
+                                      ),
+                                      TextButton(
+                                        onPressed: () {
+                                          context
+                                              .read<LogoutBloc>()
+                                              .add(const LogoutEvent.logout());
+                                        },
+                                        child: const Text('Logout'),
+                                      ),
+                                    ],
+                                  );
+                                },
+                              );
                             },
                           ),
                         ),

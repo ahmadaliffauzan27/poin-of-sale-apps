@@ -3,8 +3,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../core/constants/colors.dart';
 
-
-
 class NavItem extends StatelessWidget {
   final String iconPath;
   final bool isActive;
