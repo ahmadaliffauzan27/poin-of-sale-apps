@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_pos_apps/core/core.dart';
 import 'package:flutter_pos_apps/data/datasources/auth_local_remote_datasource.dart';
 import 'package:flutter_pos_apps/presentation/home/pages/home_page.dart';
+import 'package:flutter_pos_apps/presentation/setting/pages/settings_page.dart';
 import 'package:flutter_pos_apps/presentation/setting/pages/sync_data_pages.dart';
 
 import '../../auth/bloc/logout/logout_bloc.dart';
@@ -24,8 +25,9 @@ class _DashboardPageState extends State<DashboardPage> {
     // const Center(child: Text('This is page 1')),
     const Center(child: Text('This is page 2')),
     const Center(child: Text('This is page 3')),
+    const SettingsPage(),
     // const Center(child: Text('This is page 4')),
-    const SyncDataPage(),
+    // const SyncDataPage(),
     // const ManagePrinterPage(),
     // const SettingsPage(),
   ];

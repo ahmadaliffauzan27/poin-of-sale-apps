@@ -107,9 +107,10 @@ class _SuccessPaymentDialogState extends State<SuccessPaymentDialog> {
                   loaded: (model) => model.paymentAmount,
                 );
                 final total = state.maybeWhen(
-                  orElse: () => 0,
-                  loaded: (model) => model.total,
-                );
+                    orElse: () => 0,
+                    loaded: (model) {
+                      return model.total;
+                    });
                 final diff = paymentAmount - total;
                 return Text(
                   diff.ceil().currencyFormatRp,
@@ -119,6 +120,33 @@ class _SuccessPaymentDialogState extends State<SuccessPaymentDialog> {
                 );
               },
             ),
+//             const Text('KEMBALIAN'),
+//             const SpaceHeight(5.0),
+//             BlocBuilder<OrderBloc, OrderState>(
+//               builder: (context, state) {
+//                 final paymentAmount = state.maybeWhen(
+//                   orElse: () => 0,
+//                   loaded: (order) => order.paymentAmount,
+//                 );
+
+//                 final total = state.maybeWhen(
+//                     orElse: () => 0,
+//                     loaded: (order) {
+//                       return order.total;
+//                     });
+
+//                 final kembalian = paymentAmount - total;
+
+//                 return Text(
+//                   kembalian.ceil().currencyFormatRp,
+//                   style: const TextStyle(
+//                     color: AppColors.primary,
+//                     fontSize: 36,
+//                     fontWeight: FontWeight.w700,
+//                   ),
+//                 );
+//               },
+//             ),
             const SpaceHeight(10.0),
             const Divider(),
             const SpaceHeight(8.0),

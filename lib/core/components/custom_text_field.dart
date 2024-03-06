@@ -9,7 +9,9 @@ class CustomTextField extends StatelessWidget {
   final bool obscureText;
   final TextInputType? keyboardType;
   final bool showLabel;
+  final Widget? prefixIcon;
   final Widget? suffixIcon;
+  final bool readOnly;
 
   const CustomTextField({
     super.key,
@@ -19,7 +21,9 @@ class CustomTextField extends StatelessWidget {
     this.obscureText = false,
     this.keyboardType,
     this.showLabel = true,
+    this.prefixIcon,
     this.suffixIcon,
+    this.readOnly = false,
   });
 
   @override
@@ -42,7 +46,9 @@ class CustomTextField extends StatelessWidget {
           onChanged: onChanged,
           obscureText: obscureText,
           keyboardType: keyboardType,
+          readOnly: readOnly,
           decoration: InputDecoration(
+            prefixIcon: prefixIcon,
             suffixIcon: suffixIcon,
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(16.0),

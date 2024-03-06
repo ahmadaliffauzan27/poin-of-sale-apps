@@ -13,7 +13,7 @@ part 'order_bloc.freezed.dart';
 class OrderBloc extends Bloc<OrderEvent, OrderState> {
   OrderBloc() : super(const _Initial()) {
     on<_Order>((event, emit) async {
-      emit(_Loading());
+      emit(const _Loading());
 
       final subTotal = event.items.fold<int>(
         0,
@@ -21,7 +21,7 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
             previousValue + (element.product.price! * element.quantity),
       );
 
-      final total = subTotal + event.tax - event.discount + event.serviceCharge;
+      final total = subTotal + event.tax + event.serviceCharge - event.discount;
 
       final totalItem = event.items.fold<int>(
         0,

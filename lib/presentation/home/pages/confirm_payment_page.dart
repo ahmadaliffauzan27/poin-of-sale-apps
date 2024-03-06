@@ -153,7 +153,7 @@ class _ConfirmPaymentPageState extends State<ConfirmPaymentPage> {
                               orElse: () => const Center(
                                 child: Text('No Items'),
                               ),
-                              loaded: (products) {
+                              loaded: (products, discount, tax, service) {
                                 if (products.isEmpty) {
                                   return const Center(
                                     child: Text('No Items'),
@@ -173,154 +173,29 @@ class _ConfirmPaymentPageState extends State<ConfirmPaymentPage> {
                           },
                         ),
                         const SpaceHeight(16.0),
-                        // Row(
-                        //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        //   children: [
-                        //     ColumnButton(
-                        //       label: 'Diskon',
-                        //       svgGenImage: Assets.icons.diskon,
-                        //       onPressed: () => showDialog(
-                        //         context: context,
-                        //         builder: (context) => const DiscountDialog(),
-                        //       ),
-                        //     ),
-                        //     ColumnButton(
-                        //       label: 'Pajak',
-                        //       svgGenImage: Assets.icons.pajak,
-                        //       onPressed: () => showDialog(
-                        //         context: context,
-                        //         builder: (context) => const TaxDialog(),
-                        //       ),
-                        //     ),
-                        //     ColumnButton(
-                        //       label: 'Layanan',
-                        //       svgGenImage: Assets.icons.layanan,
-                        //       onPressed: () => showDialog(
-                        //         context: context,
-                        //         builder: (context) => const ServiceDialog(),
-                        //       ),
-                        //     ),
-                        //   ],
-                        // ),
+
                         const SpaceHeight(8.0),
                         const Divider(),
                         const SpaceHeight(8.0),
 
-                        // Row(
-                        //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        //   children: [
-                        //     const Text(
-                        //       'Pajak',
-                        //       style: TextStyle(color: AppColors.grey),
-                        //     ),
-                        //     BlocBuilder<CheckoutBloc, CheckoutState>(
-                        //       builder: (context, state) {
-                        //         final tax = state.maybeWhen(
-                        //           orElse: () => 0,
-                        //           loaded: (products, discount, tax, service) =>
-                        //               tax,
-                        //         );
-                        //         final price = state.maybeWhen(
-                        //           orElse: () => 0,
-                        //           loaded: (products, discount, tax, service) =>
-                        //               products.fold(
-                        //             0,
-                        //             (previousValue, element) =>
-                        //                 previousValue +
-                        //                 (element.product.price!
-                        //                         .toIntegerFromText *
-                        //                     element.quantity),
-                        //           ),
-                        //         );
-
-                        //         final discount = state.maybeWhen(
-                        //             orElse: () => 0,
-                        //             loaded: (products, discount, tax,
-                        //                 serviceCharge) {
-                        //               if (discount == null) {
-                        //                 return 0;
-                        //               }
-                        //               return discount.value!
-                        //                   .replaceAll('.00', '')
-                        //                   .toIntegerFromText;
-                        //             });
-
-                        //         final subTotal =
-                        //             price - (discount / 100 * price);
-                        //         final finalTax = subTotal * 0.11;
-                        //         return Text(
-                        //           '$tax % (${finalTax.toInt().currencyFormatRp})',
-                        //           style: const TextStyle(
-                        //             color: AppColors.primary,
-                        //             fontWeight: FontWeight.w600,
-                        //           ),
-                        //         );
-                        //       },
-                        //     ),
-                        //   ],
-                        // ),
-                        // const SpaceHeight(16.0),
-                        // Row(
-                        //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        //   children: [
-                        //     Text(
-                        //       'Diskon',
-                        //       style: TextStyle(color: AppColors.grey),
-                        //     ),
-                        //     BlocBuilder<CheckoutBloc, CheckoutState>(
-                        //       builder: (context, state) {
-                        //         final discount = state.maybeWhen(
-                        //             orElse: () => 0,
-                        //             loaded: (products, discount, tax,
-                        //                 serviceCharge) {
-                        //               if (discount == null) {
-                        //                 return 0;
-                        //               }
-                        //               return discount.value!
-                        //                   .replaceAll('.00', '')
-                        //                   .toIntegerFromText;
-                        //             });
-
-                        //         final subTotal = state.maybeWhen(
-                        //             orElse: () => 0,
-                        //             loaded:
-                        //                 (products, discount, tax, service) =>
-                        //                     products.fold(
-                        //                       0,
-                        //                       (previousValue, element) =>
-                        //                           previousValue +
-                        //                           (element.product.price!
-                        //                                   .toIntegerFromText *
-                        //                               element.quantity),
-                        //                     ));
-
-                        //         final finalDiscount = discount / 100 * subTotal;
-                        //         return Text(
-                        //           finalDiscount.toInt().currencyFormatRp,
-                        //           style: TextStyle(
-                        //             color: AppColors.primary,
-                        //             fontWeight: FontWeight.w600,
-                        //           ),
-                        //         );
-                        //       },
-                        //     ),
-                        //   ],
-                        // ),
-                        const SpaceHeight(16.0),
-                        //pajak
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             const Text(
                               'Pajak',
-                              style: TextStyle(
-                                  color: AppColors.grey, fontSize: 14),
+                              style: TextStyle(color: AppColors.grey),
                             ),
                             BlocBuilder<CheckoutBloc, CheckoutState>(
                               builder: (context, state) {
+                                final tax = state.maybeWhen(
+                                  orElse: () => 0,
+                                  loaded: (products, discount, tax, service) =>
+                                      tax,
+                                );
                                 final price = state.maybeWhen(
                                   orElse: () => 0,
-                                  loaded: (products) => products.fold(
+                                  loaded: (products, discount, tax, service) =>
+                                      products.fold(
                                     0,
                                     (previousValue, element) =>
                                         previousValue +
@@ -329,9 +204,23 @@ class _ConfirmPaymentPageState extends State<ConfirmPaymentPage> {
                                   ),
                                 );
 
-                                final tax = price * 0.11;
+                                final discount = state.maybeWhen(
+                                    orElse: () => 0,
+                                    loaded: (products, discount, tax,
+                                        serviceCharge) {
+                                      if (discount == null) {
+                                        return 0;
+                                      }
+                                      return discount.value!
+                                          .replaceAll('.00', '')
+                                          .toIntegerFromText;
+                                    });
+
+                                final subTotal =
+                                    price - (discount / 100 * price);
+                                final finalTax = subTotal * 0.11;
                                 return Text(
-                                  '11% (${tax.toInt().currencyFormatRp})',
+                                  '$tax % (${finalTax.toInt().currencyFormatRp})',
                                   style: const TextStyle(
                                     color: AppColors.primary,
                                     fontWeight: FontWeight.w600,
@@ -342,91 +231,73 @@ class _ConfirmPaymentPageState extends State<ConfirmPaymentPage> {
                           ],
                         ),
                         const SpaceHeight(16.0),
-                        //diskon
-                        const Row(
+                        Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(
-                              'Discount',
-                              style: TextStyle(
-                                  color: AppColors.grey, fontSize: 14),
+                            const Text(
+                              'Diskon',
+                              style: TextStyle(color: AppColors.grey),
                             ),
-                            Text(
-                              'Rp. 0',
-                              style: TextStyle(
-                                color: AppColors.primary,
-                                fontWeight: FontWeight.w600,
-                                fontSize: 14,
-                              ),
+                            BlocBuilder<CheckoutBloc, CheckoutState>(
+                              builder: (context, state) {
+                                final discount = state.maybeWhen(
+                                    orElse: () => 0,
+                                    loaded: (products, discount, tax,
+                                        serviceCharge) {
+                                      if (discount == null) {
+                                        return 0;
+                                      }
+                                      return discount.value!
+                                          .replaceAll('.00', '')
+                                          .toIntegerFromText;
+                                    });
+
+                                final subTotal = state.maybeWhen(
+                                    orElse: () => 0,
+                                    loaded:
+                                        (products, discount, tax, service) =>
+                                            products.fold(
+                                              0,
+                                              (previousValue, element) =>
+                                                  previousValue +
+                                                  (element.product.price! *
+                                                      element.quantity),
+                                            ));
+
+                                final finalDiscount = discount / 100 * subTotal;
+                                return Text(
+                                  finalDiscount.toInt().currencyFormatRp,
+                                  style: const TextStyle(
+                                    color: AppColors.primary,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                );
+                              },
                             ),
                           ],
                         ),
-                        // Row(
-                        //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        //   children: [
-                        //     const Text(
-                        //       'Diskon',
-                        //       style: TextStyle(
-                        //           color: AppColors.grey, fontSize: 14),
-                        //     ),
-                        //     BlocBuilder<CheckoutBloc, CheckoutState>(
-                        //       builder: (context, state) {
-                        //         final discount = state.maybeWhen(
-                        //             orElse: () => 0,
-                        //             loaded: (products) {
-                        //               if (discount == null) {
-                        //                 return 0;
-                        //               }
-                        //               return discount.value!
-                        //                   .replaceAll('.00', '')
-                        //                   .toIntegerFromText;
-                        //             });
 
-                        //         final price = state.maybeWhen(
-                        //           orElse: () => 0,
-                        //           loaded: (products) => products.fold(
-                        //             0,
-                        //             (previousValue, element) =>
-                        //                 previousValue +
-                        //                 (element.product.price! *
-                        //                     element.quantity),
-                        //           ),
-                        //         );
-
-                        //         final subTotal =
-                        //             price - (discount / 100 * price);
-                        //         final finalDiscount = discount / 100 * subTotal;
-                        //         return Text(
-                        //           finalDiscount.toInt().currencyFormatRp,
-                        //           style: const TextStyle(
-                        //             color: AppColors.primary,
-                        //             fontWeight: FontWeight.w600,
-                        //           ),
-                        //         );
-                        //       },
-                        //     ),
-                        //   ],
-                        // ),
                         const SpaceHeight(16.0),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             const Text(
-                              'Sub total',
-                              style: TextStyle(
-                                  color: AppColors.grey, fontSize: 14),
+                              'Total',
+                              style: TextStyle(color: AppColors.grey),
                             ),
                             BlocBuilder<CheckoutBloc, CheckoutState>(
                               builder: (context, state) {
                                 final price = state.maybeWhen(
                                     orElse: () => 0,
-                                    loaded: (products) => products.fold(
-                                          0,
-                                          (previousValue, element) =>
-                                              previousValue +
-                                              (element.product.price! *
-                                                  element.quantity),
-                                        ));
+                                    loaded:
+                                        (products, discount, tax, service) =>
+                                            products.fold(
+                                              0,
+                                              (previousValue, element) =>
+                                                  previousValue +
+                                                  (element.product.price! *
+                                                      element.quantity),
+                                            ));
                                 return Text(
                                   price.currencyFormatRp,
                                   style: const TextStyle(
@@ -443,17 +314,18 @@ class _ConfirmPaymentPageState extends State<ConfirmPaymentPage> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             const Text(
-                              'Total',
+                              'Sub Total',
                               style: TextStyle(
                                   color: AppColors.grey,
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 14),
+                                  fontSize: 16),
                             ),
                             BlocBuilder<CheckoutBloc, CheckoutState>(
                               builder: (context, state) {
                                 final price = state.maybeWhen(
                                   orElse: () => 0,
-                                  loaded: (products) => products.fold(
+                                  loaded: (products, discount, tax, service) =>
+                                      products.fold(
                                     0,
                                     (previousValue, element) =>
                                         previousValue +
@@ -462,22 +334,22 @@ class _ConfirmPaymentPageState extends State<ConfirmPaymentPage> {
                                   ),
                                 );
 
-                                // final discount = state.maybeWhen(
-                                //     orElse: () => 0,
-                                //     loaded: (products, discount, tax,
-                                //         serviceCharge) {
-                                //       if (discount == null) {
-                                //         return 0;
-                                //       }
-                                //       return discount.value!
-                                //           .replaceAll('.00', '')
-                                //           .toIntegerFromText;
-                                //     });
+                                final discount = state.maybeWhen(
+                                    orElse: () => 0,
+                                    loaded: (products, discount, tax,
+                                        serviceCharge) {
+                                      if (discount == null) {
+                                        return 0;
+                                      }
+                                      return discount.value!
+                                          .replaceAll('.00', '')
+                                          .toIntegerFromText;
+                                    });
 
-                                // final subTotal =
-                                //     price - (discount / 100 * price);
-                                final tax = price * 0.11;
-                                final total = price + tax;
+                                final subTotal =
+                                    price - (discount / 100 * price);
+                                final tax = subTotal * 0.11;
+                                final total = subTotal + tax;
 
                                 totalPriceController.text =
                                     total.ceil().toString();
@@ -625,88 +497,43 @@ class _ConfirmPaymentPageState extends State<ConfirmPaymentPage> {
                                   ),
                                 ),
                                 const SpaceWidth(8.0),
-                                // BlocBuilder<CheckoutBloc, CheckoutState>(
-                                //   builder: (context, state) {
-                                //     final discount = state.maybeWhen(
-                                //         orElse: () => 0,
-                                //         loaded: (products, discount, tax,
-                                //             serviceCharge) {
-                                //           if (discount == null) {
-                                //             return 0;
-                                //           }
-                                //           return discount.value!
-                                //               .replaceAll('.00', '')
-                                //               .toIntegerFromText;
-                                //         });
-
-                                //     final price = state.maybeWhen(
-                                //       orElse: () => 0,
-                                //       loaded:
-                                //           (products, discount, tax, service) =>
-                                //               products.fold(
-                                //         0,
-                                //         (previousValue, element) =>
-                                //             previousValue +
-                                //             (element.product.price!
-                                //                     .toIntegerFromText *
-                                //                 element.quantity),
-                                //       ),
-                                //     );
-
-                                //     // final discount = state.maybeWhen(
-                                //     //     orElse: () => 0,
-                                //     //     loaded: (products, discount, tax,
-                                //     //         serviceCharge) {
-                                //     //       if (discount == null) {
-                                //     //         return 0;
-                                //     //       }
-                                //     //       return discount.value!
-                                //     //           .replaceAll('.00', '')
-                                //     //           .toIntegerFromText;
-                                //     //     });
-
-                                //     final subTotal =
-                                //         price - (discount / 100 * price);
-                                //     final finalTax = subTotal * 0.11;
-
-                                //     List<ProductQuantity> items =
-                                //         state.maybeWhen(
-                                //       orElse: () => [],
-                                //       loaded:
-                                //           (products, discount, tax, service) =>
-                                //               products,
-                                //     );
-                                //     return Flexible(
-                                //       child: Button.filled(
-                                //         onPressed: () async {
-                                //           context
-                                //               .read<OrderBloc>()
-                                //               .add(OrderEvent.order(
-                                //                 items,
-                                //                 discount,
-                                //                 finalTax.toInt(),
-                                //                 0,
-                                //                 totalPriceController
-                                //                     .text.toIntegerFromText,
-                                //               ));
-                                //           await showDialog(
-                                //             context: context,
-                                //             barrierDismissible: false,
-                                //             builder: (context) =>
-                                //                 const SuccessPaymentDialog(),
-                                //           );
-                                //         },
-                                //         label: 'Bayar',
-                                //       ),
-                                //     );
-                                //   },
-                                // ),
                                 BlocBuilder<CheckoutBloc, CheckoutState>(
                                   builder: (context, state) {
+                                    final discount = state.maybeWhen(
+                                        orElse: () => 0,
+                                        loaded: (products, discount, tax,
+                                            serviceCharge) {
+                                          if (discount == null) {
+                                            return 0;
+                                          }
+                                          return discount.value!
+                                              .replaceAll('.00', '')
+                                              .toIntegerFromText;
+                                        });
+
+                                    final price = state.maybeWhen(
+                                      orElse: () => 0,
+                                      loaded:
+                                          (products, discount, tax, service) =>
+                                              products.fold(
+                                        0,
+                                        (previousValue, element) =>
+                                            previousValue +
+                                            (element.product.price! *
+                                                element.quantity),
+                                      ),
+                                    );
+
+                                    final subTotal =
+                                        price - (discount / 100 * price);
+                                    final finalTax = subTotal * 0.11;
+
                                     List<ProductQuantity> items =
                                         state.maybeWhen(
                                       orElse: () => [],
-                                      loaded: (products) => products,
+                                      loaded:
+                                          (products, discount, tax, service) =>
+                                              products,
                                     );
                                     return Flexible(
                                         child: Button.filled(
@@ -714,8 +541,8 @@ class _ConfirmPaymentPageState extends State<ConfirmPaymentPage> {
                                               context.read<OrderBloc>().add(
                                                   OrderEvent.order(
                                                       items,
-                                                      0,
-                                                      0,
+                                                      discount,
+                                                      finalTax.toInt(),
                                                       0,
                                                       totalPriceController.text
                                                           .toIntegerFromText));

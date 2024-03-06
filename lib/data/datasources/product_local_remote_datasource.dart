@@ -84,7 +84,7 @@ class ProductLocalRemoteDatasource {
 
   Future<Database> get database async {
     if (_database != null) return _database!;
-    _database = await _initDB('dbresto21.db');
+    _database = await _initDB('dbresto22.db');
     return _database!;
   }
 

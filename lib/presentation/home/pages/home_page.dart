@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_pos_apps/core/core.dart';
+import 'package:flutter_pos_apps/presentation/home/dialog/service_dialog.dart';
+import 'package:flutter_pos_apps/presentation/home/dialog/tax_dialog.dart';
 import 'package:flutter_pos_apps/presentation/home/widgets/order_menu.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -10,6 +12,7 @@ import '../../../core/components/spaces.dart';
 import '../../../core/constants/colors.dart';
 import '../bloc/checkout/checkout_bloc.dart';
 import '../bloc/local_product/local_product_bloc.dart';
+import '../dialog/discount_dialog.dart';
 import '../models/product_category.dart';
 import '../models/product_model.dart';
 import '../widgets/column_button.dart';
@@ -531,7 +534,7 @@ class _HomePageState extends State<HomePage> {
                                           ),
                                         ),
                                       ),
-                                  loaded: (products) {
+                                  loaded: (products, discount, tax, service) {
                                     if (products.isEmpty) {
                                       return Padding(
                                         padding: const EdgeInsets.symmetric(
@@ -574,53 +577,88 @@ class _HomePageState extends State<HomePage> {
                               ColumnButton(
                                 label: 'Diskon',
                                 svgGenImage: Assets.icons.diskon,
-                                onPressed: () {},
+                                onPressed: () => showDialog(
+                                    context: context,
+                                    builder: (context) =>
+                                        const DiscountDialog()),
                               ),
                               ColumnButton(
                                 label: 'Pajak',
                                 svgGenImage: Assets.icons.pajak,
-                                onPressed: () {},
+                                onPressed: () => showDialog(
+                                    context: context,
+                                    builder: (context) => const TaxDialog()),
                               ),
                               ColumnButton(
                                 label: 'Layanan',
                                 svgGenImage: Assets.icons.layanan,
-                                onPressed: () {},
+                                onPressed: () => showDialog(
+                                    context: context,
+                                    builder: (context) =>
+                                        const ServiceDialog()),
                               ),
                             ],
                           ),
                           const SpaceHeight(8.0),
                           const Divider(),
                           const SpaceHeight(8.0),
-                          const Row(
+                          Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(
+                              const Text(
                                 'Pajak',
                                 style: TextStyle(color: AppColors.grey),
                               ),
-                              Text(
-                                '11 %',
-                                style: TextStyle(
-                                  color: AppColors.primary,
-                                  fontWeight: FontWeight.w600,
-                                ),
+                              BlocBuilder<CheckoutBloc, CheckoutState>(
+                                builder: (context, state) {
+                                  final tax = state.maybeWhen(
+                                      orElse: () => 0,
+                                      loaded:
+                                          (products, discount, tax, service) {
+                                        if (products.isEmpty) {
+                                          return 0;
+                                        }
+                                        return tax;
+                                      });
+                                  return Text(
+                                    '$tax %',
+                                    style: const TextStyle(
+                                      color: AppColors.primary,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  );
+                                },
                               ),
                             ],
                           ),
                           const SpaceHeight(8.0),
-                          const Row(
+                          Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(
+                              const Text(
                                 'Diskon',
                                 style: TextStyle(color: AppColors.grey),
                               ),
-                              Text(
-                                'Rp. 0',
-                                style: TextStyle(
-                                  color: AppColors.primary,
-                                  fontWeight: FontWeight.w600,
-                                ),
+                              BlocBuilder<CheckoutBloc, CheckoutState>(
+                                builder: (context, state) {
+                                  final discount = state.maybeWhen(
+                                      orElse: () => 0,
+                                      loaded:
+                                          (products, discount, tax, service) {
+                                        if (discount == null) {
+                                          return 0;
+                                        }
+                                        return discount
+                                            .value!.toIntegerFromText;
+                                      });
+                                  return Text(
+                                    '$discount %'.replaceAll('00', ''),
+                                    style: const TextStyle(
+                                      color: AppColors.primary,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  );
+                                },
                               ),
                             ],
                           ),
@@ -636,7 +674,8 @@ class _HomePageState extends State<HomePage> {
                                 builder: (context, state) {
                                   int price = state.maybeWhen(
                                       orElse: () => 0,
-                                      loaded: (products) {
+                                      loaded:
+                                          (products, discount, tax, service) {
                                         if (products.isEmpty) {
                                           return 0;
                                         }
@@ -681,7 +720,7 @@ class _HomePageState extends State<HomePage> {
                       builder: (context, state) {
                         return state.maybeWhen(
                           orElse: () => const SizedBox(),
-                          loaded: (products) {
+                          loaded: (products, discount, tax, service) {
                             if (products.isEmpty) {
                               return Align(
                                 alignment: Alignment.bottomCenter,
