@@ -18,15 +18,15 @@ class DiscountPage extends StatefulWidget {
 }
 
 class _DiscountPageState extends State<DiscountPage> {
-  final List<DiscountModel> discounts = [
-    DiscountModel(
-      name: '20',
-      code: 'BUKAPUASA',
-      description: null,
-      discount: 50,
-      category: ProductCategory.food,
-    ),
-  ];
+  // final List<DiscountModel> discounts = [
+  //   DiscountModel(
+  //     name: '20',
+  //     code: 'BUKAPUASA',
+  //     description: null,
+  //     discount: 50,
+  //     category: ProductCategory.food,
+  //   ),
+  // ];
 
   void onEditTap(DiscountModel item) {
     showDialog(
@@ -50,83 +50,87 @@ class _DiscountPageState extends State<DiscountPage> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          const SettingsTitle('Kelola Diskon'),
-          const SizedBox(height: 24),
-          CustomTabBar(
-            tabTitles: const ['Semua'],
-            initialTabIndex: 0,
-            tabViews: [
-              // SEMUA TAB
-
-              SizedBox(
-                child: BlocBuilder<DiscountBloc, DiscountState>(
-                  builder: (context, state) {
-                    return state.maybeWhen(orElse: () {
-                      return const Center(
-                        child: CircularProgressIndicator(),
-                      );
-                    }, loaded: (discounts) {
-                      return GridView.builder(
-                        shrinkWrap: true,
-                        itemCount: discounts.length + 1,
-                        physics: const NeverScrollableScrollPhysics(),
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                          childAspectRatio: 0.85,
-                          crossAxisCount: 3,
-                          crossAxisSpacing: 30.0,
-                          mainAxisSpacing: 30.0,
-                        ),
-                        itemBuilder: (context, index) {
-                          if (index == 0) {
-                            return AddData(
-                              title: 'Tambah Diskon Baru',
-                              onPressed: onAddDataTap,
+    return RefreshIndicator(
+      onRefresh: () async {
+        context.read<DiscountBloc>().add(const DiscountEvent.getDiscounts());
+      },
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            const SettingsTitle('Kelola Diskon'),
+            const SizedBox(height: 24),
+            CustomTabBar(
+              tabTitles: const ['Semua'],
+              initialTabIndex: 0,
+              tabViews: [
+                // SEMUA TAB
+                SizedBox(
+                  child: BlocBuilder<DiscountBloc, DiscountState>(
+                    builder: (context, state) {
+                      return state.maybeWhen(orElse: () {
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }, loaded: (discounts) {
+                        return GridView.builder(
+                          shrinkWrap: true,
+                          itemCount: discounts.length + 1,
+                          physics: const NeverScrollableScrollPhysics(),
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                            childAspectRatio: 0.85,
+                            crossAxisCount: 3,
+                            crossAxisSpacing: 30.0,
+                            mainAxisSpacing: 30.0,
+                          ),
+                          itemBuilder: (context, index) {
+                            if (index == 0) {
+                              return AddData(
+                                title: 'Tambah Diskon Baru',
+                                onPressed: onAddDataTap,
+                              );
+                            }
+                            final item = discounts[index - 1];
+                            return ManageDiscountCard(
+                              data: item,
+                              onEditTap: () {},
                             );
-                          }
-                          final item = discounts[index - 1];
-                          return ManageDiscountCard(
-                            data: item,
-                            onEditTap: () {},
-                          );
-                        },
-                      );
-                    });
-                    // return GridView.builder(
-                    //   shrinkWrap: true,
-                    //   itemCount: discounts.length + 1,
-                    //   physics: const NeverScrollableScrollPhysics(),
-                    //   gridDelegate:
-                    //       const SliverGridDelegateWithFixedCrossAxisCount(
-                    //     childAspectRatio: 0.85,
-                    //     crossAxisCount: 3,
-                    //     crossAxisSpacing: 30.0,
-                    //     mainAxisSpacing: 30.0,
-                    //   ),
-                    //   itemBuilder: (context, index) {
-                    //     if (index == 0) {
-                    //       return AddData(
-                    //         title: 'Tambah Diskon Baru',
-                    //         onPressed: onAddDataTap,
-                    //       );
-                    //     }
-                    //     final item = discounts[index - 1];
-                    //     return ManageDiscountCard(
-                    //       data: item,
-                    //       onEditTap: () => onEditTap(item),
-                    //     );
-                    //   },
-                    // );
-                  },
+                          },
+                        );
+                      });
+                      // return GridView.builder(
+                      //   shrinkWrap: true,
+                      //   itemCount: discounts.length + 1,
+                      //   physics: const NeverScrollableScrollPhysics(),
+                      //   gridDelegate:
+                      //       const SliverGridDelegateWithFixedCrossAxisCount(
+                      //     childAspectRatio: 0.85,
+                      //     crossAxisCount: 3,
+                      //     crossAxisSpacing: 30.0,
+                      //     mainAxisSpacing: 30.0,
+                      //   ),
+                      //   itemBuilder: (context, index) {
+                      //     if (index == 0) {
+                      //       return AddData(
+                      //         title: 'Tambah Diskon Baru',
+                      //         onPressed: onAddDataTap,
+                      //       );
+                      //     }
+                      //     final item = discounts[index - 1];
+                      //     return ManageDiscountCard(
+                      //       data: item,
+                      //       onEditTap: () => onEditTap(item),
+                      //     );
+                      //   },
+                      // );
+                    },
+                  ),
                 ),
-              ),
-            ],
-          ),
-        ],
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

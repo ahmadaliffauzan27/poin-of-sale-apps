@@ -23,4 +23,26 @@ class DiscountRemoteDatasource {
       return const Left('Failed to load discounts');
     }
   }
+
+  //add diskon
+  Future<Either<String, bool>> addDiscount(
+      String name, String description, int value) async {
+    final url = Uri.parse('${Variables.baseUrl}/api/api-discount');
+    final authData = await AuthLocalRemoteDatasource().getAuthData();
+    final response = await http.post(url, headers: {
+      'Authorization': 'Bearer ${authData.token}',
+      'Accept': 'application/json',
+    }, body: {
+      'name': name,
+      'description': description,
+      'value': value.toString(),
+      'type': 'percentage',
+    });
+
+    if (response.statusCode == 200) {
+      return const Right(true);
+    } else {
+      return const Left('Gagal menambahkan diskon');
+    }
+  }
 }
