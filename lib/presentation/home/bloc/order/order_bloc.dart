@@ -1,8 +1,10 @@
+// ignore: depend_on_referenced_packages
 import 'package:bloc/bloc.dart';
 import 'package:flutter_pos_apps/data/datasources/auth_local_remote_datasource.dart';
 import 'package:flutter_pos_apps/data/datasources/product_local_remote_datasource.dart';
 import 'package:flutter_pos_apps/presentation/home/models/product_qty.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:intl/intl.dart';
 
 import '../../models/order_model.dart';
 
@@ -41,7 +43,7 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
         totalItem: totalItem,
         idKasir: userData.user!.id!,
         namaKasir: userData.user!.name!,
-        transactionTime: DateTime.now().toString(),
+        transactionTime: DateFormat.yMd().format(DateTime.now()),
         isSync: 0,
         orderItems: event.items,
       );

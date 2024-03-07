@@ -12,11 +12,8 @@ class FormTaxDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final shippingFeeController = TextEditingController();
     final serviceFeeController = TextEditingController();
     final taxFeeController = TextEditingController();
-    final isShipping = ValueNotifier<bool>(false);
-    final isService = ValueNotifier<bool>(false);
     return AlertDialog(
       title: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -56,10 +53,7 @@ class FormTaxDialog extends StatelessWidget {
               Button.filled(
                 onPressed: () {
                   if (data == null) {
-                    // TODO: do add Perhitungan Biaya
-                  } else {
-                    // TODO: do edit Perhitungan Biaya
-                  }
+                  } else {}
                   context.pop();
                 },
                 label: data == null ? 'Simpan' : 'Perbarui',

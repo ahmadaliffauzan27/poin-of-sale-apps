@@ -3,10 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_pos_apps/core/core.dart';
 import 'package:flutter_pos_apps/presentation/home/models/product_qty.dart';
 import '../../../core/components/spaces.dart';
-import '../../../core/constants/colors.dart';
 import '../../../core/constants/variables.dart';
 import '../bloc/checkout/checkout_bloc.dart';
-import '../models/order_item.dart';
 
 class OrderMenu extends StatelessWidget {
   final ProductQuantity data;
@@ -37,7 +35,7 @@ class OrderMenu extends StatelessWidget {
                 title: Text(data.product.name!,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
                     )),

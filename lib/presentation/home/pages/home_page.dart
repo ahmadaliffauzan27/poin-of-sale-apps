@@ -4,17 +4,12 @@ import 'package:flutter_pos_apps/core/core.dart';
 import 'package:flutter_pos_apps/presentation/home/dialog/service_dialog.dart';
 import 'package:flutter_pos_apps/presentation/home/dialog/tax_dialog.dart';
 import 'package:flutter_pos_apps/presentation/home/widgets/order_menu.dart';
-import 'package:google_fonts/google_fonts.dart';
 
-import '../../../core/assets/assets.gen.dart';
 import '../../../core/components/buttons.dart';
 import '../../../core/components/spaces.dart';
-import '../../../core/constants/colors.dart';
 import '../bloc/checkout/checkout_bloc.dart';
 import '../bloc/local_product/local_product_bloc.dart';
 import '../dialog/discount_dialog.dart';
-import '../models/product_category.dart';
-import '../models/product_model.dart';
 import '../widgets/column_button.dart';
 import '../widgets/custom_tab_bar.dart';
 import '../widgets/home_title.dart';
@@ -769,6 +764,7 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
+// ignore: unused_element
 class _IsEmpty extends StatelessWidget {
   const _IsEmpty();
 

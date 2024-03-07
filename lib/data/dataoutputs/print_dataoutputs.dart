@@ -26,8 +26,8 @@ class PrintDataoutputs {
     final profile = await CapabilityProfile.load();
     final generator = Generator(PaperSize.mm58, profile);
 
-    final pajak = totalPrice * 0.11;
-    final total = totalPrice + pajak;
+    // final pajak = totalPrice * 0.11;
+    // final total = totalPrice + pajak;
     final nominalPembayaran = nominalBayar.toDouble();
     final kembalian = nominalPembayaran - totalPrice;
 

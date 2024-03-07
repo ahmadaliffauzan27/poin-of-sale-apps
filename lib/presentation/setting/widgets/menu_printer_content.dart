@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:print_bluetooth_thermal/print_bluetooth_thermal.dart';
 
 import '../../../../core/constants/colors.dart';
-import '../models/printer_model.dart';
 
 class MenuPrinterContent extends StatelessWidget {
   final BluetoothInfo data;

@@ -1,3 +1,4 @@
+// ignore: depend_on_referenced_packages
 import 'package:bloc/bloc.dart';
 import 'package:flutter_pos_apps/data/datasources/product_remote_datasource.dart';
 import 'package:flutter_pos_apps/data/models/response/product_response_model.dart';

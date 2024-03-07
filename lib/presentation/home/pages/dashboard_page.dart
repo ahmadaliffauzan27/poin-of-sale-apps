@@ -4,10 +4,10 @@ import 'package:flutter_pos_apps/core/core.dart';
 import 'package:flutter_pos_apps/data/datasources/auth_local_remote_datasource.dart';
 import 'package:flutter_pos_apps/presentation/home/pages/home_page.dart';
 import 'package:flutter_pos_apps/presentation/setting/pages/settings_page.dart';
-import 'package:flutter_pos_apps/presentation/setting/pages/sync_data_pages.dart';
 
 import '../../auth/bloc/logout/logout_bloc.dart';
 import '../../auth/login_page.dart';
+import '../../report/pages/report_page.dart';
 import '../widgets/nav_item.dart';
 
 class DashboardPage extends StatefulWidget {
@@ -22,14 +22,8 @@ class _DashboardPageState extends State<DashboardPage> {
 
   final List<Widget> _pages = [
     const HomePage(),
-    // const Center(child: Text('This is page 1')),
-    const Center(child: Text('This is page 2')),
-    const Center(child: Text('This is page 3')),
+    const ReportPage(),
     const SettingsPage(),
-    // const Center(child: Text('This is page 4')),
-    // const SyncDataPage(),
-    // const ManagePrinterPage(),
-    // const SettingsPage(),
   ];
 
   void _onItemTapped(int index) {
@@ -58,58 +52,18 @@ class _DashboardPageState extends State<DashboardPage> {
                           isActive: _selectedIndex == 0,
                           onTap: () => _onItemTapped(0),
                         ),
+
                         NavItem(
-                          iconPath: Assets.icons.discount.path,
+                          iconPath: Assets.icons.dashboard.path,
                           isActive: _selectedIndex == 1,
                           onTap: () => _onItemTapped(1),
                         ),
                         NavItem(
-                          iconPath: Assets.icons.dashboard.path,
+                          iconPath: Assets.icons.setting.path,
                           isActive: _selectedIndex == 2,
                           onTap: () => _onItemTapped(2),
                         ),
-                        NavItem(
-                          iconPath: Assets.icons.setting.path,
-                          isActive: _selectedIndex == 3,
-                          onTap: () => _onItemTapped(3),
-                        ),
-                        // BlocListener<LogoutBloc, LogoutState>(
-                        //   listener: (context, state) {
-                        //     state.maybeMap(
-                        //       orElse: () {},
-                        //       error: (e) {
-                        //         ScaffoldMessenger.of(context).showSnackBar(
-                        //           SnackBar(
-                        //             content: Text(e.message),
-                        //             backgroundColor: AppColors.red,
-                        //           ),
-                        //         );
-                        //       },
-                        //       success: (value) {
-                        //         AuthLocalRemoteDatasource().removeAuthData();
-                        //         ScaffoldMessenger.of(context).showSnackBar(
-                        //           const SnackBar(
-                        //             content: Text('Logout success'),
-                        //             backgroundColor: AppColors.primary,
-                        //           ),
-                        //         );
-                        //         Navigator.pushReplacement(context,
-                        //             MaterialPageRoute(builder: (context) {
-                        //           return const LoginPage();
-                        //         }));
-                        //       },
-                        //     );
-                        //   },
-                        //   child: NavItem(
-                        //     iconPath: Assets.icons.logout.path,
-                        //     isActive: false,
-                        //     onTap: () {
-                        //       context
-                        //           .read<LogoutBloc>()
-                        //           .add(const LogoutEvent.logout());
-                        //     },
-                        //   ),
-                        // ),
+
                         // logout with popup dialog
                         BlocListener<LogoutBloc, LogoutState>(
                           listener: (context, state) {

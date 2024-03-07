@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter_pos_apps/presentation/home/models/order_item.dart';
 import 'package:flutter_pos_apps/presentation/home/models/product_qty.dart';
 
 // ignore_for_file: public_member_api_docs, sort_constructors_first

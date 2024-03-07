@@ -131,10 +131,7 @@ class FormPrinterDialog extends StatelessWidget {
               Button.filled(
                 onPressed: () {
                   if (data == null) {
-                    // TODO: do add printer
-                  } else {
-                    // TODO: do edit printer
-                  }
+                  } else {}
                   context.pop();
                 },
                 label: data == null ? 'Simpan' : 'Perbarui',

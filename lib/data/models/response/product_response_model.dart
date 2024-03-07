@@ -1,7 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/foundation.dart';
-
 class ProductResponsesModel {
   final String? status;
   final List<Product>? data;

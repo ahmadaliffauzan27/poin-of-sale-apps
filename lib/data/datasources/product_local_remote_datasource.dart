@@ -84,7 +84,7 @@ class ProductLocalRemoteDatasource {
 
   Future<Database> get database async {
     if (_database != null) return _database!;
-    _database = await _initDB('dbresto22.db');
+    _database = await _initDB('dbresto23.db');
     return _database!;
   }
 
@@ -105,6 +105,25 @@ class ProductLocalRemoteDatasource {
     final db = await instance.database;
     final List<Map<String, dynamic>> maps =
         await db.query(tableOrder, where: 'is_sync = ?', whereArgs: [0]);
+    return List.generate(maps.length, (i) {
+      return OrderModel.fromMap(maps[i]);
+    });
+  }
+
+  //get all order
+  Future<List<OrderModel>> getAllOrder(
+    DateTime start,
+    DateTime end,
+  ) async {
+    final db = await instance.database;
+    final List<Map<String, dynamic>> maps = await db.query(
+      tableOrder,
+      // where: 'transaction_time BETWEEN ? AND ?',
+      // whereArgs: [
+      //   DateFormat.yMd().format(start),
+      //   DateFormat.yMd().format(end),
+      // ],
+    );
     return List.generate(maps.length, (i) {
       return OrderModel.fromMap(maps[i]);
     });
@@ -140,6 +159,7 @@ class ProductLocalRemoteDatasource {
     for (var product in products) {
       await db.insert(tableProduct, product.toLocalMap(),
           conflictAlgorithm: ConflictAlgorithm.replace);
+      // ignore: avoid_print
       print('inserted success ${product.name}');
     }
   }

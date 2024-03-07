@@ -5,7 +5,6 @@ import 'package:flutter_pos_apps/core/core.dart';
 import 'package:print_bluetooth_thermal/print_bluetooth_thermal.dart';
 
 import '../../../core/components/spaces.dart';
-import '../../../core/constants/colors.dart';
 import '../widgets/menu_printer_button.dart';
 import '../widgets/menu_printer_content.dart';
 
@@ -35,10 +34,13 @@ class _ManagePrinterPageState extends State<ManagePrinterPage> {
 
   String macName = '';
 
+  // ignore: unused_field
   String _info = "";
+  // ignore: unused_field
   String _msj = '';
   bool connected = false;
   List<BluetoothInfo> items = [];
+  // ignore: unused_field
   final List<String> _options = [
     "permission bluetooth granted",
     "bluetooth enabled",
@@ -46,9 +48,12 @@ class _ManagePrinterPageState extends State<ManagePrinterPage> {
     "update info"
   ];
 
+  // ignore: prefer_final_fields
   String _selectSize = "2";
   final _txtText = TextEditingController(text: "Hello developer");
+  // ignore: unused_field
   bool _progress = false;
+  // ignore: unused_field
   String _msjprogress = "";
 
   String optionprinttype = "58 mm";
@@ -66,6 +71,7 @@ class _ManagePrinterPageState extends State<ManagePrinterPage> {
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
       platformVersion = await PrintBluetoothThermal.platformVersion;
+      // ignore: avoid_print
       print("patformversion: $platformVersion");
       porcentbatery = await PrintBluetoothThermal.batteryLevel;
     } on PlatformException {
@@ -78,6 +84,7 @@ class _ManagePrinterPageState extends State<ManagePrinterPage> {
     if (!mounted) return;
 
     final bool result = await PrintBluetoothThermal.bluetoothEnabled;
+    // ignore: avoid_print
     print("bluetooth enabled: $result");
     if (result) {
       _msj = "Bluetooth enabled, please search and connect";
@@ -123,6 +130,7 @@ class _ManagePrinterPageState extends State<ManagePrinterPage> {
     });
     final bool result =
         await PrintBluetoothThermal.connect(macPrinterAddress: mac);
+    // ignore: avoid_print
     print("state conected $result");
     if (result) connected = true;
     setState(() {
@@ -135,6 +143,7 @@ class _ManagePrinterPageState extends State<ManagePrinterPage> {
     setState(() {
       connected = false;
     });
+    // ignore: avoid_print
     print("status disconnect $status");
   }
 
@@ -144,6 +153,7 @@ class _ManagePrinterPageState extends State<ManagePrinterPage> {
     if (conexionStatus) {
       List<int> ticket = await testTicket();
       final result = await PrintBluetoothThermal.writeBytes(ticket);
+      // ignore: avoid_print
       print("print test result:  $result");
     } else {
       //no conectado, reconecte
@@ -192,6 +202,7 @@ class _ManagePrinterPageState extends State<ManagePrinterPage> {
       String text = "${_txtText.text}\n";
       bool result = await PrintBluetoothThermal.writeString(
           printText: PrintTextSize(size: int.parse(_selectSize), text: text));
+      // ignore: avoid_print
       print("status print result: $result");
       setState(() {
         _msj = "printed status: $result";
@@ -201,6 +212,7 @@ class _ManagePrinterPageState extends State<ManagePrinterPage> {
       setState(() {
         _msj = "no connected device";
       });
+      // ignore: avoid_print
       print("no conectado");
     }
   }
@@ -220,6 +232,7 @@ class _ManagePrinterPageState extends State<ManagePrinterPage> {
           printText: PrintTextSize(size: 3, text: "$text size 3"));
     } else {
       //desconectado
+      // ignore: avoid_print
       print("desconectado bluetooth $conexionStatus");
     }
   }
@@ -227,10 +240,10 @@ class _ManagePrinterPageState extends State<ManagePrinterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Kelola Printer'),
-        centerTitle: true,
-      ),
+      // appBar: AppBar(
+      //   title: const SettingsTitle('Kelola Printer'),
+      //   centerTitle: true,
+      // ),
       body: ListView(
         padding: const EdgeInsets.all(24.0),
         children: [

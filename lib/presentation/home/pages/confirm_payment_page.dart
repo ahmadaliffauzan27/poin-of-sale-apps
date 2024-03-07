@@ -1,18 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_pos_apps/core/core.dart';
-import 'package:flutter_pos_apps/core/extensions/int_ext.dart';
-import 'package:flutter_pos_apps/core/extensions/string_ext.dart';
-import '../../../core/assets/assets.gen.dart';
 import '../../../core/components/buttons.dart';
 import '../../../core/components/spaces.dart';
-import '../../../core/constants/colors.dart';
 import '../bloc/checkout/checkout_bloc.dart';
 import '../bloc/order/order_bloc.dart';
 import '../models/product_category.dart';
 import '../models/product_model.dart';
 import '../models/product_qty.dart';
-import '../widgets/column_button.dart';
 import '../widgets/order_menu.dart';
 import '../widgets/success_payment_dialog.dart';
 
@@ -24,6 +19,10 @@ class ConfirmPaymentPage extends StatefulWidget {
 }
 
 class _ConfirmPaymentPageState extends State<ConfirmPaymentPage> {
+  void updateTotalPrice(int amount) {
+    totalPriceController.text = amount.toString();
+  }
+
   final totalPriceController = TextEditingController();
   final products = [
     ProductModel(
@@ -57,51 +56,51 @@ class _ConfirmPaymentPageState extends State<ConfirmPaymentPage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            const Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Konfirmasi',
-                                  style: TextStyle(
-                                    color: AppColors.primary,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                                Text(
-                                  'Orders #1',
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            GestureDetector(
-                              onTap: () {},
-                              child: Container(
-                                padding: const EdgeInsets.all(16.0),
-                                height: 60.0,
-                                width: 60.0,
-                                decoration: const BoxDecoration(
-                                  color: AppColors.primary,
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(8.0)),
-                                ),
-                                child: const Icon(
-                                  Icons.add,
-                                  color: AppColors.white,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        const SpaceHeight(8.0),
-                        const Divider(),
-                        const SpaceHeight(24.0),
+                        // Row(
+                        //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        //   children: [
+                        //     const Column(
+                        //       crossAxisAlignment: CrossAxisAlignment.start,
+                        //       children: [
+                        //         Text(
+                        //           'Konfirmasi',
+                        //           style: TextStyle(
+                        //             color: AppColors.primary,
+                        //             fontSize: 20,
+                        //             fontWeight: FontWeight.w600,
+                        //           ),
+                        //         ),
+                        //         Text(
+                        //           'Orders #1',
+                        //           style: TextStyle(
+                        //             fontSize: 16,
+                        //             fontWeight: FontWeight.w500,
+                        //           ),
+                        //         ),
+                        //       ],
+                        //     ),
+                        //     GestureDetector(
+                        //       onTap: () {},
+                        //       child: Container(
+                        //         padding: const EdgeInsets.all(16.0),
+                        //         height: 60.0,
+                        //         width: 60.0,
+                        //         decoration: const BoxDecoration(
+                        //           color: AppColors.primary,
+                        //           borderRadius:
+                        //               BorderRadius.all(Radius.circular(8.0)),
+                        //         ),
+                        //         child: const Icon(
+                        //           Icons.add,
+                        //           color: AppColors.white,
+                        //         ),
+                        //       ),
+                        //     ),
+                        //   ],
+                        // ),
+                        // const SpaceHeight(8.0),
+                        // const Divider(),
+                        const SpaceHeight(28.0),
                         const Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -168,39 +167,9 @@ class _ConfirmPaymentPageState extends State<ConfirmPaymentPage> {
                           },
                         ),
                         const SpaceHeight(16.0),
-                        // Row(
-                        //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        //   children: [
-                        //     ColumnButton(
-                        //       label: 'Diskon',
-                        //       svgGenImage: Assets.icons.diskon,
-                        //       onPressed: () => showDialog(
-                        //         context: context,
-                        //         builder: (context) => const DiscountDialog(),
-                        //       ),
-                        //     ),
-                        //     ColumnButton(
-                        //       label: 'Pajak',
-                        //       svgGenImage: Assets.icons.pajak,
-                        //       onPressed: () => showDialog(
-                        //         context: context,
-                        //         builder: (context) => const TaxDialog(),
-                        //       ),
-                        //     ),
-                        //     ColumnButton(
-                        //       label: 'Layanan',
-                        //       svgGenImage: Assets.icons.layanan,
-                        //       onPressed: () => showDialog(
-                        //         context: context,
-                        //         builder: (context) => const ServiceDialog(),
-                        //       ),
-                        //     ),
-                        //   ],
-                        // ),
                         const SpaceHeight(8.0),
                         const Divider(),
                         const SpaceHeight(8.0),
-
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -257,7 +226,7 @@ class _ConfirmPaymentPageState extends State<ConfirmPaymentPage> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(
+                            const Text(
                               'Diskon',
                               style: TextStyle(color: AppColors.grey),
                             ),
@@ -290,7 +259,7 @@ class _ConfirmPaymentPageState extends State<ConfirmPaymentPage> {
                                 final finalDiscount = discount / 100 * subTotal;
                                 return Text(
                                   finalDiscount.toInt().currencyFormatRp,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     color: AppColors.primary,
                                     fontWeight: FontWeight.w600,
                                   ),
@@ -375,6 +344,13 @@ class _ConfirmPaymentPageState extends State<ConfirmPaymentPage> {
 
                                 totalPriceController.text =
                                     total.ceil().toString();
+                                // Future.microtask(() {
+                                //   setState(() {
+                                //     totalPriceController.text =
+                                //         total.ceil().toString();
+                                //   });
+                                // });
+
                                 return Text(
                                   total.ceil().currencyFormatRp,
                                   style: const TextStyle(
@@ -387,11 +363,6 @@ class _ConfirmPaymentPageState extends State<ConfirmPaymentPage> {
                             ),
                           ],
                         ),
-                        // const SpaceHeight(20.0),
-                        // Button.filled(
-                        //   onPressed: () {},
-                        //   label: 'Lanjutkan Pembayaran',
-                        // ),
                       ],
                     ),
                   ),
@@ -474,30 +445,94 @@ class _ConfirmPaymentPageState extends State<ConfirmPaymentPage> {
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(8.0),
                                 ),
-                                hintText: 'Total harga',
+                                hintText: 'Total pembayaran',
                               ),
                             ),
                             const SpaceHeight(45.0),
-                            Row(
-                              children: [
-                                Button.filled(
-                                  width: 150.0,
-                                  onPressed: () {},
-                                  label: 'UANG PAS',
-                                ),
-                                const SpaceWidth(20.0),
-                                Button.filled(
-                                  width: 150.0,
-                                  onPressed: () {},
-                                  label: 'Rp 250.000',
-                                ),
-                                const SpaceWidth(20.0),
-                                Button.filled(
-                                  width: 150.0,
-                                  onPressed: () {},
-                                  label: 'Rp 300.000',
-                                ),
-                              ],
+                            // Row(
+                            //   children: [
+                            //     Button.filled(
+                            //       width: 150.0,
+                            //       onPressed: () {
+                            //         updateTotalPrice(100000);
+                            //       },
+                            //       label: 'UANG PAS',
+                            //     ),
+                            //     const SpaceWidth(20.0),
+                            //     Button.filled(
+                            //       width: 150.0,
+                            //       onPressed: () {},
+                            //       label: 'Rp 250.000',
+                            //     ),
+                            //     const SpaceWidth(20.0),
+                            //     Button.filled(
+                            //       width: 150.0,
+                            //       onPressed: () {},
+                            //       label: 'Rp 300.000',
+                            //     ),
+                            //   ],
+                            // ),
+
+                            //create uang pas button from checkout_bloc
+                            BlocBuilder<CheckoutBloc, CheckoutState>(
+                              builder: (context, state) {
+                                final price = state.maybeWhen(
+                                  orElse: () => 0,
+                                  loaded: (products, discount, tax, service) =>
+                                      products.fold(
+                                    0,
+                                    (previousValue, element) =>
+                                        previousValue +
+                                        (element.product.price! *
+                                            element.quantity),
+                                  ),
+                                );
+
+                                final discount = state.maybeWhen(
+                                    orElse: () => 0,
+                                    loaded: (products, discount, tax,
+                                        serviceCharge) {
+                                      if (discount == null) {
+                                        return 0;
+                                      }
+                                      return discount.value!
+                                          .replaceAll('.00', '')
+                                          .toIntegerFromText;
+                                    });
+
+                                final subTotal =
+                                    price - (discount / 100 * price);
+                                final finalTax = subTotal * 0.11;
+                                final total = subTotal + finalTax;
+
+                                return Row(
+                                  children: [
+                                    Button.filled(
+                                      width: 150.0,
+                                      onPressed: () {
+                                        updateTotalPrice(total.toInt());
+                                      },
+                                      label: 'UANG PAS',
+                                    ),
+                                    const SpaceWidth(20.0),
+                                    Button.filled(
+                                      width: 150.0,
+                                      onPressed: () {
+                                        updateTotalPrice(250000);
+                                      },
+                                      label: 'Rp 250.000',
+                                    ),
+                                    const SpaceWidth(20.0),
+                                    Button.filled(
+                                      width: 150.0,
+                                      onPressed: () {
+                                        updateTotalPrice(300000);
+                                      },
+                                      label: 'Rp 300.000',
+                                    ),
+                                  ],
+                                );
+                              },
                             ),
                             const SpaceHeight(100.0),
                           ],
@@ -545,18 +580,6 @@ class _ConfirmPaymentPageState extends State<ConfirmPaymentPage> {
                                                 element.quantity),
                                       ),
                                     );
-
-                                    // final discount = state.maybeWhen(
-                                    //     orElse: () => 0,
-                                    //     loaded: (products, discount, tax,
-                                    //         serviceCharge) {
-                                    //       if (discount == null) {
-                                    //         return 0;
-                                    //       }
-                                    //       return discount.value!
-                                    //           .replaceAll('.00', '')
-                                    //           .toIntegerFromText;
-                                    //     });
 
                                     final subTotal =
                                         price - (discount / 100 * price);

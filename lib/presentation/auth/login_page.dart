@@ -42,6 +42,7 @@ class _LoginPageState extends State<LoginPage> {
                 Assets.icons.homeResto.path,
                 width: 100,
                 height: 100,
+                // ignore: deprecated_member_use
                 color: AppColors.primary,
               )),
           const SpaceHeight(24.0),

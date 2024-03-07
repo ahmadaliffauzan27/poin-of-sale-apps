@@ -5,7 +5,6 @@ import '../dialogs/form_tax_dialog.dart';
 import '../models/tax_model.dart';
 import '../widgets/add_data.dart';
 import '../widgets/manage_tax_card.dart';
-import '../widgets/settings_title.dart';
 
 class TaxPage extends StatefulWidget {
   const TaxPage({super.key});
@@ -40,7 +39,6 @@ class _TaxPageState extends State<TaxPage> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          const SettingsTitle('Perhitungan Biaya'),
           const SizedBox(height: 24),
           CustomTabBar(
             tabTitles: const ['Layanan', 'Pajak'],

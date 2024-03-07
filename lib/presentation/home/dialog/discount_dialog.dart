@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_pos_apps/core/core.dart';
 
-import '../../../core/constants/colors.dart';
 import '../../setting/bloc/discount/discount_bloc.dart';
 import '../bloc/checkout/checkout_bloc.dart';
 

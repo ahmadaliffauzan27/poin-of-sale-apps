@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import '../../../core/assets/assets.gen.dart';
 import '../../../core/constants/colors.dart';
 import '../../../data/models/response/discount_response_model.dart';
-import '../models/discount_model.dart';
 
 class ManageDiscountCard extends StatelessWidget {
   final Discount data;

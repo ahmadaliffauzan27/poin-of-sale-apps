@@ -1,3 +1,4 @@
+// ignore: depend_on_referenced_packages
 import 'package:bloc/bloc.dart';
 import 'package:flutter_pos_apps/data/datasources/product_local_remote_datasource.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';

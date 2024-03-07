@@ -1,6 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+// ignore: depend_on_referenced_packages
 import 'package:bloc/bloc.dart';
-import 'package:flutter_pos_apps/data/models/response/product_response_model.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'package:flutter_pos_apps/data/datasources/order_remote_datasource.dart';

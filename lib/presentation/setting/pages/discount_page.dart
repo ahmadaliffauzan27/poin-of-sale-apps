@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../home/models/product_category.dart';
 import '../../home/widgets/custom_tab_bar.dart';
 import '../bloc/discount/discount_bloc.dart';
 import '../dialogs/form_discount_dialog.dart';
 import '../models/discount_model.dart';
 import '../widgets/add_data.dart';
 import '../widgets/manage_discount_card.dart';
-import '../widgets/settings_title.dart';
 
 class DiscountPage extends StatefulWidget {
   const DiscountPage({super.key});
@@ -58,7 +56,6 @@ class _DiscountPageState extends State<DiscountPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            const SettingsTitle('Kelola Diskon'),
             const SizedBox(height: 24),
             CustomTabBar(
               tabTitles: const ['Semua'],

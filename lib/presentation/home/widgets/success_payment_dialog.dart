@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_pos_apps/core/core.dart';
-import 'package:flutter_pos_apps/core/extensions/int_ext.dart';
 import 'package:flutter_pos_apps/data/datasources/auth_local_remote_datasource.dart';
 import 'package:intl/intl.dart';
 import 'package:print_bluetooth_thermal/print_bluetooth_thermal.dart';
-import '../../../core/assets/assets.gen.dart';
 import '../../../core/components/buttons.dart';
 import '../../../core/components/spaces.dart';
 import '../../../data/dataoutputs/print_dataoutputs.dart';
 import '../bloc/checkout/checkout_bloc.dart';
 import '../bloc/order/order_bloc.dart';
-import '../models/order_item.dart';
 import '../models/product_qty.dart';
 
 class SuccessPaymentDialog extends StatefulWidget {
@@ -88,10 +85,6 @@ class _SuccessPaymentDialogState extends State<SuccessPaymentDialog> {
             const SpaceHeight(5.0),
             BlocBuilder<OrderBloc, OrderState>(
               builder: (context, state) {
-                final total = state.maybeWhen(
-                  orElse: () => 0,
-                  loaded: (model) => model.total,
-                );
                 return Text(
                   widget.totalPrice.currencyFormatRp,
                   style: const TextStyle(
@@ -128,10 +121,6 @@ class _SuccessPaymentDialogState extends State<SuccessPaymentDialog> {
                 final paymentAmount = state.maybeWhen(
                   orElse: () => 0,
                   loaded: (model) => model.paymentAmount,
-                );
-                final total = state.maybeWhen(
-                  orElse: () => 0,
-                  loaded: (model) => model.total,
                 );
                 final diff = paymentAmount - widget.totalPrice;
                 return Text(
