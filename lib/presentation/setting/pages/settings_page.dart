@@ -3,6 +3,7 @@ import '../../../core/assets/assets.gen.dart';
 import '../../../core/components/spaces.dart';
 import '../../../core/constants/colors.dart';
 import 'discount_page.dart';
+import 'manage_printer_page.dart';
 import 'sync_data_pages.dart';
 import 'tax_page.dart';
 
@@ -81,17 +82,17 @@ class _SettingsPageState extends State<SettingsPage> {
                         : Colors.transparent,
                     onTap: () => indexValue(2),
                   ),
-                  // ListTile(
-                  //   contentPadding: const EdgeInsets.all(12.0),
-                  //   leading: Assets.icons.kelolaPajak.svg(),
-                  //   title: const Text('Sync Data'),
-                  //   subtitle: const Text('Sync data ke server atau sebaliknya'),
-                  //   textColor: AppColors.primary,
-                  //   tileColor: currentIndex == 2
-                  //       ? AppColors.blueLight
-                  //       : Colors.transparent,
-                  //   onTap: () => indexValue(2),
-                  // ),
+                  ListTile(
+                    contentPadding: const EdgeInsets.all(12.0),
+                    leading: Assets.icons.kelolaPajak.svg(),
+                    title: const Text('Sync Data'),
+                    subtitle: const Text('Sync data ke server atau sebaliknya'),
+                    textColor: AppColors.primary,
+                    tileColor: currentIndex == 3
+                        ? AppColors.blueLight
+                        : Colors.transparent,
+                    onTap: () => indexValue(3),
+                  ),
                 ],
               ),
             ),
@@ -108,12 +109,9 @@ class _SettingsPageState extends State<SettingsPage> {
                   index: currentIndex,
                   children: const [
                     DiscountPage(),
-                    SyncDataPage(),
+                    ManagePrinterPage(),
                     TaxPage(),
-                    // Text('tax'),
-                    // ManageDiscount(),
-                    // ManagePrinterPage(),
-                    // ManageTax(),
+                    SyncDataPage(),
                   ],
                 ),
               ),

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_pos_apps/core/core.dart';
-import 'package:flutter_pos_apps/presentation/home/models/product_qty.dart';
+import 'package:flutter_pos_apps/core/extensions/int_ext.dart';
+import 'package:flutter_pos_apps/core/extensions/string_ext.dart';
 import '../../../core/assets/assets.gen.dart';
 import '../../../core/components/buttons.dart';
 import '../../../core/components/spaces.dart';
@@ -10,6 +11,7 @@ import '../bloc/checkout/checkout_bloc.dart';
 import '../bloc/order/order_bloc.dart';
 import '../models/product_category.dart';
 import '../models/product_model.dart';
+import '../models/product_qty.dart';
 import '../widgets/column_button.dart';
 import '../widgets/order_menu.dart';
 import '../widgets/success_payment_dialog.dart';
@@ -23,13 +25,6 @@ class ConfirmPaymentPage extends StatefulWidget {
 
 class _ConfirmPaymentPageState extends State<ConfirmPaymentPage> {
   final totalPriceController = TextEditingController();
-
-  @override
-  dispose() {
-    totalPriceController.dispose();
-    super.dispose();
-  }
-
   final products = [
     ProductModel(
         image: Assets.images.product1.path,
@@ -173,7 +168,35 @@ class _ConfirmPaymentPageState extends State<ConfirmPaymentPage> {
                           },
                         ),
                         const SpaceHeight(16.0),
-
+                        // Row(
+                        //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        //   children: [
+                        //     ColumnButton(
+                        //       label: 'Diskon',
+                        //       svgGenImage: Assets.icons.diskon,
+                        //       onPressed: () => showDialog(
+                        //         context: context,
+                        //         builder: (context) => const DiscountDialog(),
+                        //       ),
+                        //     ),
+                        //     ColumnButton(
+                        //       label: 'Pajak',
+                        //       svgGenImage: Assets.icons.pajak,
+                        //       onPressed: () => showDialog(
+                        //         context: context,
+                        //         builder: (context) => const TaxDialog(),
+                        //       ),
+                        //     ),
+                        //     ColumnButton(
+                        //       label: 'Layanan',
+                        //       svgGenImage: Assets.icons.layanan,
+                        //       onPressed: () => showDialog(
+                        //         context: context,
+                        //         builder: (context) => const ServiceDialog(),
+                        //       ),
+                        //     ),
+                        //   ],
+                        // ),
                         const SpaceHeight(8.0),
                         const Divider(),
                         const SpaceHeight(8.0),
@@ -234,7 +257,7 @@ class _ConfirmPaymentPageState extends State<ConfirmPaymentPage> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const Text(
+                            Text(
                               'Diskon',
                               style: TextStyle(color: AppColors.grey),
                             ),
@@ -267,7 +290,7 @@ class _ConfirmPaymentPageState extends State<ConfirmPaymentPage> {
                                 final finalDiscount = discount / 100 * subTotal;
                                 return Text(
                                   finalDiscount.toInt().currencyFormatRp,
-                                  style: const TextStyle(
+                                  style: TextStyle(
                                     color: AppColors.primary,
                                     fontWeight: FontWeight.w600,
                                   ),
@@ -276,13 +299,12 @@ class _ConfirmPaymentPageState extends State<ConfirmPaymentPage> {
                             ),
                           ],
                         ),
-
                         const SpaceHeight(16.0),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             const Text(
-                              'Total',
+                              'Sub total',
                               style: TextStyle(color: AppColors.grey),
                             ),
                             BlocBuilder<CheckoutBloc, CheckoutState>(
@@ -314,7 +336,7 @@ class _ConfirmPaymentPageState extends State<ConfirmPaymentPage> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             const Text(
-                              'Sub Total',
+                              'Total',
                               style: TextStyle(
                                   color: AppColors.grey,
                                   fontWeight: FontWeight.bold,
@@ -524,8 +546,22 @@ class _ConfirmPaymentPageState extends State<ConfirmPaymentPage> {
                                       ),
                                     );
 
+                                    // final discount = state.maybeWhen(
+                                    //     orElse: () => 0,
+                                    //     loaded: (products, discount, tax,
+                                    //         serviceCharge) {
+                                    //       if (discount == null) {
+                                    //         return 0;
+                                    //       }
+                                    //       return discount.value!
+                                    //           .replaceAll('.00', '')
+                                    //           .toIntegerFromText;
+                                    //     });
+
                                     final subTotal =
                                         price - (discount / 100 * price);
+                                    final totalDiscount =
+                                        discount / 100 * price;
                                     final finalTax = subTotal * 0.11;
 
                                     List<ProductQuantity> items =
@@ -535,27 +571,48 @@ class _ConfirmPaymentPageState extends State<ConfirmPaymentPage> {
                                           (products, discount, tax, service) =>
                                               products,
                                     );
+                                    final totalQty = items.fold(
+                                      0,
+                                      (previousValue, element) =>
+                                          previousValue + element.quantity,
+                                    );
+
+                                    final totalPrice = subTotal + finalTax;
+
                                     return Flexible(
-                                        child: Button.filled(
-                                            onPressed: () async {
-                                              context.read<OrderBloc>().add(
-                                                  OrderEvent.order(
-                                                      items,
-                                                      discount,
-                                                      finalTax.toInt(),
-                                                      0,
-                                                      totalPriceController.text
-                                                          .toIntegerFromText));
-                                              await showDialog(
-                                                context: context,
-                                                barrierDismissible: false,
-                                                builder: (context) =>
-                                                    const SuccessPaymentDialog(),
-                                              );
-                                            },
-                                            label: 'Bayar'));
+                                      child: Button.filled(
+                                        onPressed: () async {
+                                          context
+                                              .read<OrderBloc>()
+                                              .add(OrderEvent.order(
+                                                items,
+                                                discount,
+                                                finalTax.toInt(),
+                                                0,
+                                                totalPriceController
+                                                    .text.toIntegerFromText,
+                                              ));
+                                          await showDialog(
+                                            context: context,
+                                            barrierDismissible: false,
+                                            builder: (context) =>
+                                                SuccessPaymentDialog(
+                                              data: items,
+                                              totalQty: totalQty,
+                                              totalPrice: totalPrice.toInt(),
+                                              totalTax: finalTax.toInt(),
+                                              totalDiscount:
+                                                  totalDiscount.toInt(),
+                                              subTotal: subTotal.toInt(),
+                                              normalPrice: price,
+                                            ),
+                                          );
+                                        },
+                                        label: 'Bayar',
+                                      ),
+                                    );
                                   },
-                                )
+                                ),
                               ],
                             ),
                           ),
