@@ -600,6 +600,12 @@ class _ConfirmPaymentPageState extends State<ConfirmPaymentPage> {
                                               data: items,
                                               totalQty: totalQty,
                                               totalPrice: totalPrice.toInt(),
+                                              paymentAmount:
+                                                  totalPriceController
+                                                      .text.toIntegerFromText,
+                                              pembayaranUser:
+                                                  totalPriceController
+                                                      .text.toIntegerFromText,
                                               totalTax: finalTax.toInt(),
                                               totalDiscount:
                                                   totalDiscount.toInt(),

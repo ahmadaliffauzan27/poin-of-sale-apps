@@ -15,6 +15,7 @@ class PrintDataoutputs {
       int totalPrice,
       String paymentMethod,
       int nominalBayar,
+      int nominalPembayaranUser,
       String namaKasir,
       int discount,
       int tax,
@@ -27,7 +28,8 @@ class PrintDataoutputs {
 
     final pajak = totalPrice * 0.11;
     final total = totalPrice + pajak;
-    final kembalian = total - nominalBayar;
+    final nominalPembayaran = nominalBayar.toDouble();
+    final kembalian = nominalPembayaran - totalPrice;
 
     bytes += generator.reset();
     bytes += generator.text('TOKO ALIF',
@@ -44,9 +46,16 @@ class PrintDataoutputs {
         'Date : ${DateFormat('dd/MM/yyyy HH:mm').format(DateTime.now())}',
         styles: const PosStyles(bold: false, align: PosAlign.center));
 
-    bytes += generator.feed(1);
+    bytes += generator.hr(ch: '-');
+    // nama kasir
+    bytes += generator.text('Kasir: $namaKasir',
+        styles: const PosStyles(bold: false, align: PosAlign.left));
+    bytes += generator.hr(ch: '-');
+
     bytes += generator.text('Pesanan:',
-        styles: const PosStyles(bold: false, align: PosAlign.center));
+        styles: const PosStyles(bold: false, align: PosAlign.left));
+
+    bytes += generator.feed(1);
 
     for (final product in products) {
       bytes += generator.text(product.product.name!,
@@ -68,20 +77,22 @@ class PrintDataoutputs {
       ]);
     }
 
-    bytes += generator.feed(1);
+    bytes += generator.hr(ch: '-');
 
-    bytes += generator.row([
-      PosColumn(
-        text: 'Normal price',
-        width: 6,
-        styles: const PosStyles(align: PosAlign.left),
-      ),
-      PosColumn(
-        text: normalPrice.currencyFormatRp,
-        width: 6,
-        styles: const PosStyles(align: PosAlign.right),
-      ),
-    ]);
+    // bytes += generator.feed(1);
+
+    // bytes += generator.row([
+    //   PosColumn(
+    //     text: 'Normal price',
+    //     width: 6,
+    //     styles: const PosStyles(align: PosAlign.left),
+    //   ),
+    //   PosColumn(
+    //     text: normalPrice.currencyFormatRp,
+    //     width: 6,
+    //     styles: const PosStyles(align: PosAlign.right),
+    //   ),
+    // ]);
 
     bytes += generator.row([
       PosColumn(
@@ -95,6 +106,8 @@ class PrintDataoutputs {
         styles: const PosStyles(align: PosAlign.right),
       ),
     ]);
+
+    // bytes += generator.feed(1);
 
     bytes += generator.row([
       PosColumn(
@@ -122,9 +135,11 @@ class PrintDataoutputs {
       ),
     ]);
 
+    bytes += generator.hr(ch: '-');
+
     bytes += generator.row([
       PosColumn(
-        text: 'Final total',
+        text: 'TOTAL',
         width: 6,
         styles: const PosStyles(align: PosAlign.left),
       ),
@@ -142,23 +157,8 @@ class PrintDataoutputs {
         styles: const PosStyles(align: PosAlign.left),
       ),
       PosColumn(
-        text: total.ceil().currencyFormatRp,
+        text: nominalPembayaran.ceil().currencyFormatRp,
         width: 6,
-        styles: const PosStyles(align: PosAlign.right),
-      ),
-    ]);
-
-    bytes += generator.feed(1);
-
-    bytes += generator.row([
-      PosColumn(
-        text: 'Pembayaran',
-        width: 8,
-        styles: const PosStyles(align: PosAlign.left),
-      ),
-      PosColumn(
-        text: paymentMethod,
-        width: 4,
         styles: const PosStyles(align: PosAlign.right),
       ),
     ]);
@@ -176,6 +176,22 @@ class PrintDataoutputs {
         styles: const PosStyles(align: PosAlign.right),
       ),
     ]);
+
+    bytes += generator.hr(ch: '-');
+
+    bytes += generator.row([
+      PosColumn(
+        text: 'Pembayaran',
+        width: 8,
+        styles: const PosStyles(align: PosAlign.left),
+      ),
+      PosColumn(
+        text: paymentMethod,
+        width: 4,
+        styles: const PosStyles(align: PosAlign.right),
+      ),
+    ]);
+    bytes += generator.hr(ch: '-');
 
     bytes += generator.feed(1);
     bytes += generator.text('Terima kasih sayanggggku',

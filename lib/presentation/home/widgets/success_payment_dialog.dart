@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_pos_apps/core/core.dart';
 import 'package:flutter_pos_apps/core/extensions/int_ext.dart';
+import 'package:flutter_pos_apps/data/datasources/auth_local_remote_datasource.dart';
 import 'package:intl/intl.dart';
 import 'package:print_bluetooth_thermal/print_bluetooth_thermal.dart';
 import '../../../core/assets/assets.gen.dart';
@@ -19,6 +20,8 @@ class SuccessPaymentDialog extends StatefulWidget {
     required this.data,
     required this.totalQty,
     required this.totalPrice,
+    required this.paymentAmount,
+    required this.pembayaranUser,
     required this.totalTax,
     required this.totalDiscount,
     required this.subTotal,
@@ -27,6 +30,8 @@ class SuccessPaymentDialog extends StatefulWidget {
   final List<ProductQuantity> data;
   final int totalQty;
   final int totalPrice;
+  final int paymentAmount;
+  final int pembayaranUser;
   final int totalTax;
   final int totalDiscount;
   final int subTotal;
@@ -166,14 +171,23 @@ class _SuccessPaymentDialogState extends State<SuccessPaymentDialog> {
                 Flexible(
                   child: Button.filled(
                     onPressed: () async {
+                      //get nama kasir from shared preferences
+                      final namaKasir =
+                          await AuthLocalRemoteDatasource().getAuthData();
+                      // final paymentAmount =
+                      //     context.read<OrderBloc>().state.maybeWhen(
+                      //           orElse: () => 0,
+                      //           loaded: (model) => model.paymentAmount,
+                      //         );
                       final printValue =
                           await PrintDataoutputs.instance.printOrder(
                         widget.data,
                         widget.totalQty,
                         widget.totalPrice,
                         'Tunai',
-                        widget.totalPrice,
-                        'Alif',
+                        widget.paymentAmount,
+                        widget.paymentAmount,
+                        namaKasir.user!.name!,
                         widget.totalDiscount,
                         widget.totalTax,
                         widget.subTotal,
