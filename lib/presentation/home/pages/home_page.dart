@@ -25,131 +25,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final searchController = TextEditingController();
-
-  // List<ProductModel> searchResults = [];
-  // final List<ProductModel> products = [
-  //   ProductModel(
-  //       image: Assets.images.menu1.path,
-  //       name: 'Express Bowl Ayam Rica',
-  //       category: ProductCategory.food,
-  //       price: 32000,
-  //       stock: 10),
-  //   ProductModel(
-  //       image: Assets.images.menu2.path,
-  //       name: 'Crispy Black Pepper Sauce',
-  //       category: ProductCategory.food,
-  //       price: 36000,
-  //       stock: 10),
-  //   ProductModel(
-  //       image: Assets.images.menu3.path,
-  //       name: 'Mie Ayam Teriyaki',
-  //       category: ProductCategory.food,
-  //       price: 33000,
-  //       stock: 10),
-  //   ProductModel(
-  //       image: Assets.images.menu4.path,
-  //       name: 'Nasi Ayam Teriyaki',
-  //       category: ProductCategory.food,
-  //       price: 21000,
-  //       stock: 10),
-  //   ProductModel(
-  //       image: Assets.images.menu5.path,
-  //       name: ' Katsu Teriyaki Saos',
-  //       category: ProductCategory.food,
-  //       price: 40000,
-  //       stock: 10),
-  //   ProductModel(
-  //       image: Assets.images.menu6.path,
-  //       name: 'Sapo Tahu Ayam',
-  //       category: ProductCategory.food,
-  //       price: 41000,
-  //       stock: 10),
-  //   ProductModel(
-  //       image: Assets.images.menu7.path,
-  //       name: ' Sapo Tahu Sapi',
-  //       category: ProductCategory.food,
-  //       price: 44000,
-  //       stock: 10),
-  //   ProductModel(
-  //       image: Assets.images.menu8.path,
-  //       name: 'Chicken Cordon Bleu',
-  //       category: ProductCategory.food,
-  //       price: 45000,
-  //       stock: 10),
-  //   ProductModel(
-  //       image: Assets.images.menu10.path,
-  //       name: 'Fish & Chips ',
-  //       category: ProductCategory.food,
-  //       price: 35000,
-  //       stock: 10),
-  //   ProductModel(
-  //       image: Assets.images.menu11.path,
-  //       name: 'Bihun Ayam',
-  //       category: ProductCategory.food,
-  //       price: 39000,
-  //       stock: 10),
-  //   ProductModel(
-  //       image: Assets.images.menu12.path,
-  //       name: 'Bihun Goreng Ayam',
-  //       category: ProductCategory.food,
-  //       price: 38000,
-  //       stock: 10),
-  //   ProductModel(
-  //       image: Assets.images.menu13.path,
-  //       name: 'Nasi Goreng Special',
-  //       category: ProductCategory.food,
-  //       price: 35000,
-  //       stock: 10),
-  //   ProductModel(
-  //       image: Assets.images.menu14.path,
-  //       name: 'Nasi Cap Cay',
-  //       category: ProductCategory.food,
-  //       price: 40000,
-  //       stock: 10),
-  //   ProductModel(
-  //       image: Assets.images.drink1.path,
-  //       name: 'Teh Tarik',
-  //       category: ProductCategory.drink,
-  //       price: 20000,
-  //       stock: 10),
-  //   ProductModel(
-  //       image: Assets.images.drink2.path,
-  //       name: 'Thai Tea',
-  //       category: ProductCategory.drink,
-  //       price: 22000,
-  //       stock: 10),
-  //   ProductModel(
-  //       image: Assets.images.drink3.path,
-  //       name: 'Jus Melon',
-  //       category: ProductCategory.drink,
-  //       price: 25000,
-  //       stock: 10),
-  //   ProductModel(
-  //       image: Assets.images.drink4.path,
-  //       name: 'Jus Stawberry',
-  //       category: ProductCategory.drink,
-  //       price: 24000,
-  //       stock: 10),
-  //   ProductModel(
-  //       image: Assets.images.drink5.path,
-  //       name: 'Air Mineral Botol',
-  //       category: ProductCategory.drink,
-  //       price: 6000,
-  //       stock: 10),
-  //   ProductModel(
-  //       image: Assets.images.drink6.path,
-  //       name: 'Jus Alpukat',
-  //       category: ProductCategory.drink,
-  //       price: 25000,
-  //       stock: 10),
-  //   ProductModel(
-  //       image: Assets.images.menu14.path,
-  //       name: 'Caramel Candy Blend',
-  //       category: ProductCategory.drink,
-  //       price: 30000,
-  //       stock: 10),
-  // ];
-
   @override
   void initState() {
     // searchResults = products;
@@ -161,23 +36,10 @@ class _HomePageState extends State<HomePage> {
 
   void onCategoryTap(int index) {
     searchController.clear();
-    // if (index == 0) {
-    //   searchResults = products;
-    // } else {
-    //   searchResults = products
-    //       .where((e) => e.category.index.toString().contains(index.toString()))
-    //       .toList();
-    // }
-    // setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
-    // if (products.isEmpty) {
-    //   return const Center(
-    //     child: CircularProgressIndicator(),
-    //   );
-    // }
     return Hero(
       tag: 'confirmation_screen',
       child: Scaffold(
@@ -196,12 +58,8 @@ class _HomePageState extends State<HomePage> {
                         HomeTitle(
                           controller: searchController,
                           onChanged: (value) {
-                            // searchResults = products
-                            //     .where((e) => e.name
-                            //         .toLowerCase()
-                            //         .contains(value.toLowerCase()))
-                            //     .toList();
-                            // setState(() {});
+                            context.read<LocalProductBloc>().add(
+                                LocalProductEvent.searchProduct(query: value));
                           },
                         ),
                         const SizedBox(height: 24),
@@ -214,12 +72,6 @@ class _HomePageState extends State<HomePage> {
                           ],
                           initialTabIndex: 0,
                           tabViews: [
-                            // if (searchResults.isEmpty)
-                            //   const Padding(
-                            //     padding: EdgeInsets.only(top: 80.0),
-                            //     child: _IsEmpty(),
-                            //   )
-                            // else
                             SizedBox(
                               child: BlocBuilder<LocalProductBloc,
                                   LocalProductState>(
@@ -774,7 +626,8 @@ class _IsEmpty extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Assets.icons.noProduct.svg(),
+          // ignore: deprecated_member_use_from_same_package
+          Assets.icons.noProduct.svg(color: AppColors.buttonOf),
           const SizedBox(height: 80.0),
           const Text(
             'Belum Ada Produk',

@@ -72,7 +72,10 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
                       decoration: InputDecoration(
                         suffixIcon: Padding(
                           padding: const EdgeInsets.all(16.0),
-                          child: Assets.icons.calendar.svg(),
+                          // ignore: deprecated_member_use_from_same_package
+                          child: Assets.icons.calendar
+                              // ignore: deprecated_member_use_from_same_package
+                              .svg(color: AppColors.primary),
                         ),
                         prefix: widget.prefix,
                         border: OutlineInputBorder(

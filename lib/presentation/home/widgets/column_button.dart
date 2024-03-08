@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 import '../../../core/assets/assets.gen.dart';
 import '../../../core/components/spaces.dart';
 import '../../../core/constants/colors.dart';
@@ -32,7 +31,8 @@ class ColumnButton extends StatelessWidget {
               border: Border.all(color: AppColors.primary),
               borderRadius: const BorderRadius.all(Radius.circular(8.0)),
             ),
-            child: svgGenImage.svg(),
+            // ignore: deprecated_member_use_from_same_package
+            child: svgGenImage.svg(color: AppColors.primary),
           ),
           const SpaceHeight(8.0),
           Text(

@@ -51,7 +51,10 @@ class _SettingsPageState extends State<SettingsPage> {
                   const SpaceHeight(16.0),
                   ListTile(
                     contentPadding: const EdgeInsets.all(12.0),
-                    leading: Assets.icons.kelolaDiskon.svg(),
+                    // ignore: deprecated_member_use_from_same_package
+                    leading:
+                        // ignore: deprecated_member_use_from_same_package
+                        Assets.icons.kelolaDiskon.svg(color: AppColors.primary),
                     title: const Text('Kelola Diskon'),
                     subtitle: const Text('Kelola Diskon Pelanggan'),
                     textColor: AppColors.primary,
@@ -62,7 +65,10 @@ class _SettingsPageState extends State<SettingsPage> {
                   ),
                   ListTile(
                     contentPadding: const EdgeInsets.all(12.0),
-                    leading: Assets.icons.kelolaPrinter.svg(),
+                    // ignore: deprecated_member_use_from_same_package
+                    leading: Assets.icons.kelolaPrinter
+                        // ignore: deprecated_member_use_from_same_package
+                        .svg(color: AppColors.primary),
                     title: const Text('Kelola Printer'),
                     subtitle: const Text('Tambah atau hapus printer'),
                     textColor: AppColors.primary,
@@ -73,7 +79,10 @@ class _SettingsPageState extends State<SettingsPage> {
                   ),
                   ListTile(
                     contentPadding: const EdgeInsets.all(12.0),
-                    leading: Assets.icons.kelolaPajak.svg(),
+                    // ignore: deprecated_member_use_from_same_package
+                    leading:
+                        // ignore: deprecated_member_use_from_same_package
+                        Assets.icons.kelolaPajak.svg(color: AppColors.primary),
                     title: const Text('Perhitungan Biaya'),
                     subtitle: const Text('Kelola biaya diluar biaya modal'),
                     textColor: AppColors.primary,
@@ -84,7 +93,10 @@ class _SettingsPageState extends State<SettingsPage> {
                   ),
                   ListTile(
                     contentPadding: const EdgeInsets.all(12.0),
-                    leading: Assets.icons.kelolaPajak.svg(),
+                    // ignore: deprecated_member_use_from_same_package
+                    leading:
+                        // ignore: deprecated_member_use_from_same_package
+                        Assets.icons.kelolaPajak.svg(color: AppColors.primary),
                     title: const Text('Sync Data'),
                     subtitle: const Text('Sync data ke server atau sebaliknya'),
                     textColor: AppColors.primary,

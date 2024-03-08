@@ -59,7 +59,10 @@ class _SyncDataPageState extends State<SyncDataPage> {
                     },
                     child: ListTile(
                       contentPadding: const EdgeInsets.all(12.0),
-                      leading: Assets.icons.kelolaDiskon.svg(),
+                      // ignore: deprecated_member_use_from_same_package
+                      leading: Assets.icons.kelolaDiskon
+                          // ignore: deprecated_member_use_from_same_package
+                          .svg(color: AppColors.primary),
                       title: const Text('Sync Product'),
                       subtitle: const Text('Sync product dari server ke local'),
                       textColor: AppColors.primary,
@@ -94,7 +97,10 @@ class _SyncDataPageState extends State<SyncDataPage> {
                     },
                     child: ListTile(
                       contentPadding: const EdgeInsets.all(12.0),
-                      leading: Assets.icons.kelolaPrinter.svg(),
+                      // ignore: deprecated_member_use_from_same_package
+                      leading: Assets.icons.kelolaPrinter
+                          // ignore: deprecated_member_use_from_same_package
+                          .svg(color: AppColors.primary),
                       title: const Text('Sync Order'),
                       subtitle: const Text('Sync order dari local ke server'),
                       textColor: AppColors.primary,

@@ -19,5 +19,15 @@ class LocalProductBloc extends Bloc<LocalProductEvent, LocalProductState> {
       final result = await productLocalRemoteDatasource.getProducts();
       emit(_Loaded(result));
     });
+
+    on<_SearchProduct>((event, emit) async {
+      final List<Product> allProducts =
+          await productLocalRemoteDatasource.getProducts();
+      final List<Product> filteredProducts = allProducts
+          .where((product) =>
+              product.name!.toLowerCase().contains(event.query.toLowerCase()))
+          .toList();
+      emit(LocalProductState.loaded(filteredProducts));
+    });
   }
 }

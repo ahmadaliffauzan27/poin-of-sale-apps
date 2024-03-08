@@ -20,18 +20,21 @@ mixin _$LocalProductEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() getLocalProduct,
+    required TResult Function(String query) searchProduct,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? getLocalProduct,
+    TResult? Function(String query)? searchProduct,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? getLocalProduct,
+    TResult Function(String query)? searchProduct,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -39,18 +42,21 @@ mixin _$LocalProductEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_getLocalProduct value) getLocalProduct,
+    required TResult Function(_SearchProduct value) searchProduct,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_getLocalProduct value)? getLocalProduct,
+    TResult? Function(_SearchProduct value)? searchProduct,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_getLocalProduct value)? getLocalProduct,
+    TResult Function(_SearchProduct value)? searchProduct,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -114,6 +120,7 @@ class _$StartedImpl implements _Started {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() getLocalProduct,
+    required TResult Function(String query) searchProduct,
   }) {
     return started();
   }
@@ -123,6 +130,7 @@ class _$StartedImpl implements _Started {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? getLocalProduct,
+    TResult? Function(String query)? searchProduct,
   }) {
     return started?.call();
   }
@@ -132,6 +140,7 @@ class _$StartedImpl implements _Started {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? getLocalProduct,
+    TResult Function(String query)? searchProduct,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -145,6 +154,7 @@ class _$StartedImpl implements _Started {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_getLocalProduct value) getLocalProduct,
+    required TResult Function(_SearchProduct value) searchProduct,
   }) {
     return started(this);
   }
@@ -154,6 +164,7 @@ class _$StartedImpl implements _Started {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_getLocalProduct value)? getLocalProduct,
+    TResult? Function(_SearchProduct value)? searchProduct,
   }) {
     return started?.call(this);
   }
@@ -163,6 +174,7 @@ class _$StartedImpl implements _Started {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_getLocalProduct value)? getLocalProduct,
+    TResult Function(_SearchProduct value)? searchProduct,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -216,6 +228,7 @@ class _$getLocalProductImpl implements _getLocalProduct {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() getLocalProduct,
+    required TResult Function(String query) searchProduct,
   }) {
     return getLocalProduct();
   }
@@ -225,6 +238,7 @@ class _$getLocalProductImpl implements _getLocalProduct {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? getLocalProduct,
+    TResult? Function(String query)? searchProduct,
   }) {
     return getLocalProduct?.call();
   }
@@ -234,6 +248,7 @@ class _$getLocalProductImpl implements _getLocalProduct {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? getLocalProduct,
+    TResult Function(String query)? searchProduct,
     required TResult orElse(),
   }) {
     if (getLocalProduct != null) {
@@ -247,6 +262,7 @@ class _$getLocalProductImpl implements _getLocalProduct {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_getLocalProduct value) getLocalProduct,
+    required TResult Function(_SearchProduct value) searchProduct,
   }) {
     return getLocalProduct(this);
   }
@@ -256,6 +272,7 @@ class _$getLocalProductImpl implements _getLocalProduct {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_getLocalProduct value)? getLocalProduct,
+    TResult? Function(_SearchProduct value)? searchProduct,
   }) {
     return getLocalProduct?.call(this);
   }
@@ -265,6 +282,7 @@ class _$getLocalProductImpl implements _getLocalProduct {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_getLocalProduct value)? getLocalProduct,
+    TResult Function(_SearchProduct value)? searchProduct,
     required TResult orElse(),
   }) {
     if (getLocalProduct != null) {
@@ -276,6 +294,146 @@ class _$getLocalProductImpl implements _getLocalProduct {
 
 abstract class _getLocalProduct implements LocalProductEvent {
   const factory _getLocalProduct() = _$getLocalProductImpl;
+}
+
+/// @nodoc
+abstract class _$$SearchProductImplCopyWith<$Res> {
+  factory _$$SearchProductImplCopyWith(
+          _$SearchProductImpl value, $Res Function(_$SearchProductImpl) then) =
+      __$$SearchProductImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String query});
+}
+
+/// @nodoc
+class __$$SearchProductImplCopyWithImpl<$Res>
+    extends _$LocalProductEventCopyWithImpl<$Res, _$SearchProductImpl>
+    implements _$$SearchProductImplCopyWith<$Res> {
+  __$$SearchProductImplCopyWithImpl(
+      _$SearchProductImpl _value, $Res Function(_$SearchProductImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? query = null,
+  }) {
+    return _then(_$SearchProductImpl(
+      query: null == query
+          ? _value.query
+          : query // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$SearchProductImpl implements _SearchProduct {
+  const _$SearchProductImpl({required this.query});
+
+  @override
+  final String query;
+
+  @override
+  String toString() {
+    return 'LocalProductEvent.searchProduct(query: $query)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SearchProductImpl &&
+            (identical(other.query, query) || other.query == query));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, query);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SearchProductImplCopyWith<_$SearchProductImpl> get copyWith =>
+      __$$SearchProductImplCopyWithImpl<_$SearchProductImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function() getLocalProduct,
+    required TResult Function(String query) searchProduct,
+  }) {
+    return searchProduct(query);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function()? getLocalProduct,
+    TResult? Function(String query)? searchProduct,
+  }) {
+    return searchProduct?.call(query);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function()? getLocalProduct,
+    TResult Function(String query)? searchProduct,
+    required TResult orElse(),
+  }) {
+    if (searchProduct != null) {
+      return searchProduct(query);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_getLocalProduct value) getLocalProduct,
+    required TResult Function(_SearchProduct value) searchProduct,
+  }) {
+    return searchProduct(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_getLocalProduct value)? getLocalProduct,
+    TResult? Function(_SearchProduct value)? searchProduct,
+  }) {
+    return searchProduct?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_getLocalProduct value)? getLocalProduct,
+    TResult Function(_SearchProduct value)? searchProduct,
+    required TResult orElse(),
+  }) {
+    if (searchProduct != null) {
+      return searchProduct(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SearchProduct implements LocalProductEvent {
+  const factory _SearchProduct({required final String query}) =
+      _$SearchProductImpl;
+
+  String get query;
+  @JsonKey(ignore: true)
+  _$$SearchProductImplCopyWith<_$SearchProductImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
