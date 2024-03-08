@@ -1,43 +1,34 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Point Of Sale Application</title>
-<style>
-  .image-container {
-    text-align: center;
-  }
+# Point Of Sale Apps
 
-.image-container img {
-display: inline-block;
-max-width: 100%;
-height: auto;
-margin: 5px; /_ spasi antara gambar _/
-}
-</style>
+adalah aplikasi penjualan yang digunakan untuk melakukan transaksi penjualan produk kepada pelanggan. Pembayaran dilakukan secara tunai (cash) atau bisa dilakukan secara digital (Qris). Aplikasi ini terintegrasi dengan bluetooth printer sehingga saat pembayaran selesai, muncul struk sebagai bukti pembelian.
 
-</head>
-<body>
+## Frontend
 
-<h5>Point Of Sale Apps</h5>
+- [x] Flutter
+- [x] BloC State Management
+- [x] clean Architecture
 
-<div class="image-container">
-  <img src="/assets/screenshoot/pos1.jpg" alt="POS">
-   <img src="/assets/screenshoot/pos9.jpg" alt="POS">
-  <img src="/assets/screenshoot/pos8.jpg" alt="POS">
-  <img src="/assets/screenshoot/pos2.jpg" alt="POS">
-   <img src="/assets/screenshoot/pos6.jpg" alt="POS">
-  <img src="/assets/screenshoot/pos3.jpg" alt="POS">
-  <img src="/assets/screenshoot/pos4.jpg" alt="POS">
-  <img src="/assets/screenshoot/pos5.jpg" alt="POS">
-  <img src="/assets/screenshoot/pos7.jpg" alt="POS">
-  <img src="/assets/screenshoot/pos3.jpg" alt="POS">
-  <img src="/assets/screenshoot/pos10.jpg" alt="POS">
-  <img src="/assets/screenshoot/pos11.jpg" alt="POS">
-  <img src="/assets/screenshoot/pos12.jpg" alt="POS">
-  <!-- tambahkan gambar-gambar lainnya di sini -->
-</div>
+## Backend
 
-</body>
-</html>
+- [x] Laravel
+- [x] MySQL
+
+## 📷 Screen Shots Feature
+
+|                    Login Screen                    |                   Home Screen 1                    |                   Home Screen 2                    |                   Confirm Screen                   |
+| :------------------------------------------------: | :------------------------------------------------: | :------------------------------------------------: | :------------------------------------------------: |
+| <img src="/assets/screenshoot/pos1.jpg" alt="POS"> | <img src="/assets/screenshoot/pos9.jpg" alt="POS"> | <img src="/assets/screenshoot/pos8.jpg" alt="POS"> | <img src="/assets/screenshoot/pos2.jpg" alt="POS"> |
+
+|               Success Payment Screen               |           Setting - Sync Data and Order            |                 Report Transaction                 |            Setting - Pajak and Layanan             |
+| :------------------------------------------------: | :------------------------------------------------: | :------------------------------------------------: | :------------------------------------------------: |
+| <img src="/assets/screenshoot/pos6.jpg" alt="POS"> | <img src="/assets/screenshoot/pos3.jpg" alt="POS"> | <img src="/assets/screenshoot/pos4.jpg" alt="POS"> | <img src="/assets/screenshoot/pos5.jpg" alt="POS"> |
+
+|                Discount Management                 |                       Logout                        |                 Printer Management                  |                    Struk (Nota)                     |
+| :------------------------------------------------: | :-------------------------------------------------: | :-------------------------------------------------: | :-------------------------------------------------: |
+| <img src="/assets/screenshoot/pos7.jpg" alt="POS"> | <img src="/assets/screenshoot/pos10.jpg" alt="POS"> | <img src="/assets/screenshoot/pos11.jpg" alt="POS"> | <img src="/assets/screenshoot/pos12.jpg" alt="POS"> |
+
+<!-- ## :iphone: Mockup
+
+<p align='center'>
+<img src="https://github.com/faishal2727/E-ngkringan/blob/main/engkringan/engkringan.jpg"/>
+</p> -->
