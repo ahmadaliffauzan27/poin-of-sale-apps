@@ -1,16 +1,16 @@
-# flutter_pos_apps
+# Point Of Sale Application
 
-A new Flutter project.
+## Screenshoot :
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<img src="/assets/screenshoot/pos1.jpg" alt="POS" width="180" height="auto"/>
+<img src="/assets/screenshoot/pos2.jpg" alt="POS" width="180" height="auto"/>
+<img src="/assets/screenshoot/pos3.jpg" alt="POS" width="180" height="auto"/>
+<img src="/assets/screenshoot/pos4.jpg" alt="POS" width="180" height="auto"/>
+<img src="/assets/screenshoot/pos5.jpg" alt="POS" width="180" height="auto"/>
+<img src="/assets/screenshoot/pos6.jpg" alt="POS" width="180" height="auto"/>
+<img src="/assets/screenshoot/pos7.jpg" alt="POS" width="180" height="auto"/>
+<img src="/assets/screenshoot/pos8.jpg" alt="POS" width="180" height="auto"/>
+<img src="/assets/screenshoot/pos9.jpg" alt="POS" width="180" height="auto"/>
+<img src="/assets/screenshoot/pos10.jpg" alt="POS" width="180" height="auto"/>
+<img src="/assets/screenshoot/pos11.jpg" alt="POS" width="180" height="auto"/>
+<img src="/assets/screenshoot/pos12.jpg" alt="POS" width="180" height="auto"/>

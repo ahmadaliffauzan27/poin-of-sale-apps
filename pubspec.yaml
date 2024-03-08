@@ -38,6 +38,7 @@ flutter:
   assets:
     - assets/images/
     - assets/icons/
+    - assets/screenshoot/
 
 flutter_gen:
   output: lib/core/assets/

@@ -283,11 +283,71 @@ class $AssetsImagesGen {
       ];
 }
 
+class $AssetsScreenshootGen {
+  const $AssetsScreenshootGen();
+
+  /// File path: assets/screenshoot/pos1.jpg
+  AssetGenImage get pos1 => const AssetGenImage('assets/screenshoot/pos1.jpg');
+
+  /// File path: assets/screenshoot/pos10.jpg
+  AssetGenImage get pos10 =>
+      const AssetGenImage('assets/screenshoot/pos10.jpg');
+
+  /// File path: assets/screenshoot/pos11.jpg
+  AssetGenImage get pos11 =>
+      const AssetGenImage('assets/screenshoot/pos11.jpg');
+
+  /// File path: assets/screenshoot/pos12.jpg
+  AssetGenImage get pos12 =>
+      const AssetGenImage('assets/screenshoot/pos12.jpg');
+
+  /// File path: assets/screenshoot/pos2.jpg
+  AssetGenImage get pos2 => const AssetGenImage('assets/screenshoot/pos2.jpg');
+
+  /// File path: assets/screenshoot/pos3.jpg
+  AssetGenImage get pos3 => const AssetGenImage('assets/screenshoot/pos3.jpg');
+
+  /// File path: assets/screenshoot/pos4.jpg
+  AssetGenImage get pos4 => const AssetGenImage('assets/screenshoot/pos4.jpg');
+
+  /// File path: assets/screenshoot/pos5.jpg
+  AssetGenImage get pos5 => const AssetGenImage('assets/screenshoot/pos5.jpg');
+
+  /// File path: assets/screenshoot/pos6.jpg
+  AssetGenImage get pos6 => const AssetGenImage('assets/screenshoot/pos6.jpg');
+
+  /// File path: assets/screenshoot/pos7.jpg
+  AssetGenImage get pos7 => const AssetGenImage('assets/screenshoot/pos7.jpg');
+
+  /// File path: assets/screenshoot/pos8.jpg
+  AssetGenImage get pos8 => const AssetGenImage('assets/screenshoot/pos8.jpg');
+
+  /// File path: assets/screenshoot/pos9.jpg
+  AssetGenImage get pos9 => const AssetGenImage('assets/screenshoot/pos9.jpg');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [
+        pos1,
+        pos10,
+        pos11,
+        pos12,
+        pos2,
+        pos3,
+        pos4,
+        pos5,
+        pos6,
+        pos7,
+        pos8,
+        pos9
+      ];
+}
+
 class Assets {
   Assets._();
 
   static const $AssetsIconsGen icons = $AssetsIconsGen();
   static const $AssetsImagesGen images = $AssetsImagesGen();
+  static const $AssetsScreenshootGen screenshoot = $AssetsScreenshootGen();
 }
 
 class AssetGenImage {
