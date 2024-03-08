@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_pos_apps/core/core.dart';
+import 'package:intl/intl.dart';
 import '../../../core/components/buttons.dart';
 import '../../../core/components/spaces.dart';
 import '../bloc/checkout/checkout_bloc.dart';
@@ -23,7 +25,38 @@ class _ConfirmPaymentPageState extends State<ConfirmPaymentPage> {
     totalPriceController.text = amount.toString();
   }
 
+  @override
+  void dispose() {
+    totalPriceController.dispose();
+    super.dispose();
+  }
+
   final totalPriceController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    totalPriceController.addListener(() {
+      final text = totalPriceController.text;
+      final value = int.tryParse(text.replaceAll(RegExp(r'[^0-9]'), '')) ?? 0;
+      final newText =
+          formatCurrency(value); // Menggunakan fungsi formatCurrency
+      if (newText != text) {
+        totalPriceController.value = totalPriceController.value.copyWith(
+          text: newText,
+          selection: TextSelection.collapsed(offset: newText.length),
+          composing: TextRange.empty,
+        );
+      }
+    });
+  }
+
+  String formatCurrency(int amount) {
+    // Menggunakan formatter tanpa simbol mata uang
+    final formatter = NumberFormat("#,##0", "id_ID");
+    return 'Rp ${formatter.format(amount)}'; // Menambahkan simbol mata uang di sini
+  }
+
   final products = [
     ProductModel(
         image: Assets.images.product1.path,
@@ -441,6 +474,9 @@ class _ConfirmPaymentPageState extends State<ConfirmPaymentPage> {
                             TextFormField(
                               controller: totalPriceController,
                               keyboardType: TextInputType.number,
+                              inputFormatters: [
+                                FilteringTextInputFormatter.digitsOnly,
+                              ],
                               decoration: InputDecoration(
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(8.0),
@@ -449,29 +485,6 @@ class _ConfirmPaymentPageState extends State<ConfirmPaymentPage> {
                               ),
                             ),
                             const SpaceHeight(45.0),
-                            // Row(
-                            //   children: [
-                            //     Button.filled(
-                            //       width: 150.0,
-                            //       onPressed: () {
-                            //         updateTotalPrice(100000);
-                            //       },
-                            //       label: 'UANG PAS',
-                            //     ),
-                            //     const SpaceWidth(20.0),
-                            //     Button.filled(
-                            //       width: 150.0,
-                            //       onPressed: () {},
-                            //       label: 'Rp 250.000',
-                            //     ),
-                            //     const SpaceWidth(20.0),
-                            //     Button.filled(
-                            //       width: 150.0,
-                            //       onPressed: () {},
-                            //       label: 'Rp 300.000',
-                            //     ),
-                            //   ],
-                            // ),
 
                             //create uang pas button from checkout_bloc
                             BlocBuilder<CheckoutBloc, CheckoutState>(
@@ -505,30 +518,78 @@ class _ConfirmPaymentPageState extends State<ConfirmPaymentPage> {
                                 final finalTax = subTotal * 0.11;
                                 final total = subTotal + finalTax;
 
-                                return Row(
+                                return Column(
                                   children: [
-                                    Button.filled(
-                                      width: 150.0,
-                                      onPressed: () {
-                                        updateTotalPrice(total.toInt());
-                                      },
-                                      label: 'UANG PAS',
+                                    Row(
+                                      children: [
+                                        Button.filled(
+                                          width: 150.0,
+                                          onPressed: () {
+                                            updateTotalPrice(total.toInt());
+                                          },
+                                          label: 'UANG PAS',
+                                        ),
+                                        const SpaceWidth(20.0),
+                                        Button.filled(
+                                          width: 150.0,
+                                          onPressed: () {
+                                            updateTotalPrice(20000);
+                                          },
+                                          label: 'Rp 20.000',
+                                        ),
+                                        const SpaceWidth(20.0),
+                                        Button.filled(
+                                          width: 150.0,
+                                          onPressed: () {
+                                            updateTotalPrice(50000);
+                                          },
+                                          label: 'Rp 50.000',
+                                        ),
+                                        const SpaceWidth(20.0),
+                                        Button.filled(
+                                          width: 150.0,
+                                          onPressed: () {
+                                            updateTotalPrice(100000);
+                                          },
+                                          label: 'Rp 100.000',
+                                        ),
+                                      ],
                                     ),
-                                    const SpaceWidth(20.0),
-                                    Button.filled(
-                                      width: 150.0,
-                                      onPressed: () {
-                                        updateTotalPrice(250000);
-                                      },
-                                      label: 'Rp 250.000',
-                                    ),
-                                    const SpaceWidth(20.0),
-                                    Button.filled(
-                                      width: 150.0,
-                                      onPressed: () {
-                                        updateTotalPrice(300000);
-                                      },
-                                      label: 'Rp 300.000',
+                                    const SpaceHeight(20.0),
+                                    Row(
+                                      children: [
+                                        Button.filled(
+                                          width: 150.0,
+                                          onPressed: () {
+                                            updateTotalPrice(200000);
+                                          },
+                                          label: 'Rp 200.000',
+                                        ),
+                                        const SpaceWidth(20.0),
+                                        Button.filled(
+                                          width: 150.0,
+                                          onPressed: () {
+                                            updateTotalPrice(250000);
+                                          },
+                                          label: 'Rp 250.000',
+                                        ),
+                                        const SpaceWidth(20.0),
+                                        Button.filled(
+                                          width: 150.0,
+                                          onPressed: () {
+                                            updateTotalPrice(300000);
+                                          },
+                                          label: 'Rp 300.000',
+                                        ),
+                                        const SpaceWidth(20.0),
+                                        Button.filled(
+                                          width: 150.0,
+                                          onPressed: () {
+                                            updateTotalPrice(500000);
+                                          },
+                                          label: 'Rp 500.000',
+                                        ),
+                                      ],
                                     ),
                                   ],
                                 );
@@ -581,11 +642,33 @@ class _ConfirmPaymentPageState extends State<ConfirmPaymentPage> {
                                       ),
                                     );
 
+                                    //     final discount = state.maybeWhen(
+                                    //     orElse: () => 0,
+                                    //     loaded: (products, discount, tax,
+                                    //         serviceCharge) {
+                                    //       if (discount == null) {
+                                    //         return 0;
+                                    //       }
+                                    //       return discount.value!
+                                    //           .replaceAll('.00', '')
+                                    //           .toIntegerFromText;
+                                    //     });
+
+                                    // final subTotal =
+                                    //     price - (discount / 100 * price);
+
+                                    // final total = subTotal + tax;
+
                                     final subTotal =
                                         price - (discount / 100 * price);
+
+                                    final tax = subTotal * 0.11;
+
                                     final totalDiscount =
                                         discount / 100 * price;
                                     final finalTax = subTotal * 0.11;
+
+                                    final total = subTotal + tax;
 
                                     List<ProductQuantity> items =
                                         state.maybeWhen(
@@ -605,6 +688,45 @@ class _ConfirmPaymentPageState extends State<ConfirmPaymentPage> {
                                     return Flexible(
                                       child: Button.filled(
                                         onPressed: () async {
+                                          final int enteredTotal =
+                                              totalPriceController
+                                                  .text.toIntegerFromText;
+
+                                          if (enteredTotal < total) {
+                                            return showDialog(
+                                                context: context,
+                                                builder: (context) =>
+                                                    AlertDialog(
+                                                      backgroundColor: AppColors
+                                                          .buttonOn
+                                                          .withOpacity(1),
+                                                      title: const Text(
+                                                        'Peringatan',
+                                                        style: TextStyle(
+                                                          color:
+                                                              AppColors.white,
+                                                        ),
+                                                      ),
+                                                      content: const Text(
+                                                        'Pembayaran kurang dari total harga',
+                                                        style: TextStyle(
+                                                            color: AppColors
+                                                                .white),
+                                                      ),
+                                                      actions: [
+                                                        TextButton(
+                                                          onPressed: () {
+                                                            context.pop();
+                                                          },
+                                                          child: const Text(
+                                                              'OK',
+                                                              style: TextStyle(
+                                                                  color: AppColors
+                                                                      .white)),
+                                                        ),
+                                                      ],
+                                                    ));
+                                          }
                                           context
                                               .read<OrderBloc>()
                                               .add(OrderEvent.order(
