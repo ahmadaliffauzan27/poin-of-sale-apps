@@ -9,7 +9,7 @@ class Button extends StatelessWidget {
     required this.onPressed,
     required this.label,
     this.style = ButtonStyle.filled,
-    this.color = AppColors.primary,
+    this.color = AppColors.buttonOn,
     this.textColor = Colors.white,
     this.width = double.infinity,
     this.height = 50.0,
@@ -24,8 +24,8 @@ class Button extends StatelessWidget {
     required this.onPressed,
     required this.label,
     this.style = ButtonStyle.outlined,
-    this.color = Colors.transparent,
-    this.textColor = AppColors.primary,
+    this.color = AppColors.grey,
+    this.textColor = AppColors.black,
     this.width = double.infinity,
     this.height = 50.0,
     this.borderRadius = 16.0,
@@ -93,7 +93,8 @@ class Button extends StatelessWidget {
                   Text(
                     label,
                     style: TextStyle(
-                      color: disabled ? Colors.grey : textColor,
+                      color:
+                          disabled ? Colors.black.withOpacity(0.5) : textColor,
                       fontSize: fontSize,
                       fontWeight: FontWeight.w600,
                     ),

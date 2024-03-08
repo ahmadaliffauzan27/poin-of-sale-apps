@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class AppColors {
   /// primary = #3949AB
-  static const Color primary = Color(0xff3949AB);
+  static const Color primary = Color(0xff244652);
 
   /// grey = #B7B7B7
   static const Color grey = Color(0xffB7B7B7);
@@ -36,4 +36,19 @@ class AppColors {
 
   /// stroke = #EFF0F6
   static const Color stroke = Color(0xffEFF0F6);
+
+  /// stroke = #EFF0F6
+  static const Color background = Color(0xffC2CDC5);
+
+  /// stroke = #EFF0F6
+  static const Color bag = Color(0xff3B6F81);
+
+  /// stroke = #EFF0F6
+  static const Color search = Color(0xffE4F2E8);
+
+  /// stroke = #EFF0F6
+  static const Color buttonOn = Color(0xff392A2D);
+
+  /// stroke = #EFF0F6
+  static const Color buttonOf = Color(0xff392A2D);
 }

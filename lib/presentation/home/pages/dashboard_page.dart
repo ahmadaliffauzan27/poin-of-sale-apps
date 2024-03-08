@@ -35,6 +35,7 @@ class _DashboardPageState extends State<DashboardPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: AppColors.white,
         body: Row(
           children: [
             SingleChildScrollView(
@@ -52,7 +53,6 @@ class _DashboardPageState extends State<DashboardPage> {
                           isActive: _selectedIndex == 0,
                           onTap: () => _onItemTapped(0),
                         ),
-
                         NavItem(
                           iconPath: Assets.icons.dashboard.path,
                           isActive: _selectedIndex == 1,
@@ -100,15 +100,25 @@ class _DashboardPageState extends State<DashboardPage> {
                                 context: context,
                                 builder: (context) {
                                   return AlertDialog(
-                                    title: const Text('Logout'),
-                                    content:
-                                        const Text('Are you sure to logout?'),
+                                    backgroundColor: AppColors.primary,
+                                    title: const Text(
+                                      'Logout',
+                                      style: TextStyle(color: AppColors.white),
+                                    ),
+                                    content: const Text(
+                                      'Are you sure to logout?',
+                                      style: TextStyle(color: AppColors.white),
+                                    ),
                                     actions: [
                                       TextButton(
                                         onPressed: () {
                                           Navigator.pop(context);
                                         },
-                                        child: const Text('Cancel'),
+                                        child: const Text(
+                                          'Cancel',
+                                          style:
+                                              TextStyle(color: AppColors.white),
+                                        ),
                                       ),
                                       TextButton(
                                         onPressed: () {
@@ -116,7 +126,11 @@ class _DashboardPageState extends State<DashboardPage> {
                                               .read<LogoutBloc>()
                                               .add(const LogoutEvent.logout());
                                         },
-                                        child: const Text('Logout'),
+                                        child: const Text(
+                                          'Logout',
+                                          style:
+                                              TextStyle(color: AppColors.white),
+                                        ),
                                       ),
                                     ],
                                   );

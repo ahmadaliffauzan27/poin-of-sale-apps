@@ -23,7 +23,9 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
             previousValue + (element.product.price! * element.quantity),
       );
 
-      final total = subTotal + event.tax + event.serviceCharge - event.discount;
+      final discount = (event.discount / 100) * subTotal;
+
+      final total = subTotal + event.tax + event.serviceCharge - discount;
 
       final totalItem = event.items.fold<int>(
         0,
@@ -38,7 +40,7 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
         tax: event.tax,
         discount: event.discount,
         serviceCharge: event.serviceCharge,
-        total: total,
+        total: total.toInt(),
         paymentMethod: 'Cash',
         totalItem: totalItem,
         idKasir: userData.user!.id!,
