@@ -1,9 +1,12 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_pos_apps/core/core.dart';
-import 'package:flutter_pos_apps/data/datasources/auth_local_remote_datasource.dart';
 import 'package:intl/intl.dart';
 import 'package:print_bluetooth_thermal/print_bluetooth_thermal.dart';
+
+import 'package:flutter_pos_apps/core/core.dart';
+import 'package:flutter_pos_apps/data/datasources/auth_local_remote_datasource.dart';
+
 import '../../../core/components/buttons.dart';
 import '../../../core/components/spaces.dart';
 import '../../../data/dataoutputs/print_dataoutputs.dart';
@@ -17,6 +20,7 @@ class SuccessPaymentDialog extends StatefulWidget {
     required this.data,
     required this.totalQty,
     required this.totalPrice,
+    required this.paymentMethode,
     required this.paymentAmount,
     required this.pembayaranUser,
     required this.totalTax,
@@ -27,6 +31,7 @@ class SuccessPaymentDialog extends StatefulWidget {
   final List<ProductQuantity> data;
   final int totalQty;
   final int totalPrice;
+  final String paymentMethode;
   final int paymentAmount;
   final int pembayaranUser;
   final int totalTax;
@@ -67,7 +72,7 @@ class _SuccessPaymentDialogState extends State<SuccessPaymentDialog> {
             BlocBuilder<OrderBloc, OrderState>(
               builder: (context, state) {
                 final paymentMethod = state.maybeWhen(
-                  orElse: () => 'Cash',
+                  orElse: () => '',
                   loaded: (model) => model.paymentMethod,
                 );
                 return Text(
@@ -173,7 +178,7 @@ class _SuccessPaymentDialogState extends State<SuccessPaymentDialog> {
                         widget.data,
                         widget.totalQty,
                         widget.totalPrice,
-                        'Tunai',
+                        widget.paymentMethode,
                         widget.paymentAmount,
                         widget.paymentAmount,
                         namaKasir.user!.name!,

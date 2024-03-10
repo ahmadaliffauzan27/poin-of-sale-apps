@@ -21,6 +21,11 @@ class ConfirmPaymentPage extends StatefulWidget {
 }
 
 class _ConfirmPaymentPageState extends State<ConfirmPaymentPage> {
+  // Variabel untuk menentukan apakah tombol 'Cash' atau 'QRIS' dipilih
+  bool isCashSelected = true; // Defaultnya 'Cash' terpilih
+  bool isQRISSelected = false; // 'QRIS' tidak terpilih
+
+  String paymentMethod = 'Cash';
   void updateTotalPrice(int amount) {
     totalPriceController.text = amount.toString();
   }
@@ -423,7 +428,7 @@ class _ConfirmPaymentPageState extends State<ConfirmPaymentPage> {
                               ),
                             ),
                             const Text(
-                              '1 opsi pembayaran tersedia',
+                              '2 opsi pembayaran tersedia',
                               style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w500,
@@ -444,18 +449,34 @@ class _ConfirmPaymentPageState extends State<ConfirmPaymentPage> {
                             Row(
                               children: [
                                 Button.filled(
+                                  color: AppColors.grey,
                                   width: 120.0,
                                   height: 50.0,
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    setState(() {
+                                      paymentMethod = 'Cash';
+                                      isCashSelected = true;
+                                      isQRISSelected = false;
+                                    });
+                                  },
+                                  isSelected: isCashSelected,
                                   label: 'Cash',
                                 ),
                                 const SpaceWidth(8.0),
                                 Button.outlined(
+                                  textColor: Colors.white,
                                   width: 120.0,
                                   height: 50.0,
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    setState(() {
+                                      paymentMethod = 'QRIS';
+                                      isCashSelected = false;
+                                      isQRISSelected = true;
+                                    });
+                                  },
+                                  isSelected: isQRISSelected,
                                   label: 'QRIS',
-                                  disabled: true,
+                                  // disabled: true,
                                 ),
                               ],
                             ),
@@ -736,6 +757,7 @@ class _ConfirmPaymentPageState extends State<ConfirmPaymentPage> {
                                                 0,
                                                 totalPriceController
                                                     .text.toIntegerFromText,
+                                                paymentMethod,
                                               ));
                                           await showDialog(
                                             context: context,
@@ -745,6 +767,7 @@ class _ConfirmPaymentPageState extends State<ConfirmPaymentPage> {
                                               data: items,
                                               totalQty: totalQty,
                                               totalPrice: totalPrice.toInt(),
+                                              paymentMethode: paymentMethod,
                                               paymentAmount:
                                                   totalPriceController
                                                       .text.toIntegerFromText,

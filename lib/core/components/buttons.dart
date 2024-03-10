@@ -5,12 +5,14 @@ enum ButtonStyle { filled, outlined }
 
 class Button extends StatelessWidget {
   const Button.filled({
-    super.key,
+    Key? key,
     required this.onPressed,
     required this.label,
     this.style = ButtonStyle.filled,
     this.color = AppColors.buttonOn,
+    this.selectedColor = AppColors.buttonOn, // Warna saat tombol dipilih
     this.textColor = Colors.white,
+    this.isSelected = false, // Tambah properti isSelected
     this.width = double.infinity,
     this.height = 50.0,
     this.borderRadius = 16.0,
@@ -20,12 +22,14 @@ class Button extends StatelessWidget {
   });
 
   const Button.outlined({
-    super.key,
+    Key? key,
     required this.onPressed,
     required this.label,
     this.style = ButtonStyle.outlined,
     this.color = AppColors.grey,
+    this.selectedColor = AppColors.buttonOn, // Warna saat tombol dipilih
     this.textColor = AppColors.black,
+    this.isSelected = false, // Tambah properti isSelected
     this.width = double.infinity,
     this.height = 50.0,
     this.borderRadius = 16.0,
@@ -38,7 +42,9 @@ class Button extends StatelessWidget {
   final String label;
   final ButtonStyle style;
   final Color color;
+  final Color selectedColor; // Tambah properti selectedColor
   final Color textColor;
+  final bool isSelected; // Tambah properti isSelected
   final double width;
   final double height;
   final double borderRadius;
@@ -55,7 +61,9 @@ class Button extends StatelessWidget {
           ? ElevatedButton(
               onPressed: disabled ? null : onPressed,
               style: ElevatedButton.styleFrom(
-                backgroundColor: color,
+                backgroundColor: isSelected
+                    ? selectedColor
+                    : color, // Gunakan selectedColor jika dipilih
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(borderRadius),
                 ),
@@ -79,7 +87,9 @@ class Button extends StatelessWidget {
           : OutlinedButton(
               onPressed: disabled ? null : onPressed,
               style: OutlinedButton.styleFrom(
-                backgroundColor: color,
+                backgroundColor: isSelected
+                    ? selectedColor
+                    : color, // Gunakan selectedColor jika dipilih
                 side: const BorderSide(color: Colors.grey),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(borderRadius),

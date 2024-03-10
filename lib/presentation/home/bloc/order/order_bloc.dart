@@ -1,4 +1,6 @@
 // ignore: depend_on_referenced_packages
+import 'dart:math';
+
 import 'package:bloc/bloc.dart';
 import 'package:flutter_pos_apps/data/datasources/auth_local_remote_datasource.dart';
 import 'package:flutter_pos_apps/data/datasources/product_local_remote_datasource.dart';
@@ -25,6 +27,8 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
 
       final discount = (event.discount / 100) * subTotal;
 
+      final paymentMethod = event.paymentMethod;
+
       final total = subTotal + event.tax + event.serviceCharge - discount;
 
       final totalItem = event.items.fold<int>(
@@ -41,7 +45,7 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
         discount: event.discount,
         serviceCharge: event.serviceCharge,
         total: total.toInt(),
-        paymentMethod: 'Cash',
+        paymentMethod: event.paymentMethod,
         totalItem: totalItem,
         idKasir: userData.user!.id!,
         namaKasir: userData.user!.name!,
