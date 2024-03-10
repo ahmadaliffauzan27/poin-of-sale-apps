@@ -41,20 +41,28 @@ class _ConfirmPaymentPageState extends State<ConfirmPaymentPage> {
   @override
   void initState() {
     super.initState();
-    totalPriceController.addListener(() {
-      final text = totalPriceController.text;
-      final value = int.tryParse(text.replaceAll(RegExp(r'[^0-9]'), '')) ?? 0;
-      final newText =
-          formatCurrency(value); // Menggunakan fungsi formatCurrency
-      if (newText != text) {
-        totalPriceController.value = totalPriceController.value.copyWith(
-          text: newText,
-          selection: TextSelection.collapsed(offset: newText.length),
-          composing: TextRange.empty,
-        );
-      }
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      totalPriceController.addListener(_totalPriceControllerListener);
     });
   }
+
+  void _totalPriceControllerListener() {
+    final text = totalPriceController.text;
+    final value = int.tryParse(text.replaceAll(RegExp(r'[^0-9]'), '')) ?? 0;
+    final newText = formatCurrency(value); // Menggunakan fungsi formatCurrency
+    if (newText != text) {
+      totalPriceController.value = totalPriceController.value.copyWith(
+        text: newText,
+        selection: TextSelection.collapsed(offset: newText.length),
+        composing: TextRange.empty,
+      );
+    }
+  }
+
+  List<bool> isSelected = [
+    true,
+    false
+  ]; // untuk mengontrol status pemilihan tombol
 
   String formatCurrency(int amount) {
     // Menggunakan formatter tanpa simbol mata uang
@@ -94,50 +102,6 @@ class _ConfirmPaymentPageState extends State<ConfirmPaymentPage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        // Row(
-                        //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        //   children: [
-                        //     const Column(
-                        //       crossAxisAlignment: CrossAxisAlignment.start,
-                        //       children: [
-                        //         Text(
-                        //           'Konfirmasi',
-                        //           style: TextStyle(
-                        //             color: AppColors.primary,
-                        //             fontSize: 20,
-                        //             fontWeight: FontWeight.w600,
-                        //           ),
-                        //         ),
-                        //         Text(
-                        //           'Orders #1',
-                        //           style: TextStyle(
-                        //             fontSize: 16,
-                        //             fontWeight: FontWeight.w500,
-                        //           ),
-                        //         ),
-                        //       ],
-                        //     ),
-                        //     GestureDetector(
-                        //       onTap: () {},
-                        //       child: Container(
-                        //         padding: const EdgeInsets.all(16.0),
-                        //         height: 60.0,
-                        //         width: 60.0,
-                        //         decoration: const BoxDecoration(
-                        //           color: AppColors.primary,
-                        //           borderRadius:
-                        //               BorderRadius.all(Radius.circular(8.0)),
-                        //         ),
-                        //         child: const Icon(
-                        //           Icons.add,
-                        //           color: AppColors.white,
-                        //         ),
-                        //       ),
-                        //     ),
-                        //   ],
-                        // ),
-                        // const SpaceHeight(8.0),
-                        // const Divider(),
                         const SpaceHeight(28.0),
                         const Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -382,13 +346,6 @@ class _ConfirmPaymentPageState extends State<ConfirmPaymentPage> {
 
                                 totalPriceController.text =
                                     total.ceil().toString();
-                                // Future.microtask(() {
-                                //   setState(() {
-                                //     totalPriceController.text =
-                                //         total.ceil().toString();
-                                //   });
-                                // });
-
                                 return Text(
                                   total.ceil().currencyFormatRp,
                                   style: const TextStyle(
@@ -662,24 +619,6 @@ class _ConfirmPaymentPageState extends State<ConfirmPaymentPage> {
                                                 element.quantity),
                                       ),
                                     );
-
-                                    //     final discount = state.maybeWhen(
-                                    //     orElse: () => 0,
-                                    //     loaded: (products, discount, tax,
-                                    //         serviceCharge) {
-                                    //       if (discount == null) {
-                                    //         return 0;
-                                    //       }
-                                    //       return discount.value!
-                                    //           .replaceAll('.00', '')
-                                    //           .toIntegerFromText;
-                                    //     });
-
-                                    // final subTotal =
-                                    //     price - (discount / 100 * price);
-
-                                    // final total = subTotal + tax;
-
                                     final subTotal =
                                         price - (discount / 100 * price);
 
