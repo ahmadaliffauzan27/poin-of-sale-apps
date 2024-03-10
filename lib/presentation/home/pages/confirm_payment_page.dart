@@ -7,6 +7,7 @@ import '../../../core/components/buttons.dart';
 import '../../../core/components/spaces.dart';
 import '../bloc/checkout/checkout_bloc.dart';
 import '../bloc/order/order_bloc.dart';
+import '../dialog/payment_qris_dialog.dart';
 import '../models/product_category.dart';
 import '../models/product_model.dart';
 import '../models/product_qty.dart';
@@ -648,78 +649,89 @@ class _ConfirmPaymentPageState extends State<ConfirmPaymentPage> {
                                     return Flexible(
                                       child: Button.filled(
                                         onPressed: () async {
-                                          final int enteredTotal =
-                                              totalPriceController
-                                                  .text.toIntegerFromText;
-
-                                          if (enteredTotal < total) {
-                                            return showDialog(
-                                                context: context,
-                                                builder: (context) =>
-                                                    AlertDialog(
-                                                      backgroundColor: AppColors
-                                                          .buttonOn
-                                                          .withOpacity(1),
-                                                      title: const Text(
-                                                        'Peringatan',
-                                                        style: TextStyle(
-                                                          color:
-                                                              AppColors.white,
-                                                        ),
-                                                      ),
-                                                      content: const Text(
-                                                        'Pembayaran kurang dari total harga',
-                                                        style: TextStyle(
-                                                            color: AppColors
-                                                                .white),
-                                                      ),
-                                                      actions: [
-                                                        TextButton(
-                                                          onPressed: () {
-                                                            context.pop();
-                                                          },
-                                                          child: const Text(
-                                                              'OK',
-                                                              style: TextStyle(
-                                                                  color: AppColors
-                                                                      .white)),
-                                                        ),
-                                                      ],
-                                                    ));
-                                          }
-                                          context
-                                              .read<OrderBloc>()
-                                              .add(OrderEvent.order(
-                                                items,
-                                                discount,
-                                                finalTax.toInt(),
-                                                0,
+                                          if (isCashSelected) {
+                                            final int enteredTotal =
                                                 totalPriceController
-                                                    .text.toIntegerFromText,
-                                                paymentMethod,
-                                              ));
-                                          await showDialog(
-                                            context: context,
-                                            barrierDismissible: false,
-                                            builder: (context) =>
-                                                SuccessPaymentDialog(
-                                              data: items,
-                                              totalQty: totalQty,
-                                              totalPrice: totalPrice.toInt(),
-                                              paymentMethode: paymentMethod,
-                                              paymentAmount:
+                                                    .text.toIntegerFromText;
+
+                                            if (enteredTotal < total) {
+                                              return showDialog(
+                                                  context: context,
+                                                  builder: (context) =>
+                                                      AlertDialog(
+                                                        backgroundColor:
+                                                            AppColors.buttonOn
+                                                                .withOpacity(1),
+                                                        title: const Text(
+                                                          'Peringatan',
+                                                          style: TextStyle(
+                                                            color:
+                                                                AppColors.white,
+                                                          ),
+                                                        ),
+                                                        content: const Text(
+                                                          'Pembayaran kurang dari total harga',
+                                                          style: TextStyle(
+                                                              color: AppColors
+                                                                  .white),
+                                                        ),
+                                                        actions: [
+                                                          TextButton(
+                                                            onPressed: () {
+                                                              context.pop();
+                                                            },
+                                                            child: const Text(
+                                                                'OK',
+                                                                style: TextStyle(
+                                                                    color: AppColors
+                                                                        .white)),
+                                                          ),
+                                                        ],
+                                                      ));
+                                            }
+                                            context
+                                                .read<OrderBloc>()
+                                                .add(OrderEvent.order(
+                                                  items,
+                                                  discount,
+                                                  finalTax.toInt(),
+                                                  0,
                                                   totalPriceController
                                                       .text.toIntegerFromText,
-                                              pembayaranUser:
-                                                  totalPriceController
-                                                      .text.toIntegerFromText,
-                                              totalTax: finalTax.toInt(),
-                                              totalDiscount:
-                                                  totalDiscount.toInt(),
-                                              subTotal: subTotal.toInt(),
-                                              normalPrice: price,
-                                            ),
-                                          );
+                                                  paymentMethod,
+                                                ));
+                                            await showDialog(
+                                              context: context,
+                                              barrierDismissible: false,
+                                              builder: (context) =>
+                                                  SuccessPaymentDialog(
+                                                data: items,
+                                                totalQty: totalQty,
+                                                totalPrice: totalPrice.toInt(),
+                                                paymentMethode: paymentMethod,
+                                                paymentAmount:
+                                                    totalPriceController
+                                                        .text.toIntegerFromText,
+                                                pembayaranUser:
+                                                    totalPriceController
+                                                        .text.toIntegerFromText,
+                                                totalTax: finalTax.toInt(),
+                                                totalDiscount:
+                                                    totalDiscount.toInt(),
+                                                subTotal: subTotal.toInt(),
+                                                normalPrice: price,
+                                              ),
+                                            );
+                                          } else if (isQRISSelected) {
+                                            showDialog(
+                                              context: context,
+                                              barrierDismissible: false,
+                                              builder: (context) =>
+                                                  PaymentQrisDialog(
+                                                price: subTotal.toInt(),
+                                              ),
+                                            );
+                                          }
                                         },
                                         label: 'Bayar',
                                       ),

@@ -15,6 +15,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'presentation/home/bloc/checkout/checkout_bloc.dart';
 import 'presentation/home/bloc/order/order_bloc.dart';
+import 'presentation/home/bloc/qris/qris_bloc.dart';
 import 'presentation/home/pages/dashboard_page.dart';
 import 'presentation/report/bloc/transaction_report/transaction_report_bloc.dart';
 import 'presentation/setting/bloc/add_discount/add_discount_bloc.dart';
@@ -65,6 +66,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) =>
               TransactionReportBloc(ProductLocalRemoteDatasource.instance),
+        ),
+        BlocProvider(
+          create: (context) => QrisBloc(),
         ),
       ],
       child: MaterialApp(
