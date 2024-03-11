@@ -4,6 +4,7 @@ import '../constants/colors.dart';
 enum ButtonStyle { filled, outlined }
 
 class Button extends StatelessWidget {
+  // ignore: use_key_in_widget_constructors
   const Button.filled({
     Key? key,
     required this.onPressed,
@@ -21,6 +22,7 @@ class Button extends StatelessWidget {
     this.fontSize = 16.0,
   });
 
+  // ignore: use_key_in_widget_constructors
   const Button.outlined({
     Key? key,
     required this.onPressed,

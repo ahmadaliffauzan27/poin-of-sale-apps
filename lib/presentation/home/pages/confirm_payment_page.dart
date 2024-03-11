@@ -7,8 +7,6 @@ import '../../../core/components/buttons.dart';
 import '../../../core/components/spaces.dart';
 import '../bloc/checkout/checkout_bloc.dart';
 import '../bloc/order/order_bloc.dart';
-import '../models/product_category.dart';
-import '../models/product_model.dart';
 import '../models/product_qty.dart';
 import '../widgets/order_menu.dart';
 import '../widgets/success_payment_dialog.dart';
@@ -30,6 +28,22 @@ class _ConfirmPaymentPageState extends State<ConfirmPaymentPage> {
     totalPriceController.text = amount.toString();
   }
 
+  void _selectCash() {
+    setState(() {
+      paymentMethod = 'Cash';
+      isCashSelected = true;
+      isQRISSelected = false;
+    });
+  }
+
+  void _selectQRIS() {
+    setState(() {
+      paymentMethod = 'QRIS';
+      isCashSelected = false;
+      isQRISSelected = true;
+    });
+  }
+
   @override
   void dispose() {
     isCashSelected = true;
@@ -44,6 +58,8 @@ class _ConfirmPaymentPageState extends State<ConfirmPaymentPage> {
   @override
   void initState() {
     super.initState();
+    // _selectCash();
+    // _selectQRIS();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       totalPriceController.addListener(_totalPriceControllerListener);
     });
@@ -73,20 +89,6 @@ class _ConfirmPaymentPageState extends State<ConfirmPaymentPage> {
     return 'Rp ${formatter.format(amount)}'; // Menambahkan simbol mata uang di sini
   }
 
-  final products = [
-    ProductModel(
-        image: Assets.images.product1.path,
-        name: 'Vanila Late Vanila itu',
-        category: ProductCategory.drink,
-        price: 200000,
-        stock: 10),
-    ProductModel(
-        image: Assets.images.product2.path,
-        name: 'V60',
-        category: ProductCategory.drink,
-        price: 1200000,
-        stock: 10),
-  ];
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -413,11 +415,7 @@ class _ConfirmPaymentPageState extends State<ConfirmPaymentPage> {
                                   width: 120.0,
                                   height: 50.0,
                                   onPressed: () {
-                                    setState(() {
-                                      paymentMethod = 'Cash';
-                                      isCashSelected = true;
-                                      isQRISSelected = false;
-                                    });
+                                    _selectCash();
                                   },
                                   isSelected: isCashSelected,
                                   label: 'Cash',
@@ -428,11 +426,7 @@ class _ConfirmPaymentPageState extends State<ConfirmPaymentPage> {
                                   width: 120.0,
                                   height: 50.0,
                                   onPressed: () {
-                                    setState(() {
-                                      paymentMethod = 'QRIS';
-                                      isCashSelected = false;
-                                      isQRISSelected = true;
-                                    });
+                                    _selectQRIS();
                                   },
                                   isSelected: isQRISSelected,
                                   label: 'QRIS',
