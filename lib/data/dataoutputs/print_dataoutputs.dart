@@ -61,17 +61,20 @@ class PrintDataoutputs {
       bytes += generator.text(product.product.name!,
           styles: const PosStyles(align: PosAlign.left));
 
+      print('${product.product.price! * product.quantity}');
+
       bytes += generator.row([
         PosColumn(
-          text: '${product.product.price!} x ${product.quantity}',
-          width: 8,
+          text:
+              '${product.product.price!.currencyFormatRp} x ${product.quantity}',
+          width: 5,
           styles: const PosStyles(align: PosAlign.left),
         ),
         PosColumn(
           text: '${product.product.price! * product.quantity}'
               .toIntegerFromText
               .currencyFormatRp,
-          width: 4,
+          width: 7,
           styles: const PosStyles(align: PosAlign.right),
         ),
       ]);
