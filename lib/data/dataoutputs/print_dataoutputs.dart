@@ -63,15 +63,16 @@ class PrintDataoutputs {
 
       bytes += generator.row([
         PosColumn(
-          text: '${product.product.price!} x ${product.quantity}',
-          width: 8,
+          text:
+              '${product.product.price!.currencyFormatRp} x ${product.quantity}',
+          width: 6,
           styles: const PosStyles(align: PosAlign.left),
         ),
         PosColumn(
           text: '${product.product.price! * product.quantity}'
               .toIntegerFromText
               .currencyFormatRp,
-          width: 4,
+          width: 6,
           styles: const PosStyles(align: PosAlign.right),
         ),
       ]);

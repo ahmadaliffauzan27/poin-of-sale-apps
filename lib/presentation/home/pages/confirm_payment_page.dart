@@ -32,6 +32,9 @@ class _ConfirmPaymentPageState extends State<ConfirmPaymentPage> {
 
   @override
   void dispose() {
+    isCashSelected = true;
+    isQRISSelected = false;
+    paymentMethod = 'Cash';
     totalPriceController.dispose();
     super.dispose();
   }
