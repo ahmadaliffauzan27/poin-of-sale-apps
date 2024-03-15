@@ -86,8 +86,11 @@ class _HomePageState extends State<HomePage> {
                                     );
                                   }, loaded: (products) {
                                     if (products.isEmpty) {
-                                      return const Center(
-                                        child: Text('data kosong'),
+                                      return const Padding(
+                                        padding: EdgeInsets.only(top: 200),
+                                        child: Center(
+                                          child: Text('Produk Tidak Ditemukan'),
+                                        ),
                                       );
                                     }
                                     return GridView.builder(
@@ -316,7 +319,7 @@ class _HomePageState extends State<HomePage> {
                           //     ),
                           //   ],
                           // ),
-                          // const SpaceHeight(16.0),
+                          const SpaceHeight(8.0),
                           const Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [

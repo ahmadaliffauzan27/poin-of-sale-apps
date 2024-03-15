@@ -163,8 +163,9 @@ class _ReportPageState extends State<ReportPage> {
                       loaded: (value) {
                         return value.data.fold(
                           0,
-                          (previousValue, element) =>
-                              previousValue + element.discount,
+                          (previousValue, element) => (previousValue +
+                                  element.discount / 100 * subTotal)
+                              .toInt(),
                         );
                       },
                     );
@@ -207,12 +208,12 @@ class _ReportPageState extends State<ReportPage> {
                           ),
                           const SpaceHeight(16.0),
 
-                          // Center(
-                          //   child: Text(
-                          //     searchDateFormatted,
-                          //     style: const TextStyle(fontSize: 16.0),
-                          //   ),
-                          // ),
+                          Center(
+                            child: Text(
+                              searchDateFormatted,
+                              style: const TextStyle(fontSize: 16.0),
+                            ),
+                          ),
                           const SpaceHeight(16.0),
 
                           // REVENUE INFO
@@ -232,16 +233,16 @@ class _ReportPageState extends State<ReportPage> {
                               ],
                             ),
                             const SpaceHeight(4.0),
-                            // Row(
-                            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            //   children: [
-                            //     const Text('Discount'),
-                            //     Text('$discount'
-                            //         .toIntegerFromText
-                            //         .currencyFormatRp),
-                            //   ],
-                            // ),
-                            // const SpaceHeight(4.0),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                const Text('Discount'),
+                                Text('$discount'
+                                    .toIntegerFromText
+                                    .currencyFormatRp),
+                              ],
+                            ),
+                            const SpaceHeight(4.0),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [

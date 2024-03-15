@@ -44,7 +44,7 @@ class HomeTitle extends StatelessWidget {
           child: SearchInput(
             controller: controller,
             onChanged: onChanged,
-            hintText: 'Search for food, coffe, etc..',
+            hintText: 'Search...',
           ),
         ),
       ],

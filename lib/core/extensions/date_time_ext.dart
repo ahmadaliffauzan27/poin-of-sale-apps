@@ -1,11 +1,11 @@
 const List<String> _dayNames = [
-  'Minggu',
   'Senin',
   'Selasa',
   'Rabu',
   'Kamis',
   'Jumat',
-  'Sabtu'
+  'Sabtu',
+  'Minggu'
 ];
 
 const List<String> _monthNames = [

@@ -31,6 +31,10 @@ class PrintDataoutputs {
     final nominalPembayaran = nominalBayar.toDouble();
     final kembalian = nominalPembayaran - totalPrice;
 
+    int roundedTotalPrice = ((totalPrice / 1000).ceil() * 1000);
+
+    int lastThreeDigits = (subTotal + tax) % 1000;
+
     bytes += generator.reset();
     bytes += generator.text('TOKO ALIF',
         styles: const PosStyles(
@@ -140,12 +144,38 @@ class PrintDataoutputs {
 
     bytes += generator.row([
       PosColumn(
+        text: 'Total Harga',
+        width: 7,
+        styles: const PosStyles(align: PosAlign.left),
+      ),
+      PosColumn(
+        text: (subTotal + tax).currencyFormatRp,
+        width: 5,
+        styles: const PosStyles(align: PosAlign.right),
+      ),
+    ]);
+
+    bytes += generator.row([
+      PosColumn(
+        text: 'Pembulatan',
+        width: 7,
+        styles: const PosStyles(align: PosAlign.left),
+      ),
+      PosColumn(
+        text: lastThreeDigits.currencyFormatRp,
+        width: 5,
+        styles: const PosStyles(align: PosAlign.right),
+      ),
+    ]);
+
+    bytes += generator.row([
+      PosColumn(
         text: 'TOTAL',
         width: 6,
         styles: const PosStyles(align: PosAlign.left),
       ),
       PosColumn(
-        text: totalPrice.currencyFormatRp,
+        text: roundedTotalPrice.currencyFormatRp,
         width: 6,
         styles: const PosStyles(align: PosAlign.right),
       ),

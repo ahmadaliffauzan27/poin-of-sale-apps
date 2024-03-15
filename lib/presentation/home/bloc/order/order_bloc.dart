@@ -27,7 +27,11 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
 
       final discount = (event.discount / 100) * subTotal;
 
-      final total = subTotal + event.tax + event.serviceCharge - discount;
+      final total =
+          ((subTotal + event.tax + event.serviceCharge - discount) / 1000)
+                  .round()
+                  .toInt() *
+              1000;
 
       final totalItem = event.items.fold<int>(
         0,
