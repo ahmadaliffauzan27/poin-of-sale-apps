@@ -42,6 +42,9 @@ class _ReportPageState extends State<ReportPage> {
   void initState() {
     super.initState();
 
+    setState(() {
+      selectedMenu = 0;
+    });
     // Inisialisasi zona waktu
     tz.initializeTimeZones();
     tz.setLocalLocation(tz.getLocation('Asia/Jakarta'));
