@@ -68,7 +68,8 @@ class _HomePageState extends State<HomePage> {
                             'Semua',
                             'Makanan',
                             'Minuman',
-                            'Snack'
+                            'Tambahan',
+                            'Kerupuk'
                           ],
                           initialTabIndex: 0,
                           tabViews: [
