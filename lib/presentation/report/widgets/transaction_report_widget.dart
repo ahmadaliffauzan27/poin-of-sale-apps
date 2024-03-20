@@ -135,7 +135,7 @@ class TransactionReportWidget extends StatelessWidget {
                 borderRadius: BorderRadius.circular(12),
                 child: HorizontalDataTable(
                   leftHandSideColumnWidth: 50,
-                  rightHandSideColumnWidth: 850,
+                  rightHandSideColumnWidth: 600,
                   isFixedHeader: true,
                   headerWidgets: headerWidgets,
                   // isFixedFooter: true,
@@ -162,15 +162,15 @@ class TransactionReportWidget extends StatelessWidget {
                             transactionReport[index].total!.currencyFormatRp,
                           )),
                         ),
-                        Container(
-                          width: 120,
-                          height: 52,
-                          padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            transactionReport[index].subTotal!.currencyFormatRp,
-                          ),
-                        ),
+                        // Container(
+                        //   width: 120,
+                        //   height: 52,
+                        //   padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
+                        //   alignment: Alignment.centerLeft,
+                        //   child: Text(
+                        //     transactionReport[index].subTotal!.currencyFormatRp,
+                        //   ),
+                        // ),
                         // Container(
                         //   width: 100,
                         //   height: 52,
@@ -181,23 +181,23 @@ class TransactionReportWidget extends StatelessWidget {
                         //     transactionReport[index].tax!.currencyFormatRp,
                         //   )),
                         // ),
-                        Container(
-                          width: 100,
-                          height: 52,
-                          padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            // Mengubah persentase diskon menjadi nominal dan memformatnya ke dalam format mata uang yang diinginkan
-                            (transactionReport[index].discount! *
-                                    transactionReport[index].total! /
-                                    100)
-                                .toString()
-                                .toIntegerFromText
-                                .currencyFormatRp
-                                .replaceAll('.0',
-                                    ''), // Menyertakan 2 angka di belakang koma
-                          ),
-                        ),
+                        // Container(
+                        //   width: 100,
+                        //   height: 52,
+                        //   padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
+                        //   alignment: Alignment.centerLeft,
+                        //   child: Text(
+                        //     // Mengubah persentase diskon menjadi nominal dan memformatnya ke dalam format mata uang yang diinginkan
+                        //     (transactionReport[index].discount! *
+                        //             transactionReport[index].total! /
+                        //             100)
+                        //         .toString()
+                        //         .toIntegerFromText
+                        //         .currencyFormatRp
+                        //         .replaceAll('.0',
+                        //             ''), // Menyertakan 2 angka di belakang koma
+                        //   ),
+                        // ),
                         // Container(
                         //   width: 100,
                         //   height: 52,
@@ -216,23 +216,27 @@ class TransactionReportWidget extends StatelessWidget {
                           height: 52,
                           padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
                           alignment: Alignment.centerLeft,
-                          child: Text(
-                              transactionReport[index].totalItem.toString()),
+                          child: Center(
+                            child: Text(
+                                transactionReport[index].totalItem.toString()),
+                          ),
                         ),
                         Container(
                           width: 150,
                           height: 52,
                           padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
                           alignment: Alignment.centerLeft,
-                          child: Text(transactionReport[index].namaKasir!),
+                          child: Center(
+                              child: Text(transactionReport[index].namaKasir!)),
                         ),
                         Container(
                           width: 230,
                           height: 52,
                           padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
                           alignment: Alignment.centerLeft,
-                          child:
-                              Text(transactionReport[index].transactionTime!),
+                          child: Center(
+                              child: Text(
+                                  transactionReport[index].transactionTime!)),
                         ),
                       ],
                     );

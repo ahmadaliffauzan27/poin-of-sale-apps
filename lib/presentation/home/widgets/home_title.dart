@@ -22,7 +22,7 @@ class HomeTitle extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
-              'Point Of Sale Apps',
+              'Empal Gentong Mang Medi',
               style: TextStyle(
                 color: AppColors.primary,
                 fontSize: 22,

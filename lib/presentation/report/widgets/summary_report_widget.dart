@@ -82,7 +82,7 @@ class SummaryReportWidget extends StatelessWidget {
             ),
             const SpaceHeight(16.0),
             Text(
-              'REVENUE : ${summary.totalRevenue!.currencyFormatRp}',
+              'REVENUE : ${summary.totalSubtotal!.currencyFormatRp}',
               style: const TextStyle(fontWeight: FontWeight.bold),
             ),
             const SpaceHeight(8.0),
@@ -92,7 +92,7 @@ class SummaryReportWidget extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text('Subtotal'),
+                const Text('Total'),
                 Text(
                   summary.totalSubtotal!.currencyFormatRp,
                   style: const TextStyle(fontWeight: FontWeight.bold),
@@ -100,52 +100,52 @@ class SummaryReportWidget extends StatelessWidget {
               ],
             ),
             const SpaceHeight(4.0),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text('Discount'),
-                Text(
-                  "- ${(summary.total! * (summary.totalDiscount! / 100))}",
-                  style: const TextStyle(fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-            const SpaceHeight(4.0),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text('Tax'),
-                Text(
-                  summary.totalTax!.currencyFormatRp,
-                  style: const TextStyle(fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-            const SpaceHeight(4.0),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text('Service Charge'),
-                Text(
-                  summary.totalServiceCharge!.currencyFormatRp,
-                  style: const TextStyle(fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-            const SpaceHeight(8.0),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //   children: [
+            //     const Text('Discount'),
+            //     Text(
+            //       "- ${(summary.total! * (summary.totalDiscount! / 100))}",
+            //       style: const TextStyle(fontWeight: FontWeight.bold),
+            //     ),
+            //   ],
+            // ),
+            // const SpaceHeight(4.0),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //   children: [
+            //     const Text('Tax'),
+            //     Text(
+            //       summary.totalTax!.currencyFormatRp,
+            //       style: const TextStyle(fontWeight: FontWeight.bold),
+            //     ),
+            //   ],
+            // ),
+            // const SpaceHeight(4.0),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //   children: [
+            //     const Text('Service Charge'),
+            //     Text(
+            //       summary.totalServiceCharge!.currencyFormatRp,
+            //       style: const TextStyle(fontWeight: FontWeight.bold),
+            //     ),
+            //   ],
+            // ),
+            // const SpaceHeight(8.0),
             const DashedLine(),
             const DashedLine(),
-            const SpaceHeight(8.0),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text('TOTAL'),
-                Text(
-                  (summary.totalSubtotal! + summary.totalTax!).currencyFormatRp,
-                  style: const TextStyle(fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
+            // const SpaceHeight(8.0),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //   children: [
+            //     const Text('TOTAL'),
+            //     Text(
+            //       (summary.totalSubtotal! + summary.totalTax!).currencyFormatRp,
+            //       style: const TextStyle(fontWeight: FontWeight.bold),
+            //     ),
+            //   ],
+            // ),
           ],
         ),
       ),

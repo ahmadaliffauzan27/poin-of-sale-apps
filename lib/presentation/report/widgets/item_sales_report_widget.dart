@@ -148,7 +148,7 @@ class ItemSalesReportWidget extends StatelessWidget {
                                   Text(itemSales[index].quantity.toString())),
                         ),
                         Container(
-                          width: 140,
+                          width: 280,
                           height: 52,
                           padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
                           alignment: Alignment.centerLeft,
@@ -159,20 +159,20 @@ class ItemSalesReportWidget extends StatelessWidget {
                             ),
                           ),
                         ),
-                        Container(
-                          width: 140,
-                          height: 52,
-                          padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
-                          alignment: Alignment.centerLeft,
-                          color: color,
-                          child: Center(
-                            child: Text(
-                              (itemSales[index].price! *
-                                      itemSales[index].quantity!)
-                                  .currencyFormatRp,
-                            ),
-                          ),
-                        ),
+                        // Container(
+                        //   width: 140,
+                        //   height: 52,
+                        //   padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
+                        //   alignment: Alignment.centerLeft,
+                        //   color: color,
+                        //   child: Center(
+                        //     child: Text(
+                        //       (itemSales[index].price! *
+                        //               itemSales[index].quantity!)
+                        //           .currencyFormatRp,
+                        //     ),
+                        //   ),
+                        // ),
                       ],
                     );
                   },

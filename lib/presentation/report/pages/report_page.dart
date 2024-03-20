@@ -275,9 +275,9 @@ class _ReportPageState extends State<ReportPage> {
     return [
       _getTitleItemWidget('ID', 120),
       _getTitleItemWidget('Total', 100),
-      _getTitleItemWidget('Sub Total', 100),
+      // _getTitleItemWidget('Sub Total', 100),
       // _getTitleItemWidget('Tax', 100),
-      _getTitleItemWidget('Discount', 100),
+      // _getTitleItemWidget('Discount', 100),
       // _getTitleItemWidget('Service', 100),
       _getTitleItemWidget('Total Item', 100),
       _getTitleItemWidget('Cashier', 180),
@@ -291,8 +291,8 @@ class _ReportPageState extends State<ReportPage> {
       // _getTitleItemWidget('Order', 60),
       _getTitleItemWidget('Product', 160),
       _getTitleItemWidget('Qty', 60),
-      _getTitleItemWidget('Price', 140),
-      _getTitleItemWidget('Total Price', 140),
+      _getTitleItemWidget('Price', 280),
+      // _getTitleItemWidget('Total Price', 140),
     ];
   }
 

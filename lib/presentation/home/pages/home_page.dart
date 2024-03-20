@@ -442,7 +442,7 @@ class _HomePageState extends State<HomePage> {
                                     if (products.isEmpty) {
                                       return Padding(
                                         padding: const EdgeInsets.symmetric(
-                                            vertical: 80),
+                                            vertical: 120),
                                         child: Center(
                                           child: Column(
                                             children: [
@@ -475,103 +475,103 @@ class _HomePageState extends State<HomePage> {
                             },
                           ),
                           const SpaceHeight(8.0),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              ColumnButton(
-                                label: 'Diskon',
-                                svgGenImage: Assets.icons.diskon,
-                                onPressed: () => showDialog(
-                                    context: context,
-                                    builder: (context) =>
-                                        const DiscountDialog()),
-                              ),
-                              ColumnButton(
-                                label: 'Pajak',
-                                svgGenImage: Assets.icons.pajak,
-                                onPressed: () => showDialog(
-                                    context: context,
-                                    builder: (context) => const TaxDialog()),
-                              ),
-                              ColumnButton(
-                                label: 'Layanan',
-                                svgGenImage: Assets.icons.layanan,
-                                onPressed: () => showDialog(
-                                    context: context,
-                                    builder: (context) =>
-                                        const ServiceDialog()),
-                              ),
-                            ],
-                          ),
-                          const SpaceHeight(8.0),
+                          // Row(
+                          //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          //   children: [
+                          //     ColumnButton(
+                          //       label: 'Diskon',
+                          //       svgGenImage: Assets.icons.diskon,
+                          //       onPressed: () => showDialog(
+                          //           context: context,
+                          //           builder: (context) =>
+                          //               const DiscountDialog()),
+                          //     ),
+                          //     ColumnButton(
+                          //       label: 'Pajak',
+                          //       svgGenImage: Assets.icons.pajak,
+                          //       onPressed: () => showDialog(
+                          //           context: context,
+                          //           builder: (context) => const TaxDialog()),
+                          //     ),
+                          //     ColumnButton(
+                          //       label: 'Layanan',
+                          //       svgGenImage: Assets.icons.layanan,
+                          //       onPressed: () => showDialog(
+                          //           context: context,
+                          //           builder: (context) =>
+                          //               const ServiceDialog()),
+                          //     ),
+                          //   ],
+                          // ),
+                          // const SpaceHeight(100),
                           const Divider(),
                           const SpaceHeight(8.0),
+                          // Row(
+                          //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          //   children: [
+                          //     const Text(
+                          //       'Pajak',
+                          //       style: TextStyle(color: AppColors.grey),
+                          //     ),
+                          //     BlocBuilder<CheckoutBloc, CheckoutState>(
+                          //       builder: (context, state) {
+                          //         final tax = state.maybeWhen(
+                          //             orElse: () => 0,
+                          //             loaded:
+                          //                 (products, discount, tax, service) {
+                          //               if (products.isEmpty) {
+                          //                 return 0;
+                          //               }
+                          //               return tax;
+                          //             });
+                          //         return Text(
+                          //           '$tax %',
+                          //           style: const TextStyle(
+                          //             color: AppColors.primary,
+                          //             fontWeight: FontWeight.w600,
+                          //           ),
+                          //         );
+                          //       },
+                          //     ),
+                          //   ],
+                          // ),
+                          // const SpaceHeight(8.0),
+                          // Row(
+                          //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          //   children: [
+                          //     const Text(
+                          //       'Diskon',
+                          //       style: TextStyle(color: AppColors.grey),
+                          //     ),
+                          //     BlocBuilder<CheckoutBloc, CheckoutState>(
+                          //       builder: (context, state) {
+                          //         final discount = state.maybeWhen(
+                          //             orElse: () => 0,
+                          //             loaded:
+                          //                 (products, discount, tax, service) {
+                          //               if (discount == null) {
+                          //                 return 0;
+                          //               }
+                          //               return discount
+                          //                   .value!.toIntegerFromText;
+                          //             });
+                          //         return Text(
+                          //           '$discount %'.replaceAll('00', ''),
+                          //           style: const TextStyle(
+                          //             color: AppColors.primary,
+                          //             fontWeight: FontWeight.w600,
+                          //           ),
+                          //         );
+                          //       },
+                          //     ),
+                          //   ],
+                          // ),
+                          // const SpaceHeight(8.0),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               const Text(
-                                'Pajak',
-                                style: TextStyle(color: AppColors.grey),
-                              ),
-                              BlocBuilder<CheckoutBloc, CheckoutState>(
-                                builder: (context, state) {
-                                  final tax = state.maybeWhen(
-                                      orElse: () => 0,
-                                      loaded:
-                                          (products, discount, tax, service) {
-                                        if (products.isEmpty) {
-                                          return 0;
-                                        }
-                                        return tax;
-                                      });
-                                  return Text(
-                                    '$tax %',
-                                    style: const TextStyle(
-                                      color: AppColors.primary,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  );
-                                },
-                              ),
-                            ],
-                          ),
-                          const SpaceHeight(8.0),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              const Text(
-                                'Diskon',
-                                style: TextStyle(color: AppColors.grey),
-                              ),
-                              BlocBuilder<CheckoutBloc, CheckoutState>(
-                                builder: (context, state) {
-                                  final discount = state.maybeWhen(
-                                      orElse: () => 0,
-                                      loaded:
-                                          (products, discount, tax, service) {
-                                        if (discount == null) {
-                                          return 0;
-                                        }
-                                        return discount
-                                            .value!.toIntegerFromText;
-                                      });
-                                  return Text(
-                                    '$discount %'.replaceAll('00', ''),
-                                    style: const TextStyle(
-                                      color: AppColors.primary,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  );
-                                },
-                              ),
-                            ],
-                          ),
-                          const SpaceHeight(8.0),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              const Text(
-                                'Sub total',
+                                'Total',
                                 style: TextStyle(color: AppColors.grey),
                               ),
                               BlocBuilder<CheckoutBloc, CheckoutState>(
@@ -599,7 +599,7 @@ class _HomePageState extends State<HomePage> {
                               ),
                             ],
                           ),
-                          const SpaceHeight(100.0),
+                          const SpaceHeight(50.0),
                         ],
                       ),
                     ),
