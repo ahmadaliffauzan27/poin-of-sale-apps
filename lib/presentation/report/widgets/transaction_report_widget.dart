@@ -53,14 +53,58 @@ class TransactionReportWidget extends StatelessWidget {
                   searchDateFormatted,
                   style: const TextStyle(fontSize: 16.0),
                 ),
+                // GestureDetector(
+                //   onTap: () async {
+                //     final status = await PermissionHelper().checkPermission();
+                //     if (status.isGranted) {
+                //       final pdfFile = await TransactionSalesInvoice.generate(
+                //           transactionReport, searchDateFormatted);
+                //       log("pdfFile: $pdfFile");
+                //       HelperPdfService.openFile(pdfFile);
+                //     }
+                //   },
+                //   child: const Row(
+                //     children: [
+                //       Text(
+                //         "PDF",
+                //         style: TextStyle(
+                //           fontSize: 14.0,
+                //           fontWeight: FontWeight.bold,
+                //           color: AppColors.primary,
+                //         ),
+                //       ),
+                //       Icon(
+                //         Icons.download_outlined,
+                //         color: AppColors.primary,
+                //       )
+                //     ],
+                //   ),
+                // ),
                 GestureDetector(
                   onTap: () async {
                     final status = await PermissionHelper().checkPermission();
                     if (status.isGranted) {
-                      final pdfFile = await TransactionSalesInvoice.generate(
-                          transactionReport, searchDateFormatted);
-                      log("pdfFile: $pdfFile");
-                      HelperPdfService.openFile(pdfFile);
+                      try {
+                        final pdfFile = await TransactionSalesInvoice.generate(
+                            transactionReport, searchDateFormatted);
+                        log("pdfFile: $pdfFile");
+
+                        // Konversi File menjadi Document
+                        final pdfDocument =
+                            await HelperPdfService.convertFileToPdfDocument(
+                                pdfFile);
+
+                        // Simpan PDF ke penyimpanan perangkat
+                        final savedFile = await HelperPdfService.saveDocument(
+                          name: 'laporan.pdf',
+                          pdf: pdfDocument,
+                        );
+
+                        // Buka file PDF yang telah disimpan
+                        await HelperPdfService.openFile(savedFile);
+                      } catch (e) {
+                        log("Failed to generate or open PDF: $e");
+                      }
                     }
                   },
                   child: const Row(
