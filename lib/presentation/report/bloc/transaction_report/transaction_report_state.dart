@@ -5,7 +5,5 @@ class TransactionReportState with _$TransactionReportState {
   const factory TransactionReportState.initial() = _Initial;
   const factory TransactionReportState.loading() = _Loading;
   const factory TransactionReportState.error(String message) = _Error;
-  const factory TransactionReportState.loaded({
-    required List<OrderModel> data,
-  }) = _Loaded;
+  const factory TransactionReportState.loaded(List<ItemOrder> data) = _Loaded;
 }

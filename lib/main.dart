@@ -9,6 +9,7 @@ import 'package:flutter_pos_apps/data/datasources/product_remote_datasource.dart
 import 'package:flutter_pos_apps/presentation/auth/bloc/login/login_bloc.dart';
 import 'package:flutter_pos_apps/presentation/home/bloc/local_product/local_product_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'data/datasources/order_item_remote_datasource.dart';
 import 'presentation/auth/bloc/logout/logout_bloc.dart';
 import 'presentation/auth/login_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,6 +17,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'presentation/home/bloc/checkout/checkout_bloc.dart';
 import 'presentation/home/bloc/order/order_bloc.dart';
 import 'presentation/home/pages/dashboard_page.dart';
+import 'presentation/report/bloc/item_sales/item_sales_bloc.dart';
+import 'presentation/report/bloc/product_sales/product_sales_bloc.dart';
+import 'presentation/report/bloc/summary_reports/summary_reports_bloc.dart';
 import 'presentation/report/bloc/transaction_report/transaction_report_bloc.dart';
 import 'presentation/setting/bloc/add_discount/add_discount_bloc.dart';
 import 'presentation/setting/bloc/discount/discount_bloc.dart';
@@ -63,8 +67,16 @@ class MyApp extends StatelessWidget {
           create: (context) => AddDiscountBloc(DiscountRemoteDatasource()),
         ),
         BlocProvider(
-          create: (context) =>
-              TransactionReportBloc(ProductLocalRemoteDatasource.instance),
+          create: (context) => TransactionReportBloc(OrderRemoteDatasource()),
+        ),
+        BlocProvider(
+          create: (context) => ItemSalesBloc(OrderItemRemoteDatasource()),
+        ),
+        BlocProvider(
+          create: (context) => SummaryReportBloc(OrderRemoteDatasource()),
+        ),
+        BlocProvider(
+          create: (context) => ProductSalesBloc(OrderItemRemoteDatasource()),
         ),
       ],
       child: MaterialApp(

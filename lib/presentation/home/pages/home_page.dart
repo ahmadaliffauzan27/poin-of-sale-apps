@@ -275,6 +275,59 @@ class _HomePageState extends State<HomePage> {
                                 },
                               ),
                             ),
+
+//tab kerupuk
+                            SizedBox(
+                              child: BlocBuilder<LocalProductBloc,
+                                  LocalProductState>(
+                                builder: (context, state) {
+                                  return state.maybeWhen(
+                                    orElse: () {
+                                      return const Center(
+                                        child: CircularProgressIndicator(),
+                                      );
+                                    },
+                                    loading: () {
+                                      return const Center(
+                                        child: CircularProgressIndicator(),
+                                      );
+                                    },
+                                    loaded: (products) {
+                                      if (products.isEmpty) {
+                                        return const Center(
+                                          child: Text('data kosong'),
+                                        );
+                                      }
+                                      return GridView.builder(
+                                        shrinkWrap: true,
+                                        itemCount: products
+                                            .where((element) =>
+                                                element.category!.id == 4)
+                                            .toList()
+                                            .length,
+                                        physics:
+                                            const NeverScrollableScrollPhysics(),
+                                        gridDelegate:
+                                            const SliverGridDelegateWithFixedCrossAxisCount(
+                                          childAspectRatio: 0.85,
+                                          crossAxisCount: 3,
+                                          crossAxisSpacing: 30.0,
+                                          mainAxisSpacing: 30.0,
+                                        ),
+                                        itemBuilder: (context, index) =>
+                                            ProductCard(
+                                          data: products
+                                              .where((element) =>
+                                                  element.category!.id == 4)
+                                              .toList()[index],
+                                          onCartButton: () {},
+                                        ),
+                                      );
+                                    },
+                                  );
+                                },
+                              ),
+                            ),
                           ],
                         ),
                       ],
