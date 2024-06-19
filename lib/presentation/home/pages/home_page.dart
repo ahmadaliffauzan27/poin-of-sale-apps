@@ -64,13 +64,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                         const SizedBox(height: 24),
                         CustomTabBar(
-                          tabTitles: const [
-                            'Semua',
-                            'Makanan',
-                            'Minuman',
-                            'Tambahan',
-                            'Kerupuk'
-                          ],
+                          tabTitles: const ['Semua', 'Makanan', 'Minuman'],
                           initialTabIndex: 0,
                           tabViews: [
                             SizedBox(
@@ -223,111 +217,111 @@ class _HomePageState extends State<HomePage> {
                               ),
                             ),
 
-                            //Tab snack
-                            SizedBox(
-                              child: BlocBuilder<LocalProductBloc,
-                                  LocalProductState>(
-                                builder: (context, state) {
-                                  return state.maybeWhen(
-                                    orElse: () {
-                                      return const Center(
-                                        child: CircularProgressIndicator(),
-                                      );
-                                    },
-                                    loading: () {
-                                      return const Center(
-                                        child: CircularProgressIndicator(),
-                                      );
-                                    },
-                                    loaded: (products) {
-                                      if (products.isEmpty) {
-                                        return const Center(
-                                          child: Text('data kosong'),
-                                        );
-                                      }
-                                      return GridView.builder(
-                                        shrinkWrap: true,
-                                        itemCount: products
-                                            .where((element) =>
-                                                element.category!.id == 3)
-                                            .toList()
-                                            .length,
-                                        physics:
-                                            const NeverScrollableScrollPhysics(),
-                                        gridDelegate:
-                                            const SliverGridDelegateWithFixedCrossAxisCount(
-                                          childAspectRatio: 0.85,
-                                          crossAxisCount: 3,
-                                          crossAxisSpacing: 30.0,
-                                          mainAxisSpacing: 30.0,
-                                        ),
-                                        itemBuilder: (context, index) =>
-                                            ProductCard(
-                                          data: products
-                                              .where((element) =>
-                                                  element.category!.id == 3)
-                                              .toList()[index],
-                                          onCartButton: () {},
-                                        ),
-                                      );
-                                    },
-                                  );
-                                },
-                              ),
-                            ),
+//                             //Tab snack
+//                             SizedBox(
+//                               child: BlocBuilder<LocalProductBloc,
+//                                   LocalProductState>(
+//                                 builder: (context, state) {
+//                                   return state.maybeWhen(
+//                                     orElse: () {
+//                                       return const Center(
+//                                         child: CircularProgressIndicator(),
+//                                       );
+//                                     },
+//                                     loading: () {
+//                                       return const Center(
+//                                         child: CircularProgressIndicator(),
+//                                       );
+//                                     },
+//                                     loaded: (products) {
+//                                       if (products.isEmpty) {
+//                                         return const Center(
+//                                           child: Text('data kosong'),
+//                                         );
+//                                       }
+//                                       return GridView.builder(
+//                                         shrinkWrap: true,
+//                                         itemCount: products
+//                                             .where((element) =>
+//                                                 element.category!.id == 3)
+//                                             .toList()
+//                                             .length,
+//                                         physics:
+//                                             const NeverScrollableScrollPhysics(),
+//                                         gridDelegate:
+//                                             const SliverGridDelegateWithFixedCrossAxisCount(
+//                                           childAspectRatio: 0.85,
+//                                           crossAxisCount: 3,
+//                                           crossAxisSpacing: 30.0,
+//                                           mainAxisSpacing: 30.0,
+//                                         ),
+//                                         itemBuilder: (context, index) =>
+//                                             ProductCard(
+//                                           data: products
+//                                               .where((element) =>
+//                                                   element.category!.id == 3)
+//                                               .toList()[index],
+//                                           onCartButton: () {},
+//                                         ),
+//                                       );
+//                                     },
+//                                   );
+//                                 },
+//                               ),
+//                             ),
 
-//tab kerupuk
-                            SizedBox(
-                              child: BlocBuilder<LocalProductBloc,
-                                  LocalProductState>(
-                                builder: (context, state) {
-                                  return state.maybeWhen(
-                                    orElse: () {
-                                      return const Center(
-                                        child: CircularProgressIndicator(),
-                                      );
-                                    },
-                                    loading: () {
-                                      return const Center(
-                                        child: CircularProgressIndicator(),
-                                      );
-                                    },
-                                    loaded: (products) {
-                                      if (products.isEmpty) {
-                                        return const Center(
-                                          child: Text('data kosong'),
-                                        );
-                                      }
-                                      return GridView.builder(
-                                        shrinkWrap: true,
-                                        itemCount: products
-                                            .where((element) =>
-                                                element.category!.id == 4)
-                                            .toList()
-                                            .length,
-                                        physics:
-                                            const NeverScrollableScrollPhysics(),
-                                        gridDelegate:
-                                            const SliverGridDelegateWithFixedCrossAxisCount(
-                                          childAspectRatio: 0.85,
-                                          crossAxisCount: 3,
-                                          crossAxisSpacing: 30.0,
-                                          mainAxisSpacing: 30.0,
-                                        ),
-                                        itemBuilder: (context, index) =>
-                                            ProductCard(
-                                          data: products
-                                              .where((element) =>
-                                                  element.category!.id == 4)
-                                              .toList()[index],
-                                          onCartButton: () {},
-                                        ),
-                                      );
-                                    },
-                                  );
-                                },
-                              ),
-                            ),
+// //tab kerupuk
+//                             SizedBox(
+//                               child: BlocBuilder<LocalProductBloc,
+//                                   LocalProductState>(
+//                                 builder: (context, state) {
+//                                   return state.maybeWhen(
+//                                     orElse: () {
+//                                       return const Center(
+//                                         child: CircularProgressIndicator(),
+//                                       );
+//                                     },
+//                                     loading: () {
+//                                       return const Center(
+//                                         child: CircularProgressIndicator(),
+//                                       );
+//                                     },
+//                                     loaded: (products) {
+//                                       if (products.isEmpty) {
+//                                         return const Center(
+//                                           child: Text('data kosong'),
+//                                         );
+//                                       }
+//                                       return GridView.builder(
+//                                         shrinkWrap: true,
+//                                         itemCount: products
+//                                             .where((element) =>
+//                                                 element.category!.id == 4)
+//                                             .toList()
+//                                             .length,
+//                                         physics:
+//                                             const NeverScrollableScrollPhysics(),
+//                                         gridDelegate:
+//                                             const SliverGridDelegateWithFixedCrossAxisCount(
+//                                           childAspectRatio: 0.85,
+//                                           crossAxisCount: 3,
+//                                           crossAxisSpacing: 30.0,
+//                                           mainAxisSpacing: 30.0,
+//                                         ),
+//                                         itemBuilder: (context, index) =>
+//                                             ProductCard(
+//                                           data: products
+//                                               .where((element) =>
+//                                                   element.category!.id == 4)
+//                                               .toList()[index],
+//                                           onCartButton: () {},
+//                                         ),
+//                                       );
+//                                     },
+//                                   );
+//                                 },
+//                               ),
+//                             ),
                           ],
                         ),
                       ],
@@ -378,7 +372,7 @@ class _HomePageState extends State<HomePage> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                'Item',
+                                'Menu',
                                 style: TextStyle(
                                   color: AppColors.primary,
                                   fontSize: 16,
@@ -389,9 +383,9 @@ class _HomePageState extends State<HomePage> {
                                 width: 130,
                               ),
                               SizedBox(
-                                width: 50.0,
+                                width: 70.0,
                                 child: Text(
-                                  'Qty',
+                                  'Jumlah',
                                   style: TextStyle(
                                     color: AppColors.primary,
                                     fontSize: 16,
@@ -401,7 +395,7 @@ class _HomePageState extends State<HomePage> {
                               ),
                               SizedBox(
                                 child: Text(
-                                  'Price',
+                                  'Harga',
                                   style: TextStyle(
                                     color: AppColors.primary,
                                     fontSize: 16,
@@ -481,25 +475,28 @@ class _HomePageState extends State<HomePage> {
                               ColumnButton(
                                 label: 'Diskon',
                                 svgGenImage: Assets.icons.diskon,
-                                onPressed: () => showDialog(
-                                    context: context,
-                                    builder: (context) =>
-                                        const DiscountDialog()),
+                                onPressed: () {},
+                                // onPressed: () => showDialog(
+                                //     context: context,
+                                //     builder: (context) =>
+                                //         const DiscountDialog()),
                               ),
                               ColumnButton(
                                 label: 'Pajak',
                                 svgGenImage: Assets.icons.pajak,
-                                onPressed: () => showDialog(
-                                    context: context,
-                                    builder: (context) => const TaxDialog()),
+                                onPressed: () {},
+                                // onPressed: () => showDialog(
+                                //     context: context,
+                                //     builder: (context) => const TaxDialog()),
                               ),
                               ColumnButton(
                                 label: 'Layanan',
                                 svgGenImage: Assets.icons.layanan,
-                                onPressed: () => showDialog(
-                                    context: context,
-                                    builder: (context) =>
-                                        const ServiceDialog()),
+                                onPressed: () {},
+                                // onPressed: () => showDialog(
+                                //     context: context,
+                                //     builder: (context) =>
+                                //         const ServiceDialog()),
                               ),
                             ],
                           ),

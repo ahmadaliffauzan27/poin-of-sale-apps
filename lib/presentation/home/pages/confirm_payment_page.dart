@@ -112,7 +112,7 @@ class _ConfirmPaymentPageState extends State<ConfirmPaymentPage> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'Item',
+                              'Menu',
                               style: TextStyle(
                                 color: AppColors.primary,
                                 fontSize: 16,
@@ -123,9 +123,9 @@ class _ConfirmPaymentPageState extends State<ConfirmPaymentPage> {
                               width: 160,
                             ),
                             SizedBox(
-                              width: 50.0,
+                              width: 70.0,
                               child: Text(
-                                'Qty',
+                                'Jumlah',
                                 style: TextStyle(
                                   color: AppColors.primary,
                                   fontSize: 16,
@@ -135,7 +135,7 @@ class _ConfirmPaymentPageState extends State<ConfirmPaymentPage> {
                             ),
                             SizedBox(
                               child: Text(
-                                'Price',
+                                'Harga',
                                 style: TextStyle(
                                   color: AppColors.primary,
                                   fontSize: 16,
@@ -217,7 +217,8 @@ class _ConfirmPaymentPageState extends State<ConfirmPaymentPage> {
 
                                 final subTotal =
                                     price - (discount / 100 * price);
-                                final finalTax = subTotal * 0.11;
+                                // final finalTax = subTotal * 0.11;
+                                final finalTax = subTotal * 0;
                                 return Text(
                                   '$tax % (${finalTax.toInt().currencyFormatRp})',
                                   style: const TextStyle(
@@ -348,7 +349,8 @@ class _ConfirmPaymentPageState extends State<ConfirmPaymentPage> {
                                 final subTotal =
                                     price - (discount / 100 * price);
                                 final tax = subTotal * 0.11;
-                                final total = subTotal + tax;
+                                // final total = subTotal + tax;
+                                final total = subTotal;
 
                                 totalPriceController.text =
                                     total.ceil().toString();
@@ -406,7 +408,8 @@ class _ConfirmPaymentPageState extends State<ConfirmPaymentPage> {
                                 final subTotal =
                                     price - (discount / 100 * price);
                                 final tax = subTotal * 0.11;
-                                final total = subTotal + tax;
+                                // final total = subTotal + tax;
+                                final total = subTotal;
 
                                 // Pembulatan ke ribuan
                                 final roundedTotal =
@@ -707,10 +710,13 @@ class _ConfirmPaymentPageState extends State<ConfirmPaymentPage> {
                                           previousValue + element.quantity,
                                     );
 
+                                    // final totalPrice =
+                                    //     ((subTotal + finalTax) / 1000)
+                                    //             .round()
+                                    //             .toInt() *
+                                    //         1000;
                                     final totalPrice =
-                                        ((subTotal + finalTax) / 1000)
-                                                .round()
-                                                .toInt() *
+                                        ((subTotal) / 1000).round().toInt() *
                                             1000;
 
                                     // final finalPrice =

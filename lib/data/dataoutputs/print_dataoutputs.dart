@@ -225,7 +225,7 @@ class PrintDataoutputs {
     bytes += generator.hr(ch: '-');
 
     bytes += generator.feed(1);
-    bytes += generator.text('Terima kasih sayanggggku',
+    bytes += generator.text('Terima kasih',
         styles: const PosStyles(bold: false, align: PosAlign.center));
     bytes += generator.feed(3);
 

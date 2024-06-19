@@ -22,7 +22,7 @@ class HomeTitle extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
-              'Point Of Sale Apps',
+              'Empal Gentong Mang Medi',
               style: TextStyle(
                 color: AppColors.primary,
                 fontSize: 22,
@@ -44,7 +44,7 @@ class HomeTitle extends StatelessWidget {
           child: SearchInput(
             controller: controller,
             onChanged: onChanged,
-            hintText: 'Search...',
+            hintText: 'Cari menu...',
           ),
         ),
       ],

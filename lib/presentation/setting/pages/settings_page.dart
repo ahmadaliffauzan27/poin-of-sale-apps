@@ -34,14 +34,14 @@ class _SettingsPageState extends State<SettingsPage> {
         children: [
           // LEFT CONTENT
           Expanded(
-            flex: 2,
+            flex: 1,
             child: Align(
               alignment: Alignment.topCenter,
               child: ListView(
                 padding: const EdgeInsets.all(16.0),
                 children: [
                   const Text(
-                    'Settings',
+                    'Pengaturan',
                     style: TextStyle(
                       color: AppColors.primary,
                       fontSize: 28,
@@ -49,48 +49,48 @@ class _SettingsPageState extends State<SettingsPage> {
                     ),
                   ),
                   const SpaceHeight(16.0),
-                  ListTile(
-                    contentPadding: const EdgeInsets.all(12.0),
-                    // ignore: deprecated_member_use_from_same_package
-                    leading:
-                        // ignore: deprecated_member_use_from_same_package
-                        Assets.icons.kelolaDiskon.svg(color: AppColors.primary),
-                    title: const Text('Kelola Diskon'),
-                    subtitle: const Text('Kelola Diskon Pelanggan'),
-                    textColor: AppColors.primary,
-                    tileColor: currentIndex == 0
-                        ? AppColors.blueLight
-                        : Colors.transparent,
-                    onTap: () => indexValue(0),
-                  ),
-                  ListTile(
-                    contentPadding: const EdgeInsets.all(12.0),
-                    // ignore: deprecated_member_use_from_same_package
-                    leading: Assets.icons.kelolaPrinter
-                        // ignore: deprecated_member_use_from_same_package
-                        .svg(color: AppColors.primary),
-                    title: const Text('Kelola Printer'),
-                    subtitle: const Text('Tambah atau hapus printer'),
-                    textColor: AppColors.primary,
-                    tileColor: currentIndex == 1
-                        ? AppColors.blueLight
-                        : Colors.transparent,
-                    onTap: () => indexValue(1),
-                  ),
-                  ListTile(
-                    contentPadding: const EdgeInsets.all(12.0),
-                    // ignore: deprecated_member_use_from_same_package
-                    leading:
-                        // ignore: deprecated_member_use_from_same_package
-                        Assets.icons.kelolaPajak.svg(color: AppColors.primary),
-                    title: const Text('Perhitungan Biaya'),
-                    subtitle: const Text('Kelola biaya diluar biaya modal'),
-                    textColor: AppColors.primary,
-                    tileColor: currentIndex == 2
-                        ? AppColors.blueLight
-                        : Colors.transparent,
-                    onTap: () => indexValue(2),
-                  ),
+                  // ListTile(
+                  //   contentPadding: const EdgeInsets.all(12.0),
+                  //   // ignore: deprecated_member_use_from_same_package
+                  //   leading:
+                  //       // ignore: deprecated_member_use_from_same_package
+                  //       Assets.icons.kelolaDiskon.svg(color: AppColors.primary),
+                  //   title: const Text('Kelola Diskon'),
+                  //   subtitle: const Text('Kelola Diskon Pelanggan'),
+                  //   textColor: AppColors.primary,
+                  //   tileColor: currentIndex == 0
+                  //       ? AppColors.blueLight
+                  //       : Colors.transparent,
+                  //   onTap: () => indexValue(0),
+                  // ),
+                  // ListTile(
+                  //   contentPadding: const EdgeInsets.all(12.0),
+                  //   // ignore: deprecated_member_use_from_same_package
+                  //   leading: Assets.icons.kelolaPrinter
+                  //       // ignore: deprecated_member_use_from_same_package
+                  //       .svg(color: AppColors.primary),
+                  //   title: const Text('Kelola Printer'),
+                  //   subtitle: const Text('Tambah atau hapus printer'),
+                  //   textColor: AppColors.primary,
+                  //   tileColor: currentIndex == 1
+                  //       ? AppColors.blueLight
+                  //       : Colors.transparent,
+                  //   onTap: () => indexValue(1),
+                  // ),
+                  // ListTile(
+                  //   contentPadding: const EdgeInsets.all(12.0),
+                  //   // ignore: deprecated_member_use_from_same_package
+                  //   leading:
+                  //       // ignore: deprecated_member_use_from_same_package
+                  //       Assets.icons.kelolaPajak.svg(color: AppColors.primary),
+                  //   title: const Text('Perhitungan Biaya'),
+                  //   subtitle: const Text('Kelola biaya diluar biaya modal'),
+                  //   textColor: AppColors.primary,
+                  //   tileColor: currentIndex == 2
+                  //       ? AppColors.blueLight
+                  //       : Colors.transparent,
+                  //   onTap: () => indexValue(2),
+                  // ),
                   ListTile(
                     contentPadding: const EdgeInsets.all(12.0),
                     // ignore: deprecated_member_use_from_same_package
@@ -100,10 +100,10 @@ class _SettingsPageState extends State<SettingsPage> {
                     title: const Text('Sync Data'),
                     subtitle: const Text('Sync data ke server atau sebaliknya'),
                     textColor: AppColors.primary,
-                    tileColor: currentIndex == 3
+                    tileColor: currentIndex == 0
                         ? AppColors.blueLight
                         : Colors.transparent,
-                    onTap: () => indexValue(3),
+                    onTap: () => indexValue(0),
                   ),
                 ],
               ),
@@ -112,7 +112,7 @@ class _SettingsPageState extends State<SettingsPage> {
 
           // RIGHT CONTENT
           Expanded(
-            flex: 4,
+            flex: 1,
             child: Align(
               alignment: AlignmentDirectional.topStart,
               child: Padding(
@@ -120,9 +120,9 @@ class _SettingsPageState extends State<SettingsPage> {
                 child: IndexedStack(
                   index: currentIndex,
                   children: const [
-                    DiscountPage(),
-                    ManagePrinterPage(),
-                    TaxPage(),
+                    // DiscountPage(),
+                    // ManagePrinterPage(),
+                    // TaxPage(),
                     SyncDataPage(),
                   ],
                 ),

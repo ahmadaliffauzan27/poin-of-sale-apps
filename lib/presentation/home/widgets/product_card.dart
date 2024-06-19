@@ -44,7 +44,7 @@ class ProductCard extends StatelessWidget {
                   margin: const EdgeInsets.only(top: 20.0),
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: AppColors.disabled.withOpacity(0.4),
+                    color: AppColors.primary.withOpacity(0.4),
                   ),
                   child: ClipRRect(
                     borderRadius: const BorderRadius.all(Radius.circular(40.0)),
@@ -52,8 +52,8 @@ class ProductCard extends StatelessWidget {
                       data.image!.contains('http')
                           ? data.image!
                           : '${Variables.baseUrl}/${data.image}',
-                      width: 50,
-                      height: 50,
+                      width: 80,
+                      height: 80,
                       fit: BoxFit.cover,
                     ),
                   ),

@@ -28,17 +28,17 @@ class ColumnButton extends StatelessWidget {
             width: 40.0,
             decoration: BoxDecoration(
               color: AppColors.white,
-              border: Border.all(color: AppColors.primary),
+              border: Border.all(color: AppColors.grey),
               borderRadius: const BorderRadius.all(Radius.circular(8.0)),
             ),
             // ignore: deprecated_member_use_from_same_package
-            child: svgGenImage.svg(color: AppColors.primary),
+            child: svgGenImage.svg(color: AppColors.grey),
           ),
           const SpaceHeight(8.0),
           Text(
             label,
             style: const TextStyle(
-              color: AppColors.primary,
+              color: AppColors.grey,
               fontSize: 12,
               fontWeight: FontWeight.w500,
             ),

@@ -11,7 +11,7 @@ part 'checkout_state.dart';
 part 'checkout_bloc.freezed.dart';
 
 class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
-  CheckoutBloc() : super(const _Loaded([], null, 11, 0)) {
+  CheckoutBloc() : super(const _Loaded([], null, 0, 0)) {
     on<_AddItem>((event, emit) {
       var currentState = state as _Loaded;
       List<ProductQuantity> items = [...currentState.items];
@@ -47,7 +47,7 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
     });
 
     on<_Started>((event, emit) {
-      emit(const _Loaded([], null, 11, 0));
+      emit(const _Loaded([], null, 0, 0));
     });
 
     on<_AddDiscount>((event, emit) {
