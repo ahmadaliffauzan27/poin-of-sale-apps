@@ -173,6 +173,7 @@ class _SuccessPaymentDialogState extends State<SuccessPaymentDialog> {
                       //           orElse: () => 0,
                       //           loaded: (model) => model.paymentAmount,
                       //         );
+
                       final printValue =
                           await PrintDataoutputs.instance.printOrder(
                         widget.data,
@@ -188,6 +189,16 @@ class _SuccessPaymentDialogState extends State<SuccessPaymentDialog> {
                         widget.normalPrice,
                       );
                       await PrintBluetoothThermal.writeBytes(printValue);
+
+                      print('data: ${widget.data}');
+                      print('total qty: ${widget.totalQty}');
+                      print('total price: ${widget.totalPrice}');
+                      print('payment methode: ${widget.paymentMethode}');
+                      print('payment amount: ${widget.paymentAmount}');
+                      print('total diskon: ${widget.totalDiscount}');
+                      print('total tax: ${widget.totalTax}');
+                      print('subtotal: ${widget.subTotal}');
+                      print('normal price: ${widget.normalPrice}');
                     },
                     label: 'Print',
                   ),

@@ -25,10 +25,8 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
             previousValue + (element.product.price! * element.quantity),
       );
 
-      final discount = (event.discount / 100) * subTotal;
-
       final total =
-          ((subTotal + event.tax + event.serviceCharge - discount) / 1000)
+          ((subTotal + event.tax + event.serviceCharge - event.discount) / 1000)
                   .round()
                   .toInt() *
               1000;

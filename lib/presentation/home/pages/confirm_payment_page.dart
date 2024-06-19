@@ -733,6 +733,8 @@ class _ConfirmPaymentPageState extends State<ConfirmPaymentPage> {
                                               .toIntegerFromText;
                                         });
 
+                                    print('ini diskon awal : $discount');
+
                                     final tax = state.maybeWhen(
                                         orElse: () => 0,
                                         loaded: (products, discount, tax,
@@ -747,9 +749,30 @@ class _ConfirmPaymentPageState extends State<ConfirmPaymentPage> {
 
                                     final finalTax = price * tax / 100;
 
-                                    final subTotal = (price +
-                                        finalTax -
-                                        (discount / 100 * price));
+                                    final subTotalTanpaDiskon =
+                                        price + finalTax.toInt();
+
+                                    // final subTotal = ((price + finalTax) -
+                                    //     (discount / 100 * price));
+                                    print(
+                                        'subtotal tanpa diskon: $subTotalTanpaDiskon');
+
+                                    final finalDiscount =
+                                        (discount / 100 * subTotalTanpaDiskon)
+                                            .toInt();
+
+                                    print('final diskon: $finalDiscount');
+
+                                    final subTotal = price +
+                                        finalTax.toInt() -
+                                        finalDiscount;
+
+                                    print('final subTotal: $subTotal');
+
+                                    final finalPrice =
+                                        (subTotal / 1000).round() * 1000;
+
+                                    print('final price: $finalPrice');
 
                                     List<ProductQuantity> items =
                                         state.maybeWhen(
@@ -763,9 +786,6 @@ class _ConfirmPaymentPageState extends State<ConfirmPaymentPage> {
                                       (previousValue, element) =>
                                           previousValue + element.quantity,
                                     );
-
-                                    final finalPrice =
-                                        (subTotal / 1000).round() * 1000;
 
                                     return Flexible(
                                       child: Button.filled(
@@ -809,17 +829,21 @@ class _ConfirmPaymentPageState extends State<ConfirmPaymentPage> {
                                                       ],
                                                     ));
                                           }
+
                                           context
                                               .read<OrderBloc>()
                                               .add(OrderEvent.order(
                                                 items,
-                                                0,
-                                                0,
+                                                finalDiscount.toInt(),
+                                                finalTax.toInt(),
                                                 0,
                                                 totalPriceController
                                                     .text.toIntegerFromText,
                                                 paymentMethod,
                                               ));
+
+                                          print('Diskon :$finalDiscount');
+                                          print('Pajak : $finalTax');
                                           await showDialog(
                                             context: context,
                                             barrierDismissible: false,
@@ -835,12 +859,24 @@ class _ConfirmPaymentPageState extends State<ConfirmPaymentPage> {
                                               pembayaranUser:
                                                   totalPriceController
                                                       .text.toIntegerFromText,
-                                              totalTax: 0,
-                                              totalDiscount: 0,
+                                              totalTax: finalTax.toInt(),
+                                              totalDiscount: finalDiscount,
                                               subTotal: price.toInt(),
                                               normalPrice: price,
                                             ),
                                           );
+                                          print('data: $items}');
+                                          print('total qty: ${totalQty}');
+                                          print('total price: ${finalPrice}');
+                                          print(
+                                              'payment methode: ${paymentMethod}');
+                                          print(
+                                              'payment amount: ${totalPriceController.text.toIntegerFromText}');
+                                          print(
+                                              'total diskon: ${finalDiscount}');
+                                          print('total tax: ${finalTax}');
+                                          print('subtotal: ${price}');
+                                          print('normal price: ${price}');
                                         },
                                         label: 'Bayar',
                                       ),
