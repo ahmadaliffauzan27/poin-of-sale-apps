@@ -514,13 +514,13 @@ class _HomePageState extends State<HomePage> {
                                       orElse: () => 0,
                                       loaded:
                                           (products, discount, tax, service) {
-                                        if (products.isEmpty) {
+                                        if (tax == null) {
                                           return 0;
                                         }
-                                        return tax;
+                                        return tax.value!.toIntegerFromText;
                                       });
                                   return Text(
-                                    '$tax %',
+                                    '$tax %'.replaceAll('00', ''),
                                     style: const TextStyle(
                                       color: AppColors.primary,
                                       fontWeight: FontWeight.w600,

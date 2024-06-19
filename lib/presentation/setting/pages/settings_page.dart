@@ -54,8 +54,8 @@ class _SettingsPageState extends State<SettingsPage> {
                     leading:
                         // ignore: deprecated_member_use_from_same_package
                         Assets.icons.kelolaDiskon.svg(color: AppColors.primary),
-                    title: const Text('Kelola Diskon'),
-                    subtitle: const Text('Kelola Diskon Pelanggan'),
+                    title: const Text('Kelola Biaya'),
+                    subtitle: const Text('Kelola Diskon dan Pajak'),
                     textColor: AppColors.primary,
                     tileColor: currentIndex == 0
                         ? AppColors.blueLight

@@ -12,7 +12,7 @@ class CheckoutEvent with _$CheckoutEvent {
   //remove discount
   const factory CheckoutEvent.removeDiscount() = _RemoveDiscount;
   //add tax
-  const factory CheckoutEvent.addTax(int tax) = _AddTax;
+  const factory CheckoutEvent.addTax(Tax tax) = _AddTax;
   //add service charge
   const factory CheckoutEvent.addServiceCharge(int serviceCharge) =
       _AddServiceCharge;

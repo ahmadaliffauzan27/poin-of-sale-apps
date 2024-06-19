@@ -7,7 +7,7 @@ class CheckoutState with _$CheckoutState {
   const factory CheckoutState.loaded(
     List<ProductQuantity> items,
     Discount? discount,
-    int tax,
+    Tax? tax,
     int serviceCharge,
   ) = _Loaded;
   const factory CheckoutState.error(String message) = _Error;
