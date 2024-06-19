@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_pos_apps/core/core.dart';
 import 'package:flutter_pos_apps/presentation/setting/bloc/tax/tax_bloc.dart';
 
+import '../../../core/components/loading.dart';
 import '../../setting/bloc/discount/discount_bloc.dart';
 import '../bloc/checkout/checkout_bloc.dart';
 
@@ -24,45 +25,43 @@ class _TaxDialogState extends State<TaxDialog> {
 
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
-      title: Stack(
-        alignment: Alignment.center,
-        children: [
-          const Text(
-            'PAJAK',
-            style: TextStyle(
-              color: AppColors.primary,
-              fontSize: 28,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-          Align(
-            alignment: Alignment.centerRight,
-            child: IconButton(
-              onPressed: () {
-                context.pop();
-              },
-              icon: const Icon(
-                Icons.cancel,
-                color: AppColors.primary,
-                size: 30.0,
+    return BlocBuilder<TaxBloc, TaxState>(
+      builder: (context, state) {
+        return state.when(
+          initial: () => const SizedBox.shrink(),
+          loading: () => const Center(child: LoadingIcon()),
+          loaded: (taxes) {
+            return AlertDialog(
+              title: Stack(
+                alignment: Alignment.center,
+                children: [
+                  const Text(
+                    'PAJAK',
+                    style: TextStyle(
+                      color: AppColors.primary,
+                      fontSize: 28,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: IconButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      icon: const Icon(
+                        Icons.cancel,
+                        color: AppColors.primary,
+                        size: 30.0,
+                      ),
+                    ),
+                  ),
+                ],
               ),
-            ),
-          ),
-        ],
-      ),
-      content: BlocBuilder<TaxBloc, TaxState>(
-        builder: (context, state) {
-          return state.maybeWhen(
-            orElse: () => const SizedBox.shrink(),
-            loading: () => const Center(
-              child: CircularProgressIndicator(),
-            ),
-            loaded: (tax) {
-              return Column(
+              content: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
-                children: tax
+                children: taxes
                     .map(
                       (tax) => ListTile(
                         subtitle: Text('Pajak (${tax.value}%)'),
@@ -87,11 +86,12 @@ class _TaxDialogState extends State<TaxDialog> {
                       ),
                     )
                     .toList(),
-              );
-            },
-          );
-        },
-      ),
+              ),
+            );
+          },
+          error: (message) => Center(child: Text(message)),
+        );
+      },
     );
   }
 }

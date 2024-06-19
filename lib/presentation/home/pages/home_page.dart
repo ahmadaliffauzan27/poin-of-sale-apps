@@ -491,10 +491,11 @@ class _HomePageState extends State<HomePage> {
                               ColumnButton(
                                 label: 'Layanan',
                                 svgGenImage: Assets.icons.layanan,
-                                onPressed: () => showDialog(
-                                    context: context,
-                                    builder: (context) =>
-                                        const ServiceDialog()),
+                                // onPressed: () => showDialog(
+                                //     context: context,
+                                //     builder: (context) =>
+                                //         const ServiceDialog()),
+                                onPressed: () {},
                               ),
                             ],
                           ),

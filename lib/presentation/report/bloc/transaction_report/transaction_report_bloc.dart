@@ -1,5 +1,6 @@
 // ignore: depend_on_referenced_packages
 import 'package:bloc/bloc.dart';
+import 'package:flutter_pos_apps/core/components/loading.dart';
 import 'package:flutter_pos_apps/data/datasources/order_remote_datasource.dart';
 import 'package:flutter_pos_apps/data/datasources/product_local_remote_datasource.dart';
 import 'package:flutter_pos_apps/presentation/home/models/order_model.dart';

@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_pos_apps/core/components/loading.dart';
 import 'package:flutter_pos_apps/core/extensions/date_time_ext.dart';
 import 'package:horizontal_data_table/horizontal_data_table.dart';
 
@@ -163,6 +164,7 @@ class _ReportPageState extends State<ReportPage> {
                               selectedMenu = 3;
                               title = 'Summary Sales Report';
                               setState(() {});
+
                               context.read<SummaryReportBloc>().add(
                                     SummaryReportsEvent.getSummaryReports(
                                         startDate: DateFormatter.formatDateTime(
@@ -190,7 +192,7 @@ class _ReportPageState extends State<ReportPage> {
                       builder: (context, state) {
                         return state.maybeWhen(
                           orElse: () => const Center(
-                            child: CircularProgressIndicator(),
+                            child: LoadingIcon(),
                           ),
                           error: (message) {
                             return Text(message);
@@ -211,7 +213,7 @@ class _ReportPageState extends State<ReportPage> {
                           builder: (context, state) {
                             return state.maybeWhen(
                               orElse: () => const Center(
-                                child: CircularProgressIndicator(),
+                                child: LoadingIcon(),
                               ),
                               error: (message) {
                                 return Text(message);
@@ -232,7 +234,7 @@ class _ReportPageState extends State<ReportPage> {
                               builder: (context, state) {
                                 return state.maybeWhen(
                                   orElse: () => const Center(
-                                    child: CircularProgressIndicator(),
+                                    child: LoadingIcon(),
                                   ),
                                   error: (message) {
                                     return Text(message);
@@ -251,7 +253,7 @@ class _ReportPageState extends State<ReportPage> {
                               builder: (context, state) {
                                 return state.maybeWhen(
                                   orElse: () => const Center(
-                                    child: CircularProgressIndicator(),
+                                    child: LoadingIcon(),
                                   ),
                                   error: (message) {
                                     return Text(message);
