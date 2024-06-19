@@ -5,7 +5,6 @@ import '../../../core/constants/colors.dart';
 import 'discount_page.dart';
 import 'manage_printer_page.dart';
 import 'sync_data_pages.dart';
-import 'tax_page.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});

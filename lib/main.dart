@@ -6,9 +6,12 @@ import 'package:flutter_pos_apps/data/datasources/discount_remote_datasource.dar
 import 'package:flutter_pos_apps/data/datasources/order_remote_datasource.dart';
 import 'package:flutter_pos_apps/data/datasources/product_local_remote_datasource.dart';
 import 'package:flutter_pos_apps/data/datasources/product_remote_datasource.dart';
+import 'package:flutter_pos_apps/data/datasources/tax_remote_datasource.dart';
 import 'package:flutter_pos_apps/presentation/auth/bloc/login/login_bloc.dart';
 import 'package:flutter_pos_apps/presentation/home/bloc/local_product/local_product_bloc.dart';
+import 'package:flutter_pos_apps/presentation/setting/bloc/add_tax/add_tax_bloc.dart';
 import 'package:flutter_pos_apps/presentation/setting/bloc/delete_discount/delete_discount_bloc.dart';
+import 'package:flutter_pos_apps/presentation/setting/bloc/delete_tax/delete_tax_bloc.dart';
 import 'package:flutter_pos_apps/presentation/setting/bloc/edit_discount/edit_discount_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'data/datasources/order_item_remote_datasource.dart';
@@ -25,8 +28,10 @@ import 'presentation/report/bloc/summary_reports/summary_reports_bloc.dart';
 import 'presentation/report/bloc/transaction_report/transaction_report_bloc.dart';
 import 'presentation/setting/bloc/add_discount/add_discount_bloc.dart';
 import 'presentation/setting/bloc/discount/discount_bloc.dart';
+import 'presentation/setting/bloc/edit_tax/edit_tax_bloc.dart';
 import 'presentation/setting/bloc/sync_order/sync_order_bloc.dart';
 import 'presentation/setting/bloc/sync_product/sync_product_bloc.dart';
+import 'presentation/setting/bloc/tax/tax_bloc.dart';
 
 void main() {
   runApp(const MyApp());
@@ -73,6 +78,18 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => DeleteDiscountBloc(DiscountRemoteDatasource()),
+        ),
+        BlocProvider(
+          create: (context) => TaxBloc(TaxRemoteDatasource()),
+        ),
+        BlocProvider(
+          create: (context) => AddTaxBloc(TaxRemoteDatasource()),
+        ),
+        BlocProvider(
+          create: (context) => EditTaxBloc(TaxRemoteDatasource()),
+        ),
+        BlocProvider(
+          create: (context) => DeleteTaxBloc(TaxRemoteDatasource()),
         ),
         BlocProvider(
           create: (context) => TransactionReportBloc(OrderRemoteDatasource()),

@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 
 import '../../../core/assets/assets.gen.dart';
 import '../../../core/constants/colors.dart';
+import '../../../data/models/response/tax_response_model.dart';
 import '../models/tax_model.dart';
 
 class ManageTaxCard extends StatelessWidget {
-  final TaxModel data;
+  final Tax data;
   final VoidCallback onEditTap;
 
   const ManageTaxCard({
@@ -39,7 +40,7 @@ class ManageTaxCard extends StatelessWidget {
                   color: AppColors.disabled.withOpacity(0.4),
                 ),
                 child: Text(
-                  '${data.value}%',
+                  '${data.value?.replaceAll(".00", '')}%',
                   style: const TextStyle(
                     fontSize: 32,
                     fontWeight: FontWeight.w900,
@@ -50,10 +51,10 @@ class ManageTaxCard extends StatelessWidget {
               Center(
                 child: RichText(
                   text: TextSpan(
-                    text: 'Nama Promo : ',
+                    text: 'Pajak : ',
                     children: [
                       TextSpan(
-                        text: data.type.name,
+                        text: '${data.value!.replaceAll('.00', '')}%',
                         style: const TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.w600,

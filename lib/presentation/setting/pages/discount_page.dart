@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_pos_apps/presentation/setting/bloc/tax/tax_bloc.dart';
+import 'package:flutter_pos_apps/presentation/setting/dialogs/form_discount_dialog_tax.dart';
+import 'package:flutter_pos_apps/presentation/setting/widgets/manage_tax_card.dart';
 
 import '../../../data/models/response/discount_response_model.dart';
+import '../../../data/models/response/tax_response_model.dart';
 import '../../home/widgets/custom_tab_bar.dart';
 import '../bloc/discount/discount_bloc.dart';
 import '../dialogs/form_discount_dialog.dart';
@@ -27,6 +31,20 @@ class _DiscountPageState extends State<DiscountPage> {
   //   ),
   // ];
 
+  void onEditTax(Tax item) {
+    showDialog(
+      context: context,
+      builder: (context) => FormDiscountDialogTax(data: item),
+    );
+  }
+
+  void onAddDataTax() {
+    showDialog(
+      context: context,
+      builder: (context) => const FormDiscountDialogTax(),
+    );
+  }
+
   void onEditTap(Discount item) {
     showDialog(
       context: context,
@@ -44,6 +62,7 @@ class _DiscountPageState extends State<DiscountPage> {
   @override
   void initState() {
     context.read<DiscountBloc>().add(const DiscountEvent.getDiscounts());
+    context.read<TaxBloc>().add(const TaxEvent.getTaxs());
     super.initState();
   }
 
@@ -105,16 +124,16 @@ class _DiscountPageState extends State<DiscountPage> {
 
 //Tab pajak
                 SizedBox(
-                  child: BlocBuilder<DiscountBloc, DiscountState>(
+                  child: BlocBuilder<TaxBloc, TaxState>(
                     builder: (context, state) {
                       return state.maybeWhen(orElse: () {
                         return const Center(
                           child: CircularProgressIndicator(),
                         );
-                      }, loaded: (discounts) {
+                      }, loaded: (tax) {
                         return GridView.builder(
                           shrinkWrap: true,
-                          itemCount: discounts.length + 1,
+                          itemCount: tax.length + 1,
                           physics: const NeverScrollableScrollPhysics(),
                           gridDelegate:
                               const SliverGridDelegateWithFixedCrossAxisCount(
@@ -126,15 +145,15 @@ class _DiscountPageState extends State<DiscountPage> {
                           itemBuilder: (context, index) {
                             if (index == 0) {
                               return AddData(
-                                title: 'Tambah Diskon Baru',
-                                onPressed: onAddDataTap,
+                                title: 'Tambah Pajak Baru',
+                                onPressed: onAddDataTax,
                               );
                             }
-                            final item = discounts[index - 1];
-                            return ManageDiscountCard(
+                            final item = tax[index - 1];
+                            return ManageTaxCard(
                               data: item,
                               onEditTap: () {
-                                onEditTap(item);
+                                onEditTax(item);
                               },
                             );
                           },
