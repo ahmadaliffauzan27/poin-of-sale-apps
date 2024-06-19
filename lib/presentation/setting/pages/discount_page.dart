@@ -59,10 +59,51 @@ class _DiscountPageState extends State<DiscountPage> {
           children: [
             const SizedBox(height: 24),
             CustomTabBar(
-              tabTitles: const ['Semua'],
+              tabTitles: const ['Diskon', 'Pajak'],
               initialTabIndex: 0,
               tabViews: [
-                // SEMUA TAB
+                // Tab Diskon
+                SizedBox(
+                  child: BlocBuilder<DiscountBloc, DiscountState>(
+                    builder: (context, state) {
+                      return state.maybeWhen(orElse: () {
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }, loaded: (discounts) {
+                        return GridView.builder(
+                          shrinkWrap: true,
+                          itemCount: discounts.length + 1,
+                          physics: const NeverScrollableScrollPhysics(),
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                            childAspectRatio: 0.85,
+                            crossAxisCount: 3,
+                            crossAxisSpacing: 30.0,
+                            mainAxisSpacing: 30.0,
+                          ),
+                          itemBuilder: (context, index) {
+                            if (index == 0) {
+                              return AddData(
+                                title: 'Tambah Diskon Baru',
+                                onPressed: onAddDataTap,
+                              );
+                            }
+                            final item = discounts[index - 1];
+                            return ManageDiscountCard(
+                              data: item,
+                              onEditTap: () {
+                                onEditTap(item);
+                              },
+                            );
+                          },
+                        );
+                      });
+                    },
+                  ),
+                ),
+
+//Tab pajak
                 SizedBox(
                   child: BlocBuilder<DiscountBloc, DiscountState>(
                     builder: (context, state) {

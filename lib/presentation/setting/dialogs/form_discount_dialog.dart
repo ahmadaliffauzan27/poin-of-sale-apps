@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_pos_apps/core/core.dart';
+import 'package:flutter_pos_apps/presentation/setting/bloc/delete_discount/delete_discount_bloc.dart';
 import 'package:flutter_pos_apps/presentation/setting/bloc/edit_discount/edit_discount_bloc.dart';
 
 import '../../../core/components/buttons.dart';
@@ -162,6 +163,41 @@ class _FormDiscountDialogState extends State<FormDiscountDialog> {
                         });
                       },
                     ),
+              const SpaceHeight(24),
+              widget.data != null
+                  ? BlocConsumer<DeleteDiscountBloc, DeleteDiscountState>(
+                      listener: (context, state) {
+                        state.maybeWhen(
+                          orElse: () {},
+                          loaded: () {
+                            context
+                                .read<DiscountBloc>()
+                                .add(const DiscountEvent.getDiscounts());
+                            context.pop();
+                          },
+                        );
+                      },
+                      builder: (context, state) {
+                        return state.maybeWhen(orElse: () {
+                          return Button.filled(
+                            onPressed: () {
+                              context.read<DeleteDiscountBloc>().add(
+                                    DeleteDiscountEvent.deleteDiscount(
+                                      widget.data!.id.toString(),
+                                    ),
+                                  );
+                            },
+                            label: 'Hapus Diskon',
+                            color: AppColors.red,
+                          );
+                        }, loading: () {
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        });
+                      },
+                    )
+                  : SizedBox()
             ],
           ),
         ),
