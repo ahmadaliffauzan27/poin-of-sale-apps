@@ -43,7 +43,9 @@ class _FormDiscountDialogState extends State<FormDiscountDialog> {
             onPressed: () => context.pop(),
             icon: const Icon(Icons.close),
           ),
-          const Text('Tambah Diskon'),
+          widget.data == null
+              ? const Text('Tambah Diskon')
+              : const Text('Edit Diskon'),
           const Spacer(),
         ],
       ),
