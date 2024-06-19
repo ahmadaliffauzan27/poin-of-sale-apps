@@ -8,6 +8,7 @@ import 'package:flutter_pos_apps/data/datasources/product_local_remote_datasourc
 import 'package:flutter_pos_apps/data/datasources/product_remote_datasource.dart';
 import 'package:flutter_pos_apps/presentation/auth/bloc/login/login_bloc.dart';
 import 'package:flutter_pos_apps/presentation/home/bloc/local_product/local_product_bloc.dart';
+import 'package:flutter_pos_apps/presentation/setting/bloc/edit_discount/edit_discount_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'data/datasources/order_item_remote_datasource.dart';
 import 'presentation/auth/bloc/logout/logout_bloc.dart';
@@ -65,6 +66,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => AddDiscountBloc(DiscountRemoteDatasource()),
+        ),
+        BlocProvider(
+          create: (context) => EditDiscountBloc(DiscountRemoteDatasource()),
         ),
         BlocProvider(
           create: (context) => TransactionReportBloc(OrderRemoteDatasource()),

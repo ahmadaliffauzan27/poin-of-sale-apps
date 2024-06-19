@@ -49,20 +49,20 @@ class _SettingsPageState extends State<SettingsPage> {
                     ),
                   ),
                   const SpaceHeight(16.0),
-                  // ListTile(
-                  //   contentPadding: const EdgeInsets.all(12.0),
-                  //   // ignore: deprecated_member_use_from_same_package
-                  //   leading:
-                  //       // ignore: deprecated_member_use_from_same_package
-                  //       Assets.icons.kelolaDiskon.svg(color: AppColors.primary),
-                  //   title: const Text('Kelola Diskon'),
-                  //   subtitle: const Text('Kelola Diskon Pelanggan'),
-                  //   textColor: AppColors.primary,
-                  //   tileColor: currentIndex == 0
-                  //       ? AppColors.blueLight
-                  //       : Colors.transparent,
-                  //   onTap: () => indexValue(0),
-                  // ),
+                  ListTile(
+                    contentPadding: const EdgeInsets.all(12.0),
+                    // ignore: deprecated_member_use_from_same_package
+                    leading:
+                        // ignore: deprecated_member_use_from_same_package
+                        Assets.icons.kelolaDiskon.svg(color: AppColors.primary),
+                    title: const Text('Kelola Diskon'),
+                    subtitle: const Text('Kelola Diskon Pelanggan'),
+                    textColor: AppColors.primary,
+                    tileColor: currentIndex == 0
+                        ? AppColors.blueLight
+                        : Colors.transparent,
+                    onTap: () => indexValue(0),
+                  ),
                   ListTile(
                     contentPadding: const EdgeInsets.all(12.0),
                     // ignore: deprecated_member_use_from_same_package
@@ -72,10 +72,10 @@ class _SettingsPageState extends State<SettingsPage> {
                     title: const Text('Kelola Printer'),
                     subtitle: const Text('Tambah atau hapus printer'),
                     textColor: AppColors.primary,
-                    tileColor: currentIndex == 0
+                    tileColor: currentIndex == 1
                         ? AppColors.blueLight
                         : Colors.transparent,
-                    onTap: () => indexValue(0),
+                    onTap: () => indexValue(1),
                   ),
                   // ListTile(
                   //   contentPadding: const EdgeInsets.all(12.0),
@@ -100,10 +100,10 @@ class _SettingsPageState extends State<SettingsPage> {
                     title: const Text('Sync Data'),
                     subtitle: const Text('Sync data ke server atau sebaliknya'),
                     textColor: AppColors.primary,
-                    tileColor: currentIndex == 1
+                    tileColor: currentIndex == 2
                         ? AppColors.blueLight
                         : Colors.transparent,
-                    onTap: () => indexValue(1),
+                    onTap: () => indexValue(2),
                   ),
                 ],
               ),
@@ -120,7 +120,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 child: IndexedStack(
                   index: currentIndex,
                   children: const [
-                    // DiscountPage(),
+                    DiscountPage(),
                     ManagePrinterPage(),
                     // TaxPage(),
                     SyncDataPage(),

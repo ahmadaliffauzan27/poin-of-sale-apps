@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_pos_apps/core/core.dart';
+import 'package:flutter_pos_apps/presentation/setting/bloc/edit_discount/edit_discount_bloc.dart';
 
 import '../../../core/components/buttons.dart';
 import '../../../core/components/custom_text_field.dart';
 import '../../../core/components/spaces.dart';
+import '../../../data/models/response/discount_response_model.dart';
 import '../bloc/add_discount/add_discount_bloc.dart';
 import '../bloc/discount/discount_bloc.dart';
 import '../models/discount_model.dart';
 
 class FormDiscountDialog extends StatefulWidget {
-  final DiscountModel? data;
+  final Discount? data;
   const FormDiscountDialog({super.key, this.data});
 
   @override
@@ -20,7 +22,10 @@ class FormDiscountDialog extends StatefulWidget {
 class _FormDiscountDialogState extends State<FormDiscountDialog> {
   @override
   void initState() {
-    context.read<DiscountBloc>().add(const DiscountEvent.getDiscounts());
+    // context.read<DiscountBloc>().add(const DiscountEvent.getDiscounts());
+    nameController.text = widget.data?.name ?? '';
+    descriptionController.text = widget.data?.description ?? '';
+    discountController.text = widget.data?.value?.replaceAll('.00', '') ?? '';
     super.initState();
   }
 
@@ -85,39 +90,78 @@ class _FormDiscountDialogState extends State<FormDiscountDialog> {
                 ],
               ),
               const SpaceHeight(24.0),
-              BlocConsumer<AddDiscountBloc, AddDiscountState>(
-                listener: (context, state) {
-                  state.maybeWhen(
-                    orElse: () {},
-                    success: () {
-                      context
-                          .read<DiscountBloc>()
-                          .add(const DiscountEvent.getDiscounts());
-                    },
-                  );
-                },
-                builder: (context, state) {
-                  return state.maybeWhen(orElse: () {
-                    return Button.filled(
-                      onPressed: () {
-                        context.read<AddDiscountBloc>().add(
-                              AddDiscountEvent.addDiscount(
-                                name: nameController.text,
-                                description: descriptionController.text,
-                                value: int.parse(discountController.text),
-                              ),
-                            );
-                        context.pop();
+              widget.data == null
+                  ? BlocConsumer<AddDiscountBloc, AddDiscountState>(
+                      listener: (context, state) {
+                        state.maybeWhen(
+                          orElse: () {},
+                          success: () {
+                            context
+                                .read<DiscountBloc>()
+                                .add(const DiscountEvent.getDiscounts());
+                          },
+                        );
                       },
-                      label: 'Simpan Diskon',
-                    );
-                  }, loading: () {
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  });
-                },
-              )
+                      builder: (context, state) {
+                        return state.maybeWhen(orElse: () {
+                          return Button.filled(
+                            onPressed: () {
+                              context.read<AddDiscountBloc>().add(
+                                    AddDiscountEvent.addDiscount(
+                                      name: nameController.text,
+                                      description: descriptionController.text,
+                                      value: int.parse(discountController.text),
+                                    ),
+                                  );
+                              context
+                                  .read<DiscountBloc>()
+                                  .add(const DiscountEvent.getDiscounts());
+                              context.pop();
+                            },
+                            label: 'Simpan Diskon',
+                          );
+                        }, loading: () {
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        });
+                      },
+                    )
+                  : BlocConsumer<EditDiscountBloc, EditDiscountState>(
+                      listener: (context, state) {
+                        state.maybeWhen(
+                            orElse: () {},
+                            success: () {
+                              context
+                                  .read<DiscountBloc>()
+                                  .add(const DiscountEvent.getDiscounts());
+                            });
+                      },
+                      builder: (context, state) {
+                        return state.maybeWhen(orElse: () {
+                          return Button.filled(
+                            onPressed: () {
+                              context.read<EditDiscountBloc>().add(
+                                  EditDiscountEvent.editDiscount(
+                                      id: widget.data!.id.toString(),
+                                      name: nameController.text,
+                                      description: descriptionController.text,
+                                      value: int.parse(discountController.text)
+                                          .toDouble()));
+                              context
+                                  .read<DiscountBloc>()
+                                  .add(const DiscountEvent.getDiscounts());
+                              context.pop();
+                            },
+                            label: 'Simpan Diskon',
+                          );
+                        }, loading: () {
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        });
+                      },
+                    ),
             ],
           ),
         ),
