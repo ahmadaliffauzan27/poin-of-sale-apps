@@ -86,6 +86,10 @@ class _SyncDataPageState extends State<SyncDataPage> {
                           );
                         },
                         loaded: () {
+                          ProductLocalRemoteDatasource.instance
+                              .deleteAllOrders();
+                          ProductLocalRemoteDatasource.instance
+                              .deleteAllOrderItems();
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
                               content: Text('Sync Order Success'),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_pos_apps/core/core.dart';
 import 'package:flutter_pos_apps/data/datasources/auth_local_remote_datasource.dart';
+import 'package:flutter_pos_apps/presentation/history/pages/history_page.dart';
 import 'package:flutter_pos_apps/presentation/home/pages/home_page.dart';
 import 'package:flutter_pos_apps/presentation/setting/pages/settings_page.dart';
 
@@ -22,6 +23,7 @@ class _DashboardPageState extends State<DashboardPage> {
 
   final List<Widget> _pages = [
     const HomePage(),
+    HistoryPage(),
     const ReportPage(),
     const SettingsPage(),
   ];
@@ -54,14 +56,19 @@ class _DashboardPageState extends State<DashboardPage> {
                         onTap: () => _onItemTapped(0),
                       ),
                       NavItem(
-                        iconPath: Assets.icons.dashboard.path,
+                        iconPath: Assets.icons.history.path,
                         isActive: _selectedIndex == 1,
                         onTap: () => _onItemTapped(1),
                       ),
                       NavItem(
-                        iconPath: Assets.icons.setting.path,
+                        iconPath: Assets.icons.dashboard.path,
                         isActive: _selectedIndex == 2,
                         onTap: () => _onItemTapped(2),
+                      ),
+                      NavItem(
+                        iconPath: Assets.icons.setting.path,
+                        isActive: _selectedIndex == 3,
+                        onTap: () => _onItemTapped(3),
                       ),
 
                       // logout with popup dialog

@@ -8,6 +8,7 @@ import 'package:flutter_pos_apps/data/datasources/product_local_remote_datasourc
 import 'package:flutter_pos_apps/data/datasources/product_remote_datasource.dart';
 import 'package:flutter_pos_apps/data/datasources/tax_remote_datasource.dart';
 import 'package:flutter_pos_apps/presentation/auth/bloc/login/login_bloc.dart';
+import 'package:flutter_pos_apps/presentation/history/history/bloc/history_bloc_bloc.dart';
 import 'package:flutter_pos_apps/presentation/home/bloc/local_product/local_product_bloc.dart';
 import 'package:flutter_pos_apps/presentation/setting/bloc/add_tax/add_tax_bloc.dart';
 import 'package:flutter_pos_apps/presentation/setting/bloc/delete_discount/delete_discount_bloc.dart';
@@ -102,6 +103,10 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => ProductSalesBloc(OrderItemRemoteDatasource()),
+        ),
+        BlocProvider(
+          create: (context) =>
+              HistoryBlocBloc(ProductLocalRemoteDatasource.instance),
         ),
       ],
       child: MaterialApp(

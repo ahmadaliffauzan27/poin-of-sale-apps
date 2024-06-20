@@ -2,6 +2,7 @@ import 'package:flutter_pos_apps/presentation/home/models/order_model.dart';
 import 'package:sqflite/sqflite.dart';
 
 import '../../presentation/home/models/product_qty.dart';
+import '../../presentation/setting/models/discount_model.dart';
 import '../models/response/product_response_model.dart';
 
 class ProductLocalRemoteDatasource {
@@ -13,6 +14,7 @@ class ProductLocalRemoteDatasource {
   final String tableProduct = 'products';
   final String tableOrder = 'orders';
   final String tableOrderItem = 'order_items';
+  final String tableDiscount = 'discounts';
 
   static Database? _database;
 
@@ -74,6 +76,15 @@ class ProductLocalRemoteDatasource {
         price INTEGER  
       )
     ''');
+
+    await db.execute('''
+    CREATE TABLE $tableDiscount (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT,
+        description TEXT,
+        value INTEGER
+      )
+    ''');
   }
 
   Future<Database> _initDB(String filePath) async {
@@ -84,8 +95,25 @@ class ProductLocalRemoteDatasource {
 
   Future<Database> get database async {
     if (_database != null) return _database!;
-    _database = await _initDB('dbresto24.db');
+    _database = await _initDB('dbresto25.db');
     return _database!;
+  }
+
+  Future<void> saveDiscount(List<DiscountModel> discounts) async {
+    final db = await instance.database;
+    for (var discount in discounts) {
+      await db.insert(tableDiscount, discount.toMap(),
+          conflictAlgorithm: ConflictAlgorithm.replace);
+      // log('inserted success ${discount.name}');
+    }
+  }
+
+  Future<List<DiscountModel>> getDiscounts() async {
+    final db = await instance.database;
+    final List<Map<String, dynamic>> maps = await db.query(tableDiscount);
+    return List.generate(maps.length, (i) {
+      return DiscountModel.fromLocalMap(maps[i]);
+    });
   }
 
   //save order
@@ -112,9 +140,9 @@ class ProductLocalRemoteDatasource {
 
   //get all order
   Future<List<OrderModel>> getAllOrder(
-    DateTime start,
-    DateTime end,
-  ) async {
+      // DateTime start,
+      // DateTime end,
+      ) async {
     final db = await instance.database;
     final List<Map<String, dynamic>> maps = await db.query(
       tableOrder,
@@ -177,5 +205,15 @@ class ProductLocalRemoteDatasource {
   Future<void> deleteAllProducts() async {
     final db = await instance.database;
     await db.delete(tableProduct);
+  }
+
+  Future<void> deleteAllOrders() async {
+    final db = await instance.database;
+    await db.delete(tableOrder);
+  }
+
+  Future<void> deleteAllOrderItems() async {
+    final db = await instance.database;
+    await db.delete(tableOrderItem);
   }
 }
