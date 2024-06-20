@@ -137,7 +137,7 @@ class _HomePageState extends State<HomePage> {
                                         shrinkWrap: true,
                                         itemCount: products
                                             .where((element) =>
-                                                element.category!.id == 1)
+                                                element.category!.id == 5)
                                             .toList()
                                             .length,
                                         physics:
@@ -153,7 +153,7 @@ class _HomePageState extends State<HomePage> {
                                             ProductCard(
                                           data: products
                                               .where((element) =>
-                                                  element.category!.id == 1)
+                                                  element.category!.id == 5)
                                               .toList()[index],
                                           onCartButton: () {},
                                         ),
@@ -190,7 +190,7 @@ class _HomePageState extends State<HomePage> {
                                         shrinkWrap: true,
                                         itemCount: products
                                             .where((element) =>
-                                                element.category!.id == 2)
+                                                element.category!.id == 6)
                                             .toList()
                                             .length,
                                         physics:
@@ -206,113 +206,7 @@ class _HomePageState extends State<HomePage> {
                                             ProductCard(
                                           data: products
                                               .where((element) =>
-                                                  element.category!.id == 2)
-                                              .toList()[index],
-                                          onCartButton: () {},
-                                        ),
-                                      );
-                                    },
-                                  );
-                                },
-                              ),
-                            ),
-
-                            //Tab snack
-                            SizedBox(
-                              child: BlocBuilder<LocalProductBloc,
-                                  LocalProductState>(
-                                builder: (context, state) {
-                                  return state.maybeWhen(
-                                    orElse: () {
-                                      return const Center(
-                                        child: CircularProgressIndicator(),
-                                      );
-                                    },
-                                    loading: () {
-                                      return const Center(
-                                        child: CircularProgressIndicator(),
-                                      );
-                                    },
-                                    loaded: (products) {
-                                      if (products.isEmpty) {
-                                        return const Center(
-                                          child: Text('data kosong'),
-                                        );
-                                      }
-                                      return GridView.builder(
-                                        shrinkWrap: true,
-                                        itemCount: products
-                                            .where((element) =>
-                                                element.category!.id == 3)
-                                            .toList()
-                                            .length,
-                                        physics:
-                                            const NeverScrollableScrollPhysics(),
-                                        gridDelegate:
-                                            const SliverGridDelegateWithFixedCrossAxisCount(
-                                          childAspectRatio: 0.85,
-                                          crossAxisCount: 3,
-                                          crossAxisSpacing: 30.0,
-                                          mainAxisSpacing: 30.0,
-                                        ),
-                                        itemBuilder: (context, index) =>
-                                            ProductCard(
-                                          data: products
-                                              .where((element) =>
-                                                  element.category!.id == 3)
-                                              .toList()[index],
-                                          onCartButton: () {},
-                                        ),
-                                      );
-                                    },
-                                  );
-                                },
-                              ),
-                            ),
-
-//tab kerupuk
-                            SizedBox(
-                              child: BlocBuilder<LocalProductBloc,
-                                  LocalProductState>(
-                                builder: (context, state) {
-                                  return state.maybeWhen(
-                                    orElse: () {
-                                      return const Center(
-                                        child: CircularProgressIndicator(),
-                                      );
-                                    },
-                                    loading: () {
-                                      return const Center(
-                                        child: CircularProgressIndicator(),
-                                      );
-                                    },
-                                    loaded: (products) {
-                                      if (products.isEmpty) {
-                                        return const Center(
-                                          child: Text('data kosong'),
-                                        );
-                                      }
-                                      return GridView.builder(
-                                        shrinkWrap: true,
-                                        itemCount: products
-                                            .where((element) =>
-                                                element.category!.id == 4)
-                                            .toList()
-                                            .length,
-                                        physics:
-                                            const NeverScrollableScrollPhysics(),
-                                        gridDelegate:
-                                            const SliverGridDelegateWithFixedCrossAxisCount(
-                                          childAspectRatio: 0.85,
-                                          crossAxisCount: 3,
-                                          crossAxisSpacing: 30.0,
-                                          mainAxisSpacing: 30.0,
-                                        ),
-                                        itemBuilder: (context, index) =>
-                                            ProductCard(
-                                          data: products
-                                              .where((element) =>
-                                                  element.category!.id == 4)
+                                                  element.category!.id == 6)
                                               .toList()[index],
                                           onCartButton: () {},
                                         ),

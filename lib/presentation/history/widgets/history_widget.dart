@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_pos_apps/core/core.dart';
 import 'package:flutter_pos_apps/core/extensions/int_ext.dart';
+import 'package:flutter_pos_apps/presentation/home/bloc/order/order_bloc.dart';
 import 'package:horizontal_data_table/horizontal_data_table.dart';
+import 'package:print_bluetooth_thermal/print_bluetooth_thermal.dart';
 
+import '../../../core/components/buttons.dart';
 import '../../../core/components/spaces.dart';
+import '../../../data/dataoutputs/print_dataoutputs.dart';
+import '../../../data/datasources/auth_local_remote_datasource.dart';
+import '../../home/bloc/checkout/checkout_bloc.dart';
 import '../../home/models/order_model.dart';
+import '../../home/models/product_qty.dart';
 
 class HistoryWidget extends StatelessWidget {
   // final String title;
@@ -90,6 +98,30 @@ class HistoryWidget extends StatelessWidget {
                 rightSideItemBuilder: (context, index) {
                   return Row(
                     children: <Widget>[
+                      // nama menu
+                      // Container(
+                      //   width: 150,
+                      //   height: 52,
+                      //   padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
+                      //   alignment: Alignment.centerLeft,
+                      //   child: Center(
+                      //     child: BlocBuilder<OrderBloc, OrderState>(
+                      //       builder: (context, state) {
+                      //         List<ProductQuantity> items = state.maybeWhen(
+                      //           orElse: () => [],
+                      //           loaded: (model) => model.orderItems,
+                      //         );
+
+                      //         return Column(
+                      //           crossAxisAlignment: CrossAxisAlignment.start,
+                      //           children: items.map((item) {
+                      //             return Text(item.product.name!);
+                      //           }).toList(),
+                      //         );
+                      //       },
+                      //     ),
+                      //   ),
+                      // ),
                       Container(
                         width: 120,
                         height: 52,
@@ -128,7 +160,7 @@ class HistoryWidget extends StatelessWidget {
                         alignment: Alignment.centerLeft,
                         child: Center(
                           child: Text(
-                            orders[index].discount.toString(),
+                            orders[index].discount.currencyFormatRp,
                           ),
                         ),
                       ),
@@ -210,6 +242,68 @@ class HistoryWidget extends StatelessWidget {
                       //           },
                       //           child: Text("Products"))),
                       // ),
+                      BlocBuilder<OrderBloc, OrderState>(
+                        builder: (context, state) {
+                          return state.maybeWhen(
+                            orElse: () => const SizedBox(),
+                            loaded: (orderModel) => Flexible(
+                              child: Button.filled(
+                                onPressed: () async {
+                                  //get nama kasir from shared preferences
+                                  final namaKasir =
+                                      await AuthLocalRemoteDatasource()
+                                          .getAuthData();
+                                  List<ProductQuantity> items = state.maybeWhen(
+                                    orElse: () => [],
+                                    loaded: (model) => model.orderItems,
+                                  );
+
+                                  final printValue = await PrintDataoutputs
+                                      .instance
+                                      .printOrder(
+                                    orders[index].orderItems,
+                                    orders[index].totalItem,
+                                    orders[index].subTotal,
+                                    orders[index].paymentMethod,
+                                    orders[index].paymentAmount,
+                                    orders[index].paymentAmount,
+                                    namaKasir.user!.name!,
+                                    orders[index].discount,
+                                    orders[index].tax,
+                                    orders[index].subTotal,
+                                    orders[index].subTotal,
+                                  );
+                                  await PrintBluetoothThermal.writeBytes(
+                                      printValue);
+
+                                  print('data: ${orders[index].orderItems}');
+                                  //print model.orderItems
+                                  // print('data: ${items.asMap().toString()}');
+                                  // for (var item in items) {
+                                  //   print(
+                                  //       'menu: ${item.product.name}, quantity: ${item.quantity}');
+                                  // }
+                                  print(
+                                      'total qty: ${orders[index].totalItem}');
+                                  print(
+                                      'total price: ${orders[index].subTotal}');
+                                  print(
+                                      'payment methode: ${orders[index].paymentMethod}');
+                                  print(
+                                      'payment amount: ${orders[index].paymentAmount}');
+                                  print(
+                                      'total diskon: ${orders[index].discount}');
+                                  print('total tax: ${orders[index].tax}');
+                                  print('subtotal: ${orders[index].subTotal}');
+                                  print(
+                                      'normal price: ${orders[index].subTotal}');
+                                },
+                                label: 'Print',
+                              ),
+                            ),
+                          );
+                        },
+                      ),
                     ],
                   );
                 },

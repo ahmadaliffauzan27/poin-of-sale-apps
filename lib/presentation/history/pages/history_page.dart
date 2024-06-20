@@ -43,7 +43,7 @@ class _HistoryPageState extends State<HistoryPage> {
               Text(
                 DateTime.now().toFormattedDate(),
                 style: const TextStyle(
-                  color: AppColors.subtitle,
+                  color: AppColors.grey,
                   fontSize: 16,
                 ),
               ),
@@ -90,6 +90,7 @@ class _HistoryPageState extends State<HistoryPage> {
   List<Widget> _getTitleHeaderWidget() {
     return [
       _getTitleItemWidget('ID', 50),
+      // _getTitleItemWidget('Nama Menu', 150),
       _getTitleItemWidget('Pembayaran', 130),
       _getTitleItemWidget('Subtotal', 100),
       _getTitleItemWidget('Pajak', 130),
@@ -101,7 +102,7 @@ class _HistoryPageState extends State<HistoryPage> {
       _getTitleItemWidget('Jumlah', 60),
       _getTitleItemWidget('Nama Kasir', 150),
       _getTitleItemWidget('Waktu Penjualan', 230),
-      // _getTitleItemWidget('Action', 230),
+      _getTitleItemWidget('Action', 230),
     ];
   }
 
