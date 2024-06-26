@@ -749,8 +749,7 @@ class _ConfirmPaymentPageState extends State<ConfirmPaymentPage> {
 
                                     final finalTax = price * tax / 100;
 
-                                    final subTotalTanpaDiskon =
-                                        price + finalTax.toInt();
+                                    final subTotalTanpaDiskon = price;
 
                                     // final subTotal = ((price + finalTax) -
                                     //     (discount / 100 * price));
@@ -771,6 +770,9 @@ class _ConfirmPaymentPageState extends State<ConfirmPaymentPage> {
 
                                     final finalPrice =
                                         (subTotal / 1000).round() * 1000;
+
+                                    // final finalPrice =
+                                    //     (subTotal / 100).floor() * 100;
 
                                     print('final price: $finalPrice');
 

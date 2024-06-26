@@ -23,7 +23,7 @@ class _DashboardPageState extends State<DashboardPage> {
 
   final List<Widget> _pages = [
     const HomePage(),
-    HistoryPage(),
+    const HistoryPage(),
     const ReportPage(),
     const SettingsPage(),
   ];

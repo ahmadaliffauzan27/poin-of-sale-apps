@@ -40,10 +40,10 @@ class _SettingsPageState extends State<SettingsPage> {
                 padding: const EdgeInsets.all(16.0),
                 children: [
                   const Text(
-                    'Settings',
+                    'Pengaturan',
                     style: TextStyle(
                       color: AppColors.primary,
-                      fontSize: 28,
+                      fontSize: 22,
                       fontWeight: FontWeight.w600,
                     ),
                   ),

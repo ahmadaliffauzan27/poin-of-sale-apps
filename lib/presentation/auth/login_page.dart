@@ -36,15 +36,16 @@ class _LoginPageState extends State<LoginPage> {
         padding: const EdgeInsets.symmetric(horizontal: 124.0, vertical: 20.0),
         children: [
           const SpaceHeight(80.0),
-          Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 130.0),
-              child: SvgPicture.asset(
-                Assets.icons.homeResto.path,
-                width: 100,
-                height: 100,
-                // ignore: deprecated_member_use
-                color: AppColors.primary,
-              )),
+          // Padding(
+          //     padding: const EdgeInsets.symmetric(horizontal: 130.0),
+          //     child: SvgPicture.asset(
+          //       Assets.icons.homeResto.path,
+          //       width: 100,
+          //       height: 100,
+          //       // ignore: deprecated_member_use
+          //       color: AppColors.primary,
+          //     )),
+          const SpaceHeight(80.0),
           const SpaceHeight(24.0),
           const Center(
             child: Text(

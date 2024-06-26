@@ -13,10 +13,10 @@ class ReportTitle extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Text(
-          'Report',
+          'Laporan Penjualan',
           style: TextStyle(
             color: AppColors.primary,
-            fontSize: 28,
+            fontSize: 22,
             fontWeight: FontWeight.w600,
           ),
         ),

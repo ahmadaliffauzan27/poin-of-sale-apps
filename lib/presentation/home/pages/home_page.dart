@@ -266,7 +266,7 @@ class _HomePageState extends State<HomePage> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                'Item',
+                                'Menu',
                                 style: TextStyle(
                                   color: AppColors.primary,
                                   fontSize: 16,
@@ -277,9 +277,9 @@ class _HomePageState extends State<HomePage> {
                                 width: 130,
                               ),
                               SizedBox(
-                                width: 50.0,
+                                width: 70.0,
                                 child: Text(
-                                  'Qty',
+                                  'Jumlah',
                                   style: TextStyle(
                                     color: AppColors.primary,
                                     fontSize: 16,
@@ -289,7 +289,7 @@ class _HomePageState extends State<HomePage> {
                               ),
                               SizedBox(
                                 child: Text(
-                                  'Price',
+                                  'Harga',
                                   style: TextStyle(
                                     color: AppColors.primary,
                                     fontSize: 16,
@@ -316,7 +316,7 @@ class _HomePageState extends State<HomePage> {
                                                 height: 20,
                                               ),
                                               const Text(
-                                                'Belum ada produk yang\nditambahkan',
+                                                'Belum ada menu yang\nditambahkan',
                                                 textAlign: TextAlign.center,
                                                 style: TextStyle(
                                                     fontWeight:
@@ -382,15 +382,15 @@ class _HomePageState extends State<HomePage> {
                                     context: context,
                                     builder: (context) => const TaxDialog()),
                               ),
-                              ColumnButton(
-                                label: 'Layanan',
-                                svgGenImage: Assets.icons.layanan,
-                                // onPressed: () => showDialog(
-                                //     context: context,
-                                //     builder: (context) =>
-                                //         const ServiceDialog()),
-                                onPressed: () {},
-                              ),
+                              // ColumnButton(
+                              //   label: 'Layanan',
+                              //   svgGenImage: Assets.icons.layanan,
+                              //   // onPressed: () => showDialog(
+                              //   //     context: context,
+                              //   //     builder: (context) =>
+                              //   //         const ServiceDialog()),
+                              //   onPressed: () {},
+                              // ),
                             ],
                           ),
                           // const SpaceHeight(100),

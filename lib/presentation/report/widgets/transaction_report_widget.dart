@@ -53,6 +53,7 @@ class TransactionReportWidget extends StatelessWidget {
                   searchDateFormatted,
                   style: const TextStyle(fontSize: 16.0),
                 ),
+
                 // GestureDetector(
                 //   onTap: () async {
                 //     final status = await PermissionHelper().checkPermission();
@@ -82,6 +83,7 @@ class TransactionReportWidget extends StatelessWidget {
                 // ),
                 GestureDetector(
                   onTap: () async {
+                    print(searchDateFormatted);
                     final status = await PermissionHelper().checkPermission();
                     if (status.isGranted) {
                       try {
