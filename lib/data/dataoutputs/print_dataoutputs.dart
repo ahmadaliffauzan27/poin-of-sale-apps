@@ -29,14 +29,17 @@ class PrintDataoutputs {
     // final pajak = totalPrice * 0.11;
     // final total = totalPrice + pajak;
     final nominalPembayaran = nominalBayar.toDouble();
-    final kembalian = nominalPembayaran - subTotal;
+    final kembalian = nominalPembayaran -
+        ((subTotal + tax - discount.ceil()) / 1000).round() * 1000;
+
+    // / 1000).round() * 1000
 
     // int roundedTotalPrice = ((totalPrice / 1000).ceil() * 1000);
 
     // int lastThreeDigits = (subTotal + tax) % 1000;
 
     bytes += generator.reset();
-    bytes += generator.text('TOKO ALIF',
+    bytes += generator.text('EMPAL GENTONG MANG MEDI PLUMBON',
         styles: const PosStyles(
           bold: true,
           align: PosAlign.center,
@@ -44,12 +47,25 @@ class PrintDataoutputs {
           width: PosTextSize.size1,
         ));
 
-    bytes += generator.text('Perumahan Permata Asri, Sarabau',
-        styles: const PosStyles(bold: true, align: PosAlign.center));
     bytes += generator.text(
-        'Date : ${DateFormat('dd/MM/yyyy HH:mm').format(DateTime.now())}',
+        'Jl.Pangeran Antasari Sebelah\nselatan Lampu Merah Plumbon',
+        styles: const PosStyles(
+          bold: true,
+          align: PosAlign.center,
+          height: PosTextSize.size1,
+          width: PosTextSize.size1,
+        ));
+    bytes += generator.text('Menerima Pesanan\nWA: 085315662662',
         styles: const PosStyles(bold: false, align: PosAlign.center));
 
+    bytes += generator.text('',
+        styles: const PosStyles(bold: false, align: PosAlign.center));
+
+    bytes += generator.hr(ch: '-');
+    // nama kasir
+    bytes += generator.text(
+        'Tanggal: ${DateFormat('dd/MM/yyyy HH:mm').format(DateTime.now())}',
+        styles: const PosStyles(bold: false, align: PosAlign.left));
     bytes += generator.hr(ch: '-');
     // nama kasir
     bytes += generator.text('Kasir: $namaKasir',
@@ -99,18 +115,33 @@ class PrintDataoutputs {
     //   ),
     // ]);
 
-    // bytes += generator.row([
-    //   PosColumn(
-    //     text: 'Diskon',
-    //     width: 6,
-    //     styles: const PosStyles(align: PosAlign.left),
-    //   ),
-    //   PosColumn(
-    //     text: discount.currencyFormatRp,
-    //     width: 6,
-    //     styles: const PosStyles(align: PosAlign.right),
-    //   ),
-    // ]);
+    bytes += generator.row([
+      PosColumn(
+        text: 'Pajak ${(tax / subTotal) * 100}%',
+        width: 6,
+        styles: const PosStyles(align: PosAlign.left),
+      ),
+      PosColumn(
+        //ambil berapa persen diskon dari harga normal
+        text: tax.currencyFormatRp,
+        width: 6,
+        styles: const PosStyles(align: PosAlign.right),
+      ),
+    ]);
+
+    bytes += generator.row([
+      PosColumn(
+        text: 'Diskon ${(discount / subTotal) * 100}%',
+        width: 6,
+        styles: const PosStyles(align: PosAlign.left),
+      ),
+      PosColumn(
+        //ambil berapa persen diskon dari harga normal
+        text: discount.currencyFormatRp,
+        width: 6,
+        styles: const PosStyles(align: PosAlign.right),
+      ),
+    ]);
 
     // bytes += generator.feed(1);
 
@@ -121,7 +152,10 @@ class PrintDataoutputs {
         styles: const PosStyles(align: PosAlign.left),
       ),
       PosColumn(
-        text: subTotal.currencyFormatRp,
+        text: subTotal + tax - discount.ceil() > 0
+            ? (((subTotal + tax - discount.ceil()) / 1000).round() * 1000)
+                .currencyFormatRp
+            : '0',
         width: 6,
         styles: const PosStyles(align: PosAlign.right),
       ),
