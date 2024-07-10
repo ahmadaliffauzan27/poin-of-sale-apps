@@ -57,33 +57,33 @@ class ItemSalesReportWidget extends StatelessWidget {
                   searchDateFormatted,
                   style: const TextStyle(fontSize: 16.0),
                 ),
-                GestureDetector(
-                  onTap: () async {
-                    final status = await PermissionHelper().checkPermission();
-                    if (status.isGranted) {
-                      final pdfFile = await ItemSalesInvoice.generate(
-                          itemSales, searchDateFormatted);
-                      log("pdfFile: $pdfFile");
-                      HelperPdfService.openFile(pdfFile);
-                    }
-                  },
-                  child: const Row(
-                    children: [
-                      Text(
-                        "PDF",
-                        style: TextStyle(
-                          fontSize: 14.0,
-                          fontWeight: FontWeight.bold,
-                          color: AppColors.primary,
-                        ),
-                      ),
-                      Icon(
-                        Icons.download_outlined,
-                        color: AppColors.primary,
-                      )
-                    ],
-                  ),
-                ),
+                // GestureDetector(
+                //   onTap: () async {
+                //     final status = await PermissionHelper().checkPermission();
+                //     if (status.isGranted) {
+                //       final pdfFile = await ItemSalesInvoice.generate(
+                //           itemSales, searchDateFormatted);
+                //       log("pdfFile: $pdfFile");
+                //       HelperPdfService.openFile(pdfFile);
+                //     }
+                //   },
+                //   child: const Row(
+                //     children: [
+                //       Text(
+                //         "PDF",
+                //         style: TextStyle(
+                //           fontSize: 14.0,
+                //           fontWeight: FontWeight.bold,
+                //           color: AppColors.primary,
+                //         ),
+                //       ),
+                //       Icon(
+                //         Icons.download_outlined,
+                //         color: AppColors.primary,
+                //       )
+                //     ],
+                //   ),
+                // ),
               ],
             ),
           ),

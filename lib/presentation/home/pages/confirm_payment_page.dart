@@ -321,10 +321,9 @@ class _ConfirmPaymentPageState extends State<ConfirmPaymentPage> {
                             const Text(
                               'Total',
                               style: TextStyle(
-                                color: AppColors.grey,
-                                // fontWeight: FontWeight.bold,
-                                // fontSize: 16
-                              ),
+                                  color: AppColors.grey,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16),
                             ),
                             BlocBuilder<CheckoutBloc, CheckoutState>(
                               builder: (context, state) {
@@ -389,79 +388,79 @@ class _ConfirmPaymentPageState extends State<ConfirmPaymentPage> {
                           ],
                         ),
                         const SpaceHeight(16.0),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            const Text(
-                              'Total (Pembulatan)',
-                              style: TextStyle(
-                                color: AppColors.grey,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16,
-                              ),
-                            ),
-                            BlocBuilder<CheckoutBloc, CheckoutState>(
-                              builder: (context, state) {
-                                final price = state.maybeWhen(
-                                  orElse: () => 0,
-                                  loaded: (products, discount, tax, service) =>
-                                      products.fold(
-                                    0,
-                                    (previousValue, element) =>
-                                        previousValue +
-                                        (element.product.price! *
-                                            element.quantity),
-                                  ),
-                                );
+                        // Row(
+                        //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        //   children: [
+                        //     const Text(
+                        //       'Total (Pembulatan)',
+                        //       style: TextStyle(
+                        //         color: AppColors.grey,
+                        //         fontWeight: FontWeight.bold,
+                        //         fontSize: 16,
+                        //       ),
+                        //     ),
+                        //     BlocBuilder<CheckoutBloc, CheckoutState>(
+                        //       builder: (context, state) {
+                        //         final price = state.maybeWhen(
+                        //           orElse: () => 0,
+                        //           loaded: (products, discount, tax, service) =>
+                        //               products.fold(
+                        //             0,
+                        //             (previousValue, element) =>
+                        //                 previousValue +
+                        //                 (element.product.price! *
+                        //                     element.quantity),
+                        //           ),
+                        //         );
 
-                                final discount = state.maybeWhen(
-                                    orElse: () => 0,
-                                    loaded: (products, discount, tax,
-                                        serviceCharge) {
-                                      if (discount == null) {
-                                        return 0;
-                                      }
-                                      return discount.value!
-                                          .replaceAll('.00', '')
-                                          .toIntegerFromText;
-                                    });
+                        //         final discount = state.maybeWhen(
+                        //             orElse: () => 0,
+                        //             loaded: (products, discount, tax,
+                        //                 serviceCharge) {
+                        //               if (discount == null) {
+                        //                 return 0;
+                        //               }
+                        //               return discount.value!
+                        //                   .replaceAll('.00', '')
+                        //                   .toIntegerFromText;
+                        //             });
 
-                                final tax = state.maybeWhen(
-                                    orElse: () => 0,
-                                    loaded: (products, discount, tax,
-                                        serviceCharge) {
-                                      if (tax == null) {
-                                        return 0;
-                                      }
-                                      return tax.value!
-                                          .replaceAll('.00', '')
-                                          .toIntegerFromText;
-                                    });
+                        //         final tax = state.maybeWhen(
+                        //             orElse: () => 0,
+                        //             loaded: (products, discount, tax,
+                        //                 serviceCharge) {
+                        //               if (tax == null) {
+                        //                 return 0;
+                        //               }
+                        //               return tax.value!
+                        //                   .replaceAll('.00', '')
+                        //                   .toIntegerFromText;
+                        //             });
 
-                                final finalTax = price * tax / 100;
+                        //         final finalTax = price * tax / 100;
 
-                                final subTotal = (price +
-                                    finalTax -
-                                    (discount / 100 * price));
+                        //         final subTotal = (price +
+                        //                 finalTax -
+                        //                 (discount / 100 * price))
+                        //             .toInt();
 
-                                // Pembulatan ke ribuan
-                                final roundedTotal =
-                                    (subTotal / 1000).round() * 1000;
+                        //         // Pembulatan ke ribuan
+                        //         // final roundedTotal =
+                        //         //     (subTotal / 1000).round() * 1000;
 
-                                totalPriceController.text =
-                                    roundedTotal.toString();
-                                return Text(
-                                  roundedTotal.currencyFormatRp,
-                                  style: const TextStyle(
-                                    color: AppColors.primary,
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 16,
-                                  ),
-                                );
-                              },
-                            ),
-                          ],
-                        ),
+                        //         totalPriceController.text = subTotal.toString();
+                        //         return Text(
+                        //           subTotal.currencyFormatRp,
+                        //           style: const TextStyle(
+                        //             color: AppColors.primary,
+                        //             fontWeight: FontWeight.w600,
+                        //             fontSize: 16,
+                        //           ),
+                        //         );
+                        //       },
+                        //     ),
+                        //   ],
+                        // ),
                       ],
                     ),
                   ),
@@ -605,8 +604,8 @@ class _ConfirmPaymentPageState extends State<ConfirmPaymentPage> {
                                     finalTax -
                                     (discount / 100 * price));
 
-                                final roundedTotal =
-                                    (subTotal / 1000).round() * 1000;
+                                // final roundedTotal =
+                                //     (subTotal / 1000).round() * 1000;
 
                                 return Column(
                                   children: [
@@ -615,8 +614,7 @@ class _ConfirmPaymentPageState extends State<ConfirmPaymentPage> {
                                         Button.filled(
                                           width: 150.0,
                                           onPressed: () {
-                                            updateTotalPrice(
-                                                roundedTotal.toInt());
+                                            updateTotalPrice(subTotal.toInt());
                                           },
                                           label: 'UANG PAS',
                                         ),
@@ -768,13 +766,13 @@ class _ConfirmPaymentPageState extends State<ConfirmPaymentPage> {
 
                                     print('final subTotal: $subTotal');
 
-                                    final finalPrice =
-                                        (subTotal / 1000).round() * 1000;
+                                    // final finalPrice =
+                                    //     (subTotal / 1000).round() * 1000;
 
                                     // final finalPrice =
                                     //     (subTotal / 100).floor() * 100;
 
-                                    print('final price: $finalPrice');
+                                    print('final price: $subTotal');
 
                                     List<ProductQuantity> items =
                                         state.maybeWhen(
@@ -796,7 +794,7 @@ class _ConfirmPaymentPageState extends State<ConfirmPaymentPage> {
                                               totalPriceController
                                                   .text.toIntegerFromText;
 
-                                          if (enteredTotal < finalPrice) {
+                                          if (enteredTotal < subTotal) {
                                             return showDialog(
                                                 context: context,
                                                 builder: (context) =>
@@ -853,7 +851,7 @@ class _ConfirmPaymentPageState extends State<ConfirmPaymentPage> {
                                                 SuccessPaymentDialog(
                                               data: items,
                                               totalQty: totalQty,
-                                              totalPrice: finalPrice.toInt(),
+                                              totalPrice: subTotal.toInt(),
                                               paymentMethode: paymentMethod,
                                               paymentAmount:
                                                   totalPriceController
@@ -869,7 +867,7 @@ class _ConfirmPaymentPageState extends State<ConfirmPaymentPage> {
                                           );
                                           print('data: $items}');
                                           print('total qty: ${totalQty}');
-                                          print('total price: ${finalPrice}');
+                                          print('total price: ${subTotal}');
                                           print(
                                               'payment methode: ${paymentMethod}');
                                           print(

@@ -81,51 +81,51 @@ class TransactionReportWidget extends StatelessWidget {
                 //     ],
                 //   ),
                 // ),
-                GestureDetector(
-                  onTap: () async {
-                    print(searchDateFormatted);
-                    final status = await PermissionHelper().checkPermission();
-                    if (status.isGranted) {
-                      try {
-                        final pdfFile = await TransactionSalesInvoice.generate(
-                            transactionReport, searchDateFormatted);
-                        log("pdfFile: $pdfFile");
+                // GestureDetector(
+                //   onTap: () async {
+                //     print(searchDateFormatted);
+                //     final status = await PermissionHelper().checkPermission();
+                //     if (status.isGranted) {
+                //       try {
+                //         final pdfFile = await TransactionSalesInvoice.generate(
+                //             transactionReport, searchDateFormatted);
+                //         log("pdfFile: $pdfFile");
 
-                        // Konversi File menjadi Document
-                        final pdfDocument =
-                            await HelperPdfService.convertFileToPdfDocument(
-                                pdfFile);
+                //         // Konversi File menjadi Document
+                //         final pdfDocument =
+                //             await HelperPdfService.convertFileToPdfDocument(
+                //                 pdfFile);
 
-                        // Simpan PDF ke penyimpanan perangkat
-                        final savedFile = await HelperPdfService.saveDocument(
-                          name: 'laporan.pdf',
-                          pdf: pdfDocument,
-                        );
+                //         // Simpan PDF ke penyimpanan perangkat
+                //         final savedFile = await HelperPdfService.saveDocument(
+                //           name: 'laporan.pdf',
+                //           pdf: pdfDocument,
+                //         );
 
-                        // Buka file PDF yang telah disimpan
-                        await HelperPdfService.openFile(savedFile);
-                      } catch (e) {
-                        log("Failed to generate or open PDF: $e");
-                      }
-                    }
-                  },
-                  child: const Row(
-                    children: [
-                      Text(
-                        "PDF",
-                        style: TextStyle(
-                          fontSize: 14.0,
-                          fontWeight: FontWeight.bold,
-                          color: AppColors.primary,
-                        ),
-                      ),
-                      Icon(
-                        Icons.download_outlined,
-                        color: AppColors.primary,
-                      )
-                    ],
-                  ),
-                ),
+                //         // Buka file PDF yang telah disimpan
+                //         await HelperPdfService.openFile(savedFile);
+                //       } catch (e) {
+                //         log("Failed to generate or open PDF: $e");
+                //       }
+                //     }
+                //   },
+                //   child: const Row(
+                //     children: [
+                //       Text(
+                //         "PDF",
+                //         style: TextStyle(
+                //           fontSize: 14.0,
+                //           fontWeight: FontWeight.bold,
+                //           color: AppColors.primary,
+                //         ),
+                //       ),
+                //       Icon(
+                //         Icons.download_outlined,
+                //         color: AppColors.primary,
+                //       )
+                //     ],
+                //   ),
+                // ),
               ],
             ),
           ),
