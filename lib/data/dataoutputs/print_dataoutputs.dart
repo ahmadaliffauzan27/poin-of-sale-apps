@@ -29,8 +29,9 @@ class PrintDataoutputs {
     // final pajak = totalPrice * 0.11;
     // final total = totalPrice + pajak;
     final nominalPembayaran = nominalBayar.toDouble();
-    final kembalian = nominalPembayaran -
-        ((subTotal + tax - discount.ceil()) / 1000).round() * 1000;
+    final kembalian = nominalPembayaran - (subTotal + tax - discount.ceil());
+    // final kembalian = nominalPembayaran -
+    //     ((subTotal + tax - discount.ceil()) / 1000).round() * 1000;
 
     // / 1000).round() * 1000
 

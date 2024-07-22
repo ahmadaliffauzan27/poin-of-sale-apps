@@ -49,12 +49,11 @@ class SummaryModel {
   String toJson() => json.encode(toMap());
 
   factory SummaryModel.fromMap(Map<String, dynamic> json) => SummaryModel(
-        totalRevenue: json["total_revenue"],
-        totalDiscount: json["total_discount"],
-        totalTax: json["total_tax"],
-        totalSubtotal: json["total_subtotal"],
-        totalServiceCharge: json["total_service_charge"],
-        total: json["total"],
+        totalRevenue: json["total_revenue"] ?? 0,
+        totalDiscount: json["total_discount"] ?? 0,
+        totalTax: json["total_tax"] ?? 0,
+        totalSubtotal: json["total_subtotal"] ?? 0,
+        totalServiceCharge: json["total_service_charge"] ?? 0,
       );
 
   Map<String, dynamic> toMap() => {
@@ -63,6 +62,5 @@ class SummaryModel {
         "total_tax": totalTax,
         "total_subtotal": totalSubtotal,
         "total_service_charge": totalServiceCharge,
-        "total": total,
       };
 }

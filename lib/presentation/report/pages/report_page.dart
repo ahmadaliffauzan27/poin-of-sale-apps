@@ -63,7 +63,7 @@ class _ReportPageState extends State<ReportPage> {
   @override
   Widget build(BuildContext context) {
     String searchDateFormatted =
-        '${fromDate.toFormattedDate2()} to ${toDate.toFormattedDate2()}';
+        '${fromDate.toFormattedDate2()} - ${toDate.toFormattedDate2()}';
     return Scaffold(
       body: Row(
         children: [
@@ -83,7 +83,7 @@ class _ReportPageState extends State<ReportPage> {
                       children: [
                         Flexible(
                           child: CustomDatePicker(
-                            prefix: const Text('From: '),
+                            prefix: const Text('Dari: '),
                             initialDate: fromDate,
                             onDateSelected: (selectedDate) {
                               fromDate = selectedDate;
@@ -95,7 +95,7 @@ class _ReportPageState extends State<ReportPage> {
                         const SpaceWidth(24.0),
                         Flexible(
                           child: CustomDatePicker(
-                            prefix: const Text('To: '),
+                            prefix: const Text('Sampai: '),
                             initialDate: toDate,
                             onDateSelected: (selectedDate) {
                               toDate = selectedDate;
@@ -110,10 +110,10 @@ class _ReportPageState extends State<ReportPage> {
                       child: Wrap(
                         children: [
                           ReportMenu(
-                            label: 'Transaction Report',
+                            label: 'Laporan Transaksi',
                             onPressed: () {
                               selectedMenu = 0;
-                              title = 'Transaction Report';
+                              title = 'Laporan Transaksi';
                               setState(() {});
                               //enddate is 1 month before the current date
                               context.read<TransactionReportBloc>().add(
@@ -127,10 +127,10 @@ class _ReportPageState extends State<ReportPage> {
                             isActive: selectedMenu == 0,
                           ),
                           ReportMenu(
-                            label: 'Item Sales Report',
+                            label: 'Laporan Menu Terjual',
                             onPressed: () {
                               selectedMenu = 1;
-                              title = 'Item Sales Report';
+                              title = ' Laporan Menu Terjual';
                               setState(() {});
                               context.read<ItemSalesBloc>().add(
                                     ItemSalesEvent.getItemSales(
@@ -143,10 +143,10 @@ class _ReportPageState extends State<ReportPage> {
                             isActive: selectedMenu == 1,
                           ),
                           ReportMenu(
-                            label: 'Product Sales Chart',
+                            label: 'Diagram Menu Terjual',
                             onPressed: () {
                               selectedMenu = 2;
-                              title = 'Product Sales Chart';
+                              title = 'Diagram Menu Terjual';
                               setState(() {});
                               context.read<ProductSalesBloc>().add(
                                     ProductSalesEvent.getProductSales(
@@ -159,10 +159,10 @@ class _ReportPageState extends State<ReportPage> {
                             isActive: selectedMenu == 2,
                           ),
                           ReportMenu(
-                            label: 'Summary Sales Report',
+                            label: 'Ringkasan Penjualan',
                             onPressed: () {
                               selectedMenu = 3;
-                              title = 'Summary Sales Report';
+                              title = 'Ringkasan Penjualan';
                               setState(() {});
 
                               context.read<SummaryReportBloc>().add(

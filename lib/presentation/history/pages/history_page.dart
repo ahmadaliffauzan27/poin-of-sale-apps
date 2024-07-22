@@ -33,7 +33,7 @@ class _HistoryPageState extends State<HistoryPage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const Text(
-                'History Penjualan',
+                'Riwayat Penjualan',
                 style: TextStyle(
                   color: AppColors.primary,
                   fontSize: 22,

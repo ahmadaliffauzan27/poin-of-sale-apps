@@ -82,7 +82,7 @@ class SummaryReportWidget extends StatelessWidget {
             ),
             const SpaceHeight(16.0),
             Text(
-              'REVENUE : ${(summary.totalSubtotal! + summary.totalTax! - summary.totalDiscount!).currencyFormatRp}',
+              'Pendapatan Bersih : ${(summary.totalSubtotal! + summary.totalTax! - summary.totalDiscount!).currencyFormatRp}',
               style: const TextStyle(fontWeight: FontWeight.bold),
             ),
             const SpaceHeight(8.0),
@@ -103,7 +103,7 @@ class SummaryReportWidget extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text('Tax'),
+                const Text('Pajak'),
                 Text(
                   '+ ${summary.totalTax!.currencyFormatRp}',
                   style: const TextStyle(fontWeight: FontWeight.bold),
@@ -114,7 +114,7 @@ class SummaryReportWidget extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text('Discount'),
+                const Text('Diskon'),
                 Text(
                   "- ${((summary.totalDiscount!.currencyFormatRp))}",
                   style: const TextStyle(fontWeight: FontWeight.bold),
@@ -142,10 +142,7 @@ class SummaryReportWidget extends StatelessWidget {
               children: [
                 const Text('TOTAL'),
                 Text(
-                  (summary.totalSubtotal! +
-                          summary.totalTax! -
-                          summary.totalDiscount!)
-                      .currencyFormatRp,
+                  (summary.totalRevenue!).currencyFormatRp,
                   style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
               ],

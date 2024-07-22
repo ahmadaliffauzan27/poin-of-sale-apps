@@ -88,7 +88,7 @@ class _DashboardPageState extends State<DashboardPage> {
                               AuthLocalRemoteDatasource().removeAuthData();
                               ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(
-                                  content: Text('Logout success'),
+                                  content: Text('Berhasil keluar akun!'),
                                   backgroundColor: AppColors.primary,
                                 ),
                               );
@@ -109,11 +109,11 @@ class _DashboardPageState extends State<DashboardPage> {
                                 return AlertDialog(
                                   backgroundColor: AppColors.primary,
                                   title: const Text(
-                                    'Logout',
+                                    'Keluar',
                                     style: TextStyle(color: AppColors.white),
                                   ),
                                   content: const Text(
-                                    'Are you sure to logout?',
+                                    'Apakah anda yakin ingin keluar aplikasi?',
                                     style: TextStyle(color: AppColors.white),
                                   ),
                                   actions: [
@@ -122,7 +122,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                         Navigator.pop(context);
                                       },
                                       child: const Text(
-                                        'Cancel',
+                                        'Tidak',
                                         style:
                                             TextStyle(color: AppColors.white),
                                       ),
@@ -134,7 +134,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                             .add(const LogoutEvent.logout());
                                       },
                                       child: const Text(
-                                        'Logout',
+                                        'Iya',
                                         style:
                                             TextStyle(color: AppColors.white),
                                       ),

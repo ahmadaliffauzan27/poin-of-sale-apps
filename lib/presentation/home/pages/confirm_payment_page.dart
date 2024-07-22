@@ -112,7 +112,7 @@ class _ConfirmPaymentPageState extends State<ConfirmPaymentPage> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'Item',
+                              'Menu',
                               style: TextStyle(
                                 color: AppColors.primary,
                                 fontSize: 16,
@@ -123,9 +123,9 @@ class _ConfirmPaymentPageState extends State<ConfirmPaymentPage> {
                               width: 160,
                             ),
                             SizedBox(
-                              width: 50.0,
+                              width: 70.0,
                               child: Text(
-                                'Qty',
+                                'Jumlah',
                                 style: TextStyle(
                                   color: AppColors.primary,
                                   fontSize: 16,
@@ -135,7 +135,7 @@ class _ConfirmPaymentPageState extends State<ConfirmPaymentPage> {
                             ),
                             SizedBox(
                               child: Text(
-                                'Price',
+                                'Harga',
                                 style: TextStyle(
                                   color: AppColors.primary,
                                   fontSize: 16,

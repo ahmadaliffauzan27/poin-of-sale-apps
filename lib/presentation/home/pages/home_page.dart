@@ -84,7 +84,7 @@ class _HomePageState extends State<HomePage> {
                                       return const Padding(
                                         padding: EdgeInsets.only(top: 200),
                                         child: Center(
-                                          child: Text('Produk Tidak Ditemukan'),
+                                          child: Text('Menu Tidak Ditemukan'),
                                         ),
                                       );
                                     }
@@ -130,7 +130,7 @@ class _HomePageState extends State<HomePage> {
                                     loaded: (products) {
                                       if (products.isEmpty) {
                                         return const Center(
-                                          child: Text('data kosong'),
+                                          child: Text('Data kosong'),
                                         );
                                       }
                                       return GridView.builder(
@@ -183,7 +183,7 @@ class _HomePageState extends State<HomePage> {
                                     loaded: (products) {
                                       if (products.isEmpty) {
                                         return const Center(
-                                          child: Text('data kosong'),
+                                          child: Text('Data kosong'),
                                         );
                                       }
                                       return GridView.builder(
@@ -339,7 +339,7 @@ class _HomePageState extends State<HomePage> {
                                                 height: 20,
                                               ),
                                               const Text(
-                                                'Belum ada produk yang\nditambahkan',
+                                                'Belum ada menu yang\nditambahkan',
                                                 textAlign: TextAlign.center,
                                                 style: TextStyle(
                                                     fontWeight:
