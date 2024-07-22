@@ -276,7 +276,7 @@ class _ReportPageState extends State<ReportPage> {
   List<Widget> _getTitleReportPageWidget() {
     return [
       _getTitleItemWidget('ID', 120),
-      _getTitleItemWidget('Pembayaran Pembeli', 200),
+      _getTitleItemWidget('Subtotal', 100),
       _getTitleItemWidget('Pajak', 100),
       _getTitleItemWidget('Diskon', 100),
       _getTitleItemWidget('Total Harga', 150),

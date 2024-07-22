@@ -137,7 +137,7 @@ class TransactionReportWidget extends StatelessWidget {
                 borderRadius: BorderRadius.circular(12),
                 child: HorizontalDataTable(
                   leftHandSideColumnWidth: 50,
-                  rightHandSideColumnWidth: 1300,
+                  rightHandSideColumnWidth: 1200,
                   isFixedHeader: true,
                   headerWidgets: headerWidgets,
                   // isFixedFooter: true,
@@ -155,7 +155,7 @@ class TransactionReportWidget extends StatelessWidget {
                     return Row(
                       children: <Widget>[
                         Container(
-                          width: 200,
+                          width: 100,
                           height: 52,
                           padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
                           alignment: Alignment.centerLeft,
