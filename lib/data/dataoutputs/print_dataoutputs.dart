@@ -154,7 +154,7 @@ class PrintDataoutputs {
       ),
       PosColumn(
         text: subTotal + tax - discount.ceil() > 0
-            ? (((subTotal + tax - discount.ceil()) / 1000).round() * 1000)
+            ? (((subTotal + tax - discount.ceil()) ))
                 .currencyFormatRp
             : '0',
         width: 6,

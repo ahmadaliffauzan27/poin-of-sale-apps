@@ -137,7 +137,7 @@ class TransactionReportWidget extends StatelessWidget {
                 borderRadius: BorderRadius.circular(12),
                 child: HorizontalDataTable(
                   leftHandSideColumnWidth: 50,
-                  rightHandSideColumnWidth: 600,
+                  rightHandSideColumnWidth: 1300,
                   isFixedHeader: true,
                   headerWidgets: headerWidgets,
                   // isFixedFooter: true,
@@ -155,7 +155,43 @@ class TransactionReportWidget extends StatelessWidget {
                     return Row(
                       children: <Widget>[
                         Container(
-                          width: 120,
+                          width: 200,
+                          height: 52,
+                          padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            transactionReport[index].subTotal!.currencyFormatRp,
+                          ),
+                        ),
+                        Container(
+                          width: 100,
+                          height: 52,
+                          padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            transactionReport[index].tax!.currencyFormatRp,
+                          ),
+                        ),
+                        Container(
+                          width: 100,
+                          height: 52,
+                          padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            // Mengubah persentase diskon menjadi nominal dan memformatnya ke dalam format mata uang yang diinginkan
+                            // (transactionReport[index].discount! *
+                            //         transactionReport[index].total! /
+                            //         100)
+                            //     .toString()
+                            //     .toIntegerFromText
+                            //     .currencyFormatRp
+                            //     .replaceAll('.0',
+                            //         ''), // Menyertakan 2 angka di belakang koma
+                            transactionReport[index].discount!.currencyFormatRp,
+                          ),
+                        ),
+                        Container(
+                          width: 150,
                           height: 52,
                           padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
                           alignment: Alignment.centerLeft,
@@ -164,42 +200,6 @@ class TransactionReportWidget extends StatelessWidget {
                             transactionReport[index].total!.currencyFormatRp,
                           )),
                         ),
-                        // Container(
-                        //   width: 120,
-                        //   height: 52,
-                        //   padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
-                        //   alignment: Alignment.centerLeft,
-                        //   child: Text(
-                        //     transactionReport[index].subTotal!.currencyFormatRp,
-                        //   ),
-                        // ),
-                        // Container(
-                        //   width: 100,
-                        //   height: 52,
-                        //   padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
-                        //   alignment: Alignment.centerLeft,
-                        //   child: Center(
-                        //       child: Text(
-                        //     transactionReport[index].tax!.currencyFormatRp,
-                        //   )),
-                        // ),
-                        // Container(
-                        //   width: 100,
-                        //   height: 52,
-                        //   padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
-                        //   alignment: Alignment.centerLeft,
-                        //   child: Text(
-                        //     // Mengubah persentase diskon menjadi nominal dan memformatnya ke dalam format mata uang yang diinginkan
-                        //     (transactionReport[index].discount! *
-                        //             transactionReport[index].total! /
-                        //             100)
-                        //         .toString()
-                        //         .toIntegerFromText
-                        //         .currencyFormatRp
-                        //         .replaceAll('.0',
-                        //             ''), // Menyertakan 2 angka di belakang koma
-                        //   ),
-                        // ),
                         // Container(
                         //   width: 100,
                         //   height: 52,
@@ -213,6 +213,17 @@ class TransactionReportWidget extends StatelessWidget {
                         //     ),
                         //   ),
                         // ),
+                        Container(
+                          width: 200,
+                          height: 52,
+                          padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
+                          alignment: Alignment.centerLeft,
+                          child: Center(
+                            child: Text(transactionReport[index]
+                                .paymentMethod
+                                .toString()),
+                          ),
+                        ),
                         Container(
                           width: 100,
                           height: 52,

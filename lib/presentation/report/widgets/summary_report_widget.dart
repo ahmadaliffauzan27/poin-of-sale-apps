@@ -41,45 +41,81 @@ class SummaryReportWidget extends StatelessWidget {
                     fontWeight: FontWeight.w800, fontSize: 16.0),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    searchDateFormatted,
-                    style: const TextStyle(fontSize: 16.0),
-                  ),
-                  // GestureDetector(
-                  //   onTap: () async {
-                  //     final status = await PermissionHelper().checkPermission();
-                  //     if (status.isGranted) {
-                  //       final pdfFile = await RevenueInvoice.generate(
-                  //           summary, searchDateFormatted);
-                  //       log("pdfFile: $pdfFile");
-                  //       HelperPdfService.openFile(pdfFile);
-                  //     }
-                  //   },
-                  //   child: const Row(
-                  //     children: [
-                  //       Text(
-                  //         "PDF",
-                  //         style: TextStyle(
-                  //           fontSize: 14.0,
-                  //           fontWeight: FontWeight.bold,
-                  //           color: AppColors.primary,
-                  //         ),
-                  //       ),
-                  //       Icon(
-                  //         Icons.download_outlined,
-                  //         color: AppColors.primary,
-                  //       )
-                  //     ],
-                  //   ),
-                  // ),
-                ],
-              ),
+            const SizedBox(
+              height: 24.0,
             ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  searchDateFormatted,
+                  style: const TextStyle(fontSize: 16.0),
+                ),
+                // GestureDetector(
+                //   onTap: () async {
+                //     final status = await PermissionHelper().checkPermission();
+                //     if (status.isGranted) {
+                //       final pdfFile = await RevenueInvoice.generate(
+                //           summary, searchDateFormatted);
+                //       log("pdfFile: $pdfFile");
+                //       HelperPdfService.openFile(pdfFile);
+                //     }
+                //   },
+                //   child: const Row(
+                //     children: [
+                //       Text(
+                //         "PDF",
+                //         style: TextStyle(
+                //           fontSize: 14.0,
+                //           fontWeight: FontWeight.bold,
+                //           color: AppColors.primary,
+                //         ),
+                //       ),
+                //       Icon(
+                //         Icons.download_outlined,
+                //         color: AppColors.primary,
+                //       )
+                //     ],
+                //   ),
+                // ),
+              ],
+            ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //   children: [
+            //     Text(
+            //       searchDateFormatted,
+            //       style: const TextStyle(fontSize: 16.0),
+            //     ),
+            //     // GestureDetector(
+            //     //   onTap: () async {
+            //     //     final status = await PermissionHelper().checkPermission();
+            //     //     if (status.isGranted) {
+            //     //       final pdfFile = await RevenueInvoice.generate(
+            //     //           summary, searchDateFormatted);
+            //     //       log("pdfFile: $pdfFile");
+            //     //       HelperPdfService.openFile(pdfFile);
+            //     //     }
+            //     //   },
+            //     //   child: const Row(
+            //     //     children: [
+            //     //       Text(
+            //     //         "PDF",
+            //     //         style: TextStyle(
+            //     //           fontSize: 14.0,
+            //     //           fontWeight: FontWeight.bold,
+            //     //           color: AppColors.primary,
+            //     //         ),
+            //     //       ),
+            //     //       Icon(
+            //     //         Icons.download_outlined,
+            //     //         color: AppColors.primary,
+            //     //       )
+            //     //     ],
+            //     //   ),
+            //     // ),
+            //   ],
+            // ),
             const SpaceHeight(16.0),
             Text(
               'Pendapatan Bersih : ${(summary.totalSubtotal! + summary.totalTax! - summary.totalDiscount!).currencyFormatRp}',

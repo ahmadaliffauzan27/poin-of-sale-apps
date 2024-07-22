@@ -276,14 +276,15 @@ class _ReportPageState extends State<ReportPage> {
   List<Widget> _getTitleReportPageWidget() {
     return [
       _getTitleItemWidget('ID', 120),
-      _getTitleItemWidget('Total', 100),
-      // _getTitleItemWidget('Sub Total', 100),
-      // _getTitleItemWidget('Tax', 100),
-      // _getTitleItemWidget('Discount', 100),
+      _getTitleItemWidget('Pembayaran Pembeli', 200),
+      _getTitleItemWidget('Pajak', 100),
+      _getTitleItemWidget('Diskon', 100),
+      _getTitleItemWidget('Total Harga', 150),
       // _getTitleItemWidget('Service', 100),
+      _getTitleItemWidget('Metode Pembayaran', 200),
       _getTitleItemWidget('Total Item', 100),
-      _getTitleItemWidget('Cashier', 180),
-      _getTitleItemWidget('Time', 200),
+      _getTitleItemWidget('Kasir', 150),
+      _getTitleItemWidget('Waktu Transaksi', 200),
     ];
   }
 
@@ -291,9 +292,9 @@ class _ReportPageState extends State<ReportPage> {
     return [
       _getTitleItemWidget('ID', 80),
       // _getTitleItemWidget('Order', 60),
-      _getTitleItemWidget('Product', 160),
-      _getTitleItemWidget('Qty', 60),
-      _getTitleItemWidget('Price', 280),
+      _getTitleItemWidget('Menu', 160),
+      _getTitleItemWidget('Jumlah', 60),
+      _getTitleItemWidget('harga', 280),
       // _getTitleItemWidget('Total Price', 140),
     ];
   }
