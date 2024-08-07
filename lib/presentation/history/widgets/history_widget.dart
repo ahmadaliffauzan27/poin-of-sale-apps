@@ -82,7 +82,7 @@ class HistoryWidget extends StatelessWidget {
               borderRadius: BorderRadius.circular(12),
               child: HorizontalDataTable(
                 leftHandSideColumnWidth: 40,
-                rightHandSideColumnWidth: 1280,
+                rightHandSideColumnWidth: 1350,
                 isFixedHeader: true,
                 headerWidgets: headerWidgets,
                 // isFixedFooter: true,
@@ -239,6 +239,25 @@ class HistoryWidget extends StatelessWidget {
                         ),
                       ),
                       Container(
+                        width: 150,
+                        height: 52,
+                        padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
+                        alignment: Alignment.centerLeft,
+                        child: Center(
+                          child: Text(orders[index].customerName),
+                        ),
+                      ),
+                      Container(
+                        width: 60,
+                        height: 52,
+                        padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
+                        alignment: Alignment.centerLeft,
+                        child: Center(
+                          child: Text(orders[index].tableNumber),
+                        ),
+                      ),
+
+                      Container(
                         width: 230,
                         height: 52,
                         padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
@@ -260,70 +279,70 @@ class HistoryWidget extends StatelessWidget {
                       //           },
                       //           child: Text("Products"))),
                       // ),
-                      BlocBuilder<OrderBloc, OrderState>(
-                        builder: (context, state) {
-                          return state.maybeWhen(
-                            orElse: () => const SizedBox(),
-                            loaded: (orderModel) => Flexible(
-                              child: Button.filled(
-                                onPressed: () async {
-                                  //get nama kasir from shared preferences
-                                  final namaKasir =
-                                      await AuthLocalRemoteDatasource()
-                                          .getAuthData();
-                                  List<ProductQuantity> items = state.maybeWhen(
-                                    orElse: () => [],
-                                    loaded: (model) => model.orderItems,
-                                  );
+                      // BlocBuilder<OrderBloc, OrderState>(
+                      //   builder: (context, state) {
+                      //     return state.maybeWhen(
+                      //       orElse: () => const SizedBox(),
+                      //       loaded: (orderModel) => Flexible(
+                      //         child: Button.filled(
+                      //           onPressed: () async {
+                      //             //get nama kasir from shared preferences
+                      //             final namaKasir =
+                      //                 await AuthLocalRemoteDatasource()
+                      //                     .getAuthData();
+                      //             List<ProductQuantity> items = state.maybeWhen(
+                      //               orElse: () => [],
+                      //               loaded: (model) => model.orderItems,
+                      //             );
 
-                                  final printValue = await PrintDataoutputs
-                                      .instance
-                                      .printOrder(
-                                    orders[index].orderItems,
-                                    orders[index].totalItem,
-                                    orders[index].subTotal,
-                                    orders[index].paymentMethod,
-                                    orders[index].paymentAmount,
-                                    orders[index].paymentAmount,
-                                    namaKasir.user!.name!,
-                                    orders[index].discount,
-                                    orders[index].tax,
-                                    orders[index].subTotal,
-                                    orders[index].subTotal,
-                                    orders[index].customerName,
-                                    orders[index].tableNumber,
-                                  );
-                                  await PrintBluetoothThermal.writeBytes(
-                                      printValue);
+                      //             final printValue = await PrintDataoutputs
+                      //                 .instance
+                      //                 .printOrder(
+                      //               orders[index].orderItems,
+                      //               orders[index].totalItem,
+                      //               orders[index].subTotal,
+                      //               orders[index].paymentMethod,
+                      //               orders[index].paymentAmount,
+                      //               orders[index].paymentAmount,
+                      //               namaKasir.user!.name!,
+                      //               orders[index].discount,
+                      //               orders[index].tax,
+                      //               orders[index].subTotal,
+                      //               orders[index].subTotal,
+                      //               orders[index].customerName,
+                      //               orders[index].tableNumber,
+                      //             );
+                      //             await PrintBluetoothThermal.writeBytes(
+                      //                 printValue);
 
-                                  print('data: ${orders[index].orderItems}');
-                                  //print model.orderItems
-                                  // print('data: ${items.asMap().toString()}');
-                                  // for (var item in items) {
-                                  //   print(
-                                  //       'menu: ${item.product.name}, quantity: ${item.quantity}');
-                                  // }
-                                  print(
-                                      'total qty: ${orders[index].totalItem}');
-                                  print(
-                                      'total price: ${orders[index].subTotal}');
-                                  print(
-                                      'payment methode: ${orders[index].paymentMethod}');
-                                  print(
-                                      'payment amount: ${orders[index].paymentAmount}');
-                                  print(
-                                      'total diskon: ${orders[index].discount}');
-                                  print('total tax: ${orders[index].tax}');
-                                  print('subtotal: ${orders[index].subTotal}');
-                                  print(
-                                      'normal price: ${orders[index].subTotal}');
-                                },
-                                label: 'Print',
-                              ),
-                            ),
-                          );
-                        },
-                      ),
+                      //             print('data: ${orders[index].orderItems}');
+                      //             //print model.orderItems
+                      //             // print('data: ${items.asMap().toString()}');
+                      //             // for (var item in items) {
+                      //             //   print(
+                      //             //       'menu: ${item.product.name}, quantity: ${item.quantity}');
+                      //             // }
+                      //             print(
+                      //                 'total qty: ${orders[index].totalItem}');
+                      //             print(
+                      //                 'total price: ${orders[index].subTotal}');
+                      //             print(
+                      //                 'payment methode: ${orders[index].paymentMethod}');
+                      //             print(
+                      //                 'payment amount: ${orders[index].paymentAmount}');
+                      //             print(
+                      //                 'total diskon: ${orders[index].discount}');
+                      //             print('total tax: ${orders[index].tax}');
+                      //             print('subtotal: ${orders[index].subTotal}');
+                      //             print(
+                      //                 'normal price: ${orders[index].subTotal}');
+                      //           },
+                      //           label: 'Print',
+                      //         ),
+                      //       ),
+                      //     );
+                      //   },
+                      // ),
                     ],
                   );
                 },

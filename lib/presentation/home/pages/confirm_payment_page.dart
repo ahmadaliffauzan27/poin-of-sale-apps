@@ -496,48 +496,109 @@ class _ConfirmPaymentPageState extends State<ConfirmPaymentPage> {
                             //     fontWeight: FontWeight.w500,
                             //   ),
                             // ),
-                            const Text(
-                              'Nama Pembeli',
-                              style: TextStyle(
-                                color: AppColors.primary,
-                                fontSize: 20,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                            const SpaceHeight(12.0),
-                            TextFormField(
-                              controller: namaPembeliController,
-                              keyboardType: TextInputType.text,
-                              decoration: InputDecoration(
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(8.0),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      const Text(
+                                        'Nama Pembeli',
+                                        style: TextStyle(
+                                          color: AppColors.primary,
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      ),
+                                      const SpaceHeight(12.0),
+                                      TextFormField(
+                                        controller: namaPembeliController,
+                                        keyboardType: TextInputType.text,
+                                        decoration: InputDecoration(
+                                          border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                          ),
+                                          hintText: 'Masukkan nama pembeli',
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                                hintText: 'Masukkan nama pembeli',
-                              ),
+                                const SpaceWidth(24.0),
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      const Text(
+                                        'Nomor Meja',
+                                        style: TextStyle(
+                                          color: AppColors.primary,
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      ),
+                                      const SpaceHeight(12.0),
+                                      TextFormField(
+                                        controller: nomorMejaController,
+                                        keyboardType: TextInputType.text,
+                                        decoration: InputDecoration(
+                                          border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                          ),
+                                          hintText: 'Masukkan nomor meja',
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              ],
                             ),
+                            // const Text(
+                            //   'Nama Pembeli',
+                            //   style: TextStyle(
+                            //     color: AppColors.primary,
+                            //     fontSize: 20,
+                            //     fontWeight: FontWeight.w600,
+                            //   ),
+                            // ),
+                            // const SpaceHeight(12.0),
+                            // TextFormField(
+                            //   controller: namaPembeliController,
+                            //   keyboardType: TextInputType.text,
+                            //   decoration: InputDecoration(
+                            //     border: OutlineInputBorder(
+                            //       borderRadius: BorderRadius.circular(8.0),
+                            //     ),
+                            //     hintText: 'Masukkan nama pembeli',
+                            //   ),
+                            // ),
                             const SpaceHeight(16.0),
-                            const Text(
-                              'Nomor Meja',
-                              style: TextStyle(
-                                color: AppColors.primary,
-                                fontSize: 20,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                            const SpaceHeight(12.0),
-                            TextFormField(
-                              controller: nomorMejaController,
-                              keyboardType: TextInputType.text,
-                              decoration: InputDecoration(
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(8.0),
-                                ),
-                                hintText: 'Masukkan nomor meja',
-                              ),
-                            ),
-                            const SpaceHeight(8.0),
+                            // const Text(
+                            //   'Nomor Meja',
+                            //   style: TextStyle(
+                            //     color: AppColors.primary,
+                            //     fontSize: 20,
+                            //     fontWeight: FontWeight.w600,
+                            //   ),
+                            // ),
+                            // const SpaceHeight(12.0),
+                            // TextFormField(
+                            //   controller: nomorMejaController,
+                            //   keyboardType: TextInputType.text,
+                            //   decoration: InputDecoration(
+                            //     border: OutlineInputBorder(
+                            //       borderRadius: BorderRadius.circular(8.0),
+                            //     ),
+                            //     hintText: 'Masukkan nomor meja',
+                            //   ),
+                            // ),
+                            // const SpaceHeight(8.0),
                             const Divider(),
-                            const SpaceHeight(8.0),
+                            // const SpaceHeight(8.0),
                             const Text(
                               'Metode Bayar',
                               style: TextStyle(
@@ -621,15 +682,15 @@ class _ConfirmPaymentPageState extends State<ConfirmPaymentPage> {
                                 );
                               },
                             ),
-                            const SpaceHeight(8.0),
+                            const SpaceHeight(16.0),
                             const Divider(),
-                            const SpaceHeight(8.0),
+                            const SpaceHeight(16.0),
                             const Text(
                               'Total Bayar',
                               style: TextStyle(
                                 color: AppColors.primary,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500,
+                                fontSize: 20,
+                                fontWeight: FontWeight.w600,
                               ),
                             ),
                             const SpaceHeight(12.0),
@@ -883,6 +944,46 @@ class _ConfirmPaymentPageState extends State<ConfirmPaymentPage> {
                                           final int enteredTotal =
                                               totalPriceController
                                                   .text.toIntegerFromText;
+
+                                          //jika nama pembeli kosong dan nomor meja kosong
+                                          if (namaPembeliController
+                                                  .text.isEmpty ||
+                                              nomorMejaController
+                                                  .text.isEmpty) {
+                                            return showDialog(
+                                                context: context,
+                                                builder: (context) =>
+                                                    AlertDialog(
+                                                      backgroundColor: AppColors
+                                                          .buttonOn
+                                                          .withOpacity(1),
+                                                      title: const Text(
+                                                        'Peringatan',
+                                                        style: TextStyle(
+                                                          color:
+                                                              AppColors.white,
+                                                        ),
+                                                      ),
+                                                      content: const Text(
+                                                        'Nama Pembeli dan Nomor Meja tidak boleh kosong',
+                                                        style: TextStyle(
+                                                            color: AppColors
+                                                                .white),
+                                                      ),
+                                                      actions: [
+                                                        TextButton(
+                                                          onPressed: () {
+                                                            context.pop();
+                                                          },
+                                                          child: const Text(
+                                                              'OK',
+                                                              style: TextStyle(
+                                                                  color: AppColors
+                                                                      .white)),
+                                                        ),
+                                                      ],
+                                                    ));
+                                          }
 
                                           if (enteredTotal < subTotal) {
                                             return showDialog(

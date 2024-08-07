@@ -101,8 +101,10 @@ class _HistoryPageState extends State<HistoryPage> {
       _getTitleItemWidget('Metode', 80),
       _getTitleItemWidget('Jumlah', 60),
       _getTitleItemWidget('Nama Kasir', 150),
+      _getTitleItemWidget('Nama Pelanggan', 150),
+      _getTitleItemWidget('Meja', 50),
       _getTitleItemWidget('Waktu Penjualan', 230),
-      _getTitleItemWidget('Action', 230),
+      // _getTitleItemWidget('Action', 230),
     ];
   }
 

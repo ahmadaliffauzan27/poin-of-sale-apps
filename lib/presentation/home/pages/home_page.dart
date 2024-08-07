@@ -489,7 +489,7 @@ class _HomePageState extends State<HomePage> {
                               ),
                             ],
                           ),
-                          const SpaceHeight(50.0),
+                          const SpaceHeight(100.0),
                         ],
                       ),
                     ),
