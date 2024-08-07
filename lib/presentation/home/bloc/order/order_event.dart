@@ -10,5 +10,7 @@ class OrderEvent with _$OrderEvent {
     int serviceCharge,
     int paymentAmount,
     String paymentMethod,
+    String customerName,
+    String tableNumber,
   ) = _Order;
 }

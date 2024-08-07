@@ -17,12 +17,14 @@ class OrderModel {
   final int idKasir;
   final String namaKasir;
   final String transactionTime;
+  final String customerName;
+  final String tableNumber;
   final int isSync;
   final List<ProductQuantity> orderItems;
   OrderModel({
     this.id,
-    required this.subTotal,
     required this.paymentAmount,
+    required this.subTotal,
     required this.tax,
     required this.discount,
     required this.serviceCharge,
@@ -32,6 +34,8 @@ class OrderModel {
     required this.idKasir,
     required this.namaKasir,
     required this.transactionTime,
+    required this.customerName,
+    required this.tableNumber,
     required this.isSync,
     required this.orderItems,
   });
@@ -49,6 +53,8 @@ class OrderModel {
       'id_kasir': idKasir,
       'nama_kasir': namaKasir,
       'transaction_time': transactionTime,
+      'customer_name': customerName,
+      'table_number': tableNumber,
       'order_items': orderItems.map((e) => e.toLocalMap(id!)).toList(),
     };
   }
@@ -67,6 +73,8 @@ class OrderModel {
       'id_kasir': idKasir,
       'nama_kasir': namaKasir,
       'transaction_time': transactionTime,
+      'customer_name': customerName,
+      'table_number': tableNumber,
       'is_sync': isSync,
     };
   }
@@ -85,6 +93,8 @@ class OrderModel {
         idKasir: map['id_kasir'] as int,
         namaKasir: map['nama_kasir'] as String,
         transactionTime: map['transaction_time'] as String,
+        customerName: map['customer_name'] as String,
+        tableNumber: map['table_number'] as String,
         isSync: map['is_sync'] as int,
         orderItems: []);
   }
@@ -107,6 +117,8 @@ class OrderModel {
     int? idKasir,
     String? namaKasir,
     String? transactionTime,
+    String? customerName,
+    String? tableNumber,
     int? isSync,
     List<ProductQuantity>? orderItems,
   }) {
@@ -123,6 +135,8 @@ class OrderModel {
       idKasir: idKasir ?? this.idKasir,
       namaKasir: namaKasir ?? this.namaKasir,
       transactionTime: transactionTime ?? this.transactionTime,
+      customerName: customerName ?? this.customerName,
+      tableNumber: tableNumber ?? this.tableNumber,
       isSync: isSync ?? this.isSync,
       orderItems: orderItems ?? this.orderItems,
     );

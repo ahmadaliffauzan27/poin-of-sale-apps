@@ -20,7 +20,9 @@ class PrintDataoutputs {
       int discount,
       int tax,
       int subTotal,
-      int normalPrice) async {
+      int normalPrice,
+      String namaPembeli,
+      String nomorMeja) async {
     List<int> bytes = [];
 
     final profile = await CapabilityProfile.load();
@@ -70,6 +72,12 @@ class PrintDataoutputs {
     bytes += generator.hr(ch: '-');
     // nama kasir
     bytes += generator.text('Kasir: $namaKasir',
+        styles: const PosStyles(bold: false, align: PosAlign.left));
+    bytes += generator.hr(ch: '-');
+    bytes += generator.text('Pembeli: $namaPembeli',
+        styles: const PosStyles(bold: false, align: PosAlign.left));
+    bytes += generator.hr(ch: '-');
+    bytes += generator.text('Meja: $nomorMeja',
         styles: const PosStyles(bold: false, align: PosAlign.left));
     bytes += generator.hr(ch: '-');
 
@@ -154,8 +162,7 @@ class PrintDataoutputs {
       ),
       PosColumn(
         text: subTotal + tax - discount.ceil() > 0
-            ? (((subTotal + tax - discount.ceil()) ))
-                .currencyFormatRp
+            ? (((subTotal + tax - discount.ceil()))).currencyFormatRp
             : '0',
         width: 6,
         styles: const PosStyles(align: PosAlign.right),

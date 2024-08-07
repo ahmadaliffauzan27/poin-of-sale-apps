@@ -54,6 +54,8 @@ class _ConfirmPaymentPageState extends State<ConfirmPaymentPage> {
   }
 
   final totalPriceController = TextEditingController();
+  final namaPembeliController = TextEditingController();
+  final nomorMejaController = TextEditingController();
 
   @override
   void initState() {
@@ -479,19 +481,58 @@ class _ConfirmPaymentPageState extends State<ConfirmPaymentPage> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+                            // const Text(
+                            //   'Pembayaran',
+                            //   style: TextStyle(
+                            //     color: AppColors.primary,
+                            //     fontSize: 20,
+                            //     fontWeight: FontWeight.w600,
+                            //   ),
+                            // ),
+                            // const Text(
+                            //   '2 opsi pembayaran tersedia',
+                            //   style: TextStyle(
+                            //     fontSize: 16,
+                            //     fontWeight: FontWeight.w500,
+                            //   ),
+                            // ),
                             const Text(
-                              'Pembayaran',
+                              'Nama Pembeli',
                               style: TextStyle(
                                 color: AppColors.primary,
                                 fontSize: 20,
                                 fontWeight: FontWeight.w600,
                               ),
                             ),
+                            const SpaceHeight(12.0),
+                            TextFormField(
+                              controller: namaPembeliController,
+                              keyboardType: TextInputType.text,
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(8.0),
+                                ),
+                                hintText: 'Masukkan nama pembeli',
+                              ),
+                            ),
+                            const SpaceHeight(16.0),
                             const Text(
-                              '2 opsi pembayaran tersedia',
+                              'Nomor Meja',
                               style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500,
+                                color: AppColors.primary,
+                                fontSize: 20,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            const SpaceHeight(12.0),
+                            TextFormField(
+                              controller: nomorMejaController,
+                              keyboardType: TextInputType.text,
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(8.0),
+                                ),
+                                hintText: 'Masukkan nomor meja',
                               ),
                             ),
                             const SpaceHeight(8.0),
@@ -506,60 +547,6 @@ class _ConfirmPaymentPageState extends State<ConfirmPaymentPage> {
                               ),
                             ),
                             const SpaceHeight(12.0),
-                            Row(
-                              children: [
-                                Button.filled(
-                                  color: AppColors.grey,
-                                  width: 120.0,
-                                  height: 50.0,
-                                  onPressed: () {
-                                    _selectCash();
-                                  },
-                                  isSelected: isCashSelected,
-                                  label: 'Cash',
-                                ),
-                                const SpaceWidth(8.0),
-                                Button.outlined(
-                                  textColor: Colors.white,
-                                  width: 120.0,
-                                  height: 50.0,
-                                  onPressed: () {
-                                    _selectQRIS();
-                                  },
-                                  isSelected: isQRISSelected,
-                                  label: 'QRIS',
-                                  // disabled: true,
-                                ),
-                              ],
-                            ),
-                            const SpaceHeight(8.0),
-                            const Divider(),
-                            const SpaceHeight(8.0),
-                            const Text(
-                              'Total Bayar',
-                              style: TextStyle(
-                                color: AppColors.primary,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                            const SpaceHeight(12.0),
-                            TextFormField(
-                              controller: totalPriceController,
-                              keyboardType: TextInputType.number,
-                              inputFormatters: [
-                                FilteringTextInputFormatter.digitsOnly,
-                              ],
-                              decoration: InputDecoration(
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(8.0),
-                                ),
-                                hintText: 'Total pembayaran',
-                              ),
-                            ),
-                            const SpaceHeight(45.0),
-
-                            //create uang pas button from checkout_bloc
                             BlocBuilder<CheckoutBloc, CheckoutState>(
                               builder: (context, state) {
                                 final price = state.maybeWhen(
@@ -604,86 +591,189 @@ class _ConfirmPaymentPageState extends State<ConfirmPaymentPage> {
                                     finalTax -
                                     (discount / 100 * price));
 
-                                // final roundedTotal =
-                                //     (subTotal / 1000).round() * 1000;
-
-                                return Column(
+                                return Row(
                                   children: [
-                                    Row(
-                                      children: [
-                                        Button.filled(
-                                          width: 150.0,
-                                          onPressed: () {
-                                            updateTotalPrice(subTotal.toInt());
-                                          },
-                                          label: 'UANG PAS',
-                                        ),
-                                        const SpaceWidth(20.0),
-                                        Button.filled(
-                                          width: 150.0,
-                                          onPressed: () {
-                                            updateTotalPrice(20000);
-                                          },
-                                          label: 'Rp 20.000',
-                                        ),
-                                        const SpaceWidth(20.0),
-                                        Button.filled(
-                                          width: 150.0,
-                                          onPressed: () {
-                                            updateTotalPrice(50000);
-                                          },
-                                          label: 'Rp 50.000',
-                                        ),
-                                        const SpaceWidth(20.0),
-                                        Button.filled(
-                                          width: 150.0,
-                                          onPressed: () {
-                                            updateTotalPrice(100000);
-                                          },
-                                          label: 'Rp 100.000',
-                                        ),
-                                      ],
+                                    Button.filled(
+                                      color: AppColors.grey,
+                                      width: 120.0,
+                                      height: 50.0,
+                                      onPressed: () {
+                                        _selectCash();
+                                        updateTotalPrice(subTotal.toInt());
+                                      },
+                                      isSelected: isCashSelected,
+                                      label: 'Cash',
                                     ),
-                                    const SpaceHeight(20.0),
-                                    Row(
-                                      children: [
-                                        Button.filled(
-                                          width: 150.0,
-                                          onPressed: () {
-                                            updateTotalPrice(200000);
-                                          },
-                                          label: 'Rp 200.000',
-                                        ),
-                                        const SpaceWidth(20.0),
-                                        Button.filled(
-                                          width: 150.0,
-                                          onPressed: () {
-                                            updateTotalPrice(250000);
-                                          },
-                                          label: 'Rp 250.000',
-                                        ),
-                                        const SpaceWidth(20.0),
-                                        Button.filled(
-                                          width: 150.0,
-                                          onPressed: () {
-                                            updateTotalPrice(300000);
-                                          },
-                                          label: 'Rp 300.000',
-                                        ),
-                                        const SpaceWidth(20.0),
-                                        Button.filled(
-                                          width: 150.0,
-                                          onPressed: () {
-                                            updateTotalPrice(500000);
-                                          },
-                                          label: 'Rp 500.000',
-                                        ),
-                                      ],
+                                    const SpaceWidth(8.0),
+                                    Button.outlined(
+                                      textColor: Colors.white,
+                                      width: 120.0,
+                                      height: 50.0,
+                                      onPressed: () {
+                                        _selectQRIS();
+                                        updateTotalPrice(subTotal.toInt());
+                                      },
+                                      isSelected: isQRISSelected,
+                                      label: 'QRIS',
+                                      // disabled: true,
                                     ),
                                   ],
                                 );
                               },
                             ),
+                            const SpaceHeight(8.0),
+                            const Divider(),
+                            const SpaceHeight(8.0),
+                            const Text(
+                              'Total Bayar',
+                              style: TextStyle(
+                                color: AppColors.primary,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            const SpaceHeight(12.0),
+                            TextFormField(
+                              controller: totalPriceController,
+                              keyboardType: TextInputType.number,
+                              inputFormatters: [
+                                FilteringTextInputFormatter.digitsOnly,
+                              ],
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(8.0),
+                                ),
+                                hintText: 'Total pembayaran',
+                              ),
+                            ),
+                            const SpaceHeight(20.0),
+
+                            //create uang pas button from checkout_bloc
+                            BlocBuilder<CheckoutBloc, CheckoutState>(
+                              builder: (context, state) {
+                                final price = state.maybeWhen(
+                                  orElse: () => 0,
+                                  loaded: (products, discount, tax, service) =>
+                                      products.fold(
+                                    0,
+                                    (previousValue, element) =>
+                                        previousValue +
+                                        (element.product.price! *
+                                            element.quantity),
+                                  ),
+                                );
+
+                                final discount = state.maybeWhen(
+                                    orElse: () => 0,
+                                    loaded: (products, discount, tax,
+                                        serviceCharge) {
+                                      if (discount == null) {
+                                        return 0;
+                                      }
+                                      return discount.value!
+                                          .replaceAll('.00', '')
+                                          .toIntegerFromText;
+                                    });
+
+                                final tax = state.maybeWhen(
+                                    orElse: () => 0,
+                                    loaded: (products, discount, tax,
+                                        serviceCharge) {
+                                      if (tax == null) {
+                                        return 0;
+                                      }
+                                      return tax.value!
+                                          .replaceAll('.00', '')
+                                          .toIntegerFromText;
+                                    });
+
+                                final finalTax = price * tax / 100;
+                                final subTotal = (price +
+                                    finalTax -
+                                    (discount / 100 * price));
+
+                                return Column(
+                                  children: [
+                                    if (!isQRISSelected) ...[
+                                      // const SpaceHeight(20.0),
+                                      Row(
+                                        children: [
+                                          Button.filled(
+                                            width: 150.0,
+                                            onPressed: () {
+                                              updateTotalPrice(
+                                                  subTotal.toInt());
+                                            },
+                                            label: 'UANG PAS',
+                                          ),
+                                          const SpaceWidth(20.0),
+                                          Button.filled(
+                                            width: 150.0,
+                                            onPressed: () {
+                                              updateTotalPrice(20000);
+                                            },
+                                            label: 'Rp 20.000',
+                                          ),
+                                          const SpaceWidth(20.0),
+                                          Button.filled(
+                                            width: 150.0,
+                                            onPressed: () {
+                                              updateTotalPrice(50000);
+                                            },
+                                            label: 'Rp 50.000',
+                                          ),
+                                          const SpaceWidth(20.0),
+                                          Button.filled(
+                                            width: 150.0,
+                                            onPressed: () {
+                                              updateTotalPrice(100000);
+                                            },
+                                            label: 'Rp 100.000',
+                                          ),
+                                        ],
+                                      ),
+                                      const SpaceHeight(20.0),
+                                      Row(
+                                        children: [
+                                          Button.filled(
+                                            width: 150.0,
+                                            onPressed: () {
+                                              updateTotalPrice(200000);
+                                            },
+                                            label: 'Rp 200.000',
+                                          ),
+                                          const SpaceWidth(20.0),
+                                          Button.filled(
+                                            width: 150.0,
+                                            onPressed: () {
+                                              updateTotalPrice(250000);
+                                            },
+                                            label: 'Rp 250.000',
+                                          ),
+                                          const SpaceWidth(20.0),
+                                          Button.filled(
+                                            width: 150.0,
+                                            onPressed: () {
+                                              updateTotalPrice(300000);
+                                            },
+                                            label: 'Rp 300.000',
+                                          ),
+                                          const SpaceWidth(20.0),
+                                          Button.filled(
+                                            width: 150.0,
+                                            onPressed: () {
+                                              updateTotalPrice(500000);
+                                            },
+                                            label: 'Rp 500.000',
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ],
+                                );
+                              },
+                            ),
+
                             const SpaceHeight(100.0),
                           ],
                         ),
@@ -840,6 +930,8 @@ class _ConfirmPaymentPageState extends State<ConfirmPaymentPage> {
                                                 totalPriceController
                                                     .text.toIntegerFromText,
                                                 paymentMethod,
+                                                namaPembeliController.text,
+                                                nomorMejaController.text,
                                               ));
 
                                           print('Diskon :$finalDiscount');
@@ -863,6 +955,10 @@ class _ConfirmPaymentPageState extends State<ConfirmPaymentPage> {
                                               totalDiscount: finalDiscount,
                                               subTotal: price.toInt(),
                                               normalPrice: price,
+                                              namaPembeli:
+                                                  namaPembeliController.text,
+                                              nomorMeja:
+                                                  nomorMejaController.text,
                                             ),
                                           );
                                           print('data: $items}');
@@ -877,6 +973,10 @@ class _ConfirmPaymentPageState extends State<ConfirmPaymentPage> {
                                           print('total tax: ${finalTax}');
                                           print('subtotal: ${price}');
                                           print('normal price: ${price}');
+                                          print(
+                                              'nama pembeli: ${namaPembeliController.text}');
+                                          print(
+                                              'nomor meja: ${nomorMejaController.text}');
                                         },
                                         label: 'Bayar',
                                       ),

@@ -63,6 +63,8 @@ class ProductLocalRemoteDatasource {
         id_kasir INTEGER,
         nama_kasir TEXT,
         transaction_time TEXT,
+        customer_name TEXT,
+        table_number TEXT,
         is_sync INTEGER DEFAULT 0
       )
     ''');
@@ -95,7 +97,7 @@ class ProductLocalRemoteDatasource {
 
   Future<Database> get database async {
     if (_database != null) return _database!;
-    _database = await _initDB('dbresto25.db');
+    _database = await _initDB('dbresto33.db');
     return _database!;
   }
 

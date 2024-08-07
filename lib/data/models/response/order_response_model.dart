@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
 class OrderResponsesModel {
@@ -43,6 +44,8 @@ class ItemOrder {
   final int? idKasir;
   final String? namaKasir;
   final String? transactionTime;
+  final String? customerName;
+  final String? tableNumber;
   final DateTime? createdAt;
   final DateTime? updatedAt;
 
@@ -59,6 +62,8 @@ class ItemOrder {
     this.idKasir,
     this.namaKasir,
     this.transactionTime,
+    this.customerName,
+    this.tableNumber,
     this.createdAt,
     this.updatedAt,
   });
@@ -80,6 +85,8 @@ class ItemOrder {
         idKasir: json["id_kasir"],
         namaKasir: json["nama_kasir"],
         transactionTime: json["transaction_time"],
+        customerName: json["customer_name"],
+        tableNumber: json["table_number"],
         createdAt: json["created_at"] == null
             ? null
             : DateTime.parse(json["created_at"]),
@@ -101,6 +108,8 @@ class ItemOrder {
         "id_kasir": idKasir,
         "nama_kasir": namaKasir,
         "transaction_time": transactionTime,
+        "customer_name": customerName,
+        "table_number": tableNumber,
         "created_at": createdAt?.toIso8601String(),
         "updated_at": updatedAt?.toIso8601String(),
       };

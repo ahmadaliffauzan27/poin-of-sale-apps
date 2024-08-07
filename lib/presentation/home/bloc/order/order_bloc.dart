@@ -52,6 +52,8 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
         idKasir: userData.user!.id!,
         namaKasir: userData.user!.name!,
         transactionTime: DateFormat.yMd().format(DateTime.now()),
+        customerName: event.customerName,
+        tableNumber: event.tableNumber,
         isSync: 0,
         orderItems: event.items,
       );

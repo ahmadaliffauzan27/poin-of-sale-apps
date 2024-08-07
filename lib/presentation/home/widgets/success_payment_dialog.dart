@@ -27,6 +27,8 @@ class SuccessPaymentDialog extends StatefulWidget {
     required this.totalDiscount,
     required this.subTotal,
     required this.normalPrice,
+    required this.namaPembeli,
+    required this.nomorMeja,
   }) : super(key: key);
   final List<ProductQuantity> data;
   final int totalQty;
@@ -38,6 +40,8 @@ class SuccessPaymentDialog extends StatefulWidget {
   final int totalDiscount;
   final int subTotal;
   final int normalPrice;
+  final String namaPembeli;
+  final String nomorMeja;
 
   @override
   State<SuccessPaymentDialog> createState() => _SuccessPaymentDialogState();
@@ -187,6 +191,8 @@ class _SuccessPaymentDialogState extends State<SuccessPaymentDialog> {
                         widget.totalTax,
                         widget.subTotal,
                         widget.normalPrice,
+                        widget.namaPembeli,
+                        widget.nomorMeja,
                       );
                       await PrintBluetoothThermal.writeBytes(printValue);
 

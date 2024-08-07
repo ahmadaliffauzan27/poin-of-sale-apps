@@ -202,6 +202,24 @@ class HistoryWidget extends StatelessWidget {
                           child: Text(orders[index].paymentMethod),
                         ),
                       ),
+                      // Container(
+                      //   width: 60,
+                      //   height: 52,
+                      //   padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
+                      //   alignment: Alignment.centerLeft,
+                      //   child: Center(
+                      //     child: Text(orders[index].customerName),
+                      //   ),
+                      // ),
+                      // Container(
+                      //   width: 60,
+                      //   height: 52,
+                      //   padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
+                      //   alignment: Alignment.centerLeft,
+                      //   child: Center(
+                      //     child: Text(orders[index].tableNumber),
+                      //   ),
+                      // ),
                       Container(
                         width: 60,
                         height: 52,
@@ -272,6 +290,8 @@ class HistoryWidget extends StatelessWidget {
                                     orders[index].tax,
                                     orders[index].subTotal,
                                     orders[index].subTotal,
+                                    orders[index].customerName,
+                                    orders[index].tableNumber,
                                   );
                                   await PrintBluetoothThermal.writeBytes(
                                       printValue);

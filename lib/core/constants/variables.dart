@@ -1,7 +1,7 @@
 class Variables {
   static const String appName = 'Zstore';
   // static const String baseUrl = 'https://resto.ahmadaliffauzan.store';
-  // static const String baseUrl = 'http://192.168.43.88:8000';
+  // static const String baseUrl = 'http://192.168.1.6:8000';
   static const String baseUrl = 'https://empalgentongmangmedi.my.id';
   // static const String baseUrl = 'http://192.168.1.11:8000';
 }
